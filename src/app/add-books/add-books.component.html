@@ -1,0 +1,25 @@
+<h3>Search for Books to Add</h3>
+
+<form #form="ngForm" (submit)="searchBooksAPI(form)">
+  <label>Title</label>
+  <input
+    [(ngModel)]="titleQuery"
+    type="search"
+    name="bookSearch"
+    placeholder="enter a search term">
+
+  <label>Author (optional)</label>
+  <input
+    [(ngModel)]="authorQuery"
+    type="search"
+    name="authorSearch"
+    placeholder="enter an author's name">
+
+</form>
+<button type="submit" (click)="searchBooksAPI()">Search</button>
+
+<div class="output">
+Model: {{ model | json}}
+<br>
+Angular: {{ form.value | json}}
+</div>
