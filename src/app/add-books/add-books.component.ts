@@ -19,8 +19,12 @@ export class AddBooksComponent implements OnInit {
   }
 
   searchBooksAPI(): void {
+    let query = {
+      titleQuery: this.titleQuery,
+      authorQuery: this.authorQuery
+    };
     console.log({ titleQuery: this.titleQuery, authorQuery: this.authorQuery });
-    this._books.searchBooks();
+    this._books.searchBooks(this.titleQuery, this.authorQuery);
   }
 
 }
