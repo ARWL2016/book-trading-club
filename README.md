@@ -16,6 +16,17 @@ https://www.googleapis.com/books/v1/volumes?q=flowers+inauthor:keyes&key=yourAPI
 terms: inauthor: intitle: subject: 
 API Key not needed for basic search
 
+Response Data 
+data.items - array of books 
+data.items[0].volumeInfo - object with useful information 
+data.items[0].volumeInfo.title - string 
+data.items[0].volumeInfo.authors - string []
+data.items[0].volumeInfo.pageCount - number 
+data.items[0].volumeInfo.imageLinks.thumbnail - link string
+data.items[0].volumeInfo.imageLinks.smallThumbnail - link string 
+data.items[0].volumeInfo.language - string, such as 'en'
+
+
 
 
 
