@@ -5,9 +5,6 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/toPromise';
 
-// Example URL
-// `https://www.googleapis.com/books/v1/volumes?q=${search}${author}${title}`;
-
 const baseUrl = `https://www.googleapis.com/books/v1/volumes?q=`;
 
 @Injectable()
