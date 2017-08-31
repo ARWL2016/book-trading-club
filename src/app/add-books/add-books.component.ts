@@ -28,15 +28,6 @@ export class AddBooksComponent implements OnInit {
     this._books.searchBooks(this.titleQuery, this.authorQuery)
       .then(data => console.log(data));
 
-
-      // .then(data => {
-      //   this.data = data;
-      //   this.data.items.forEach(item => {
-      //     console.log(item.volumeInfo.title);
-      //   })
-      // });
-
-
   }
 
 }

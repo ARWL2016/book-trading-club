@@ -15,7 +15,7 @@ export class AddBooksService {
 
   constructor(private http: Http) { }
 
-  searchBooks(title, author) {
+  searchBooks(title: string, author?: string): Promise<any[] | {error: string}> {
     let encodedTitle = encodeURI(title);
     let url = `${baseUrl}${encodedTitle}`;
 
@@ -28,6 +28,9 @@ export class AddBooksService {
     return this.http.get(url)
       .map(res => res.json())
       .map(data => {
+        if (!data.totalItems) {
+          return { error: 'the search returned no items' };
+        }
         let filteredArray = [];
         data.items.forEach(item => {
           if (item.volumeInfo.language === 'en') {
@@ -35,6 +38,9 @@ export class AddBooksService {
             filteredArray.push({ title, subtitle, authors, publisher, publishedDate, pageCount, imageLinks, description });
           }
         });
+        if (filteredArray.length === 0) {
+          return { error: 'the search returned no items' };
+        }
         return filteredArray;
       })
       .toPromise();
