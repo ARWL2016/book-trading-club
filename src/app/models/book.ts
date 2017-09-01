@@ -6,7 +6,7 @@ export interface Book {
     thumbnail?: string;
   };
   pageCount?: number;
-  publishedData?: string;
+  publishedDate?: string;
   publisher?: string;
   subtitle?: string;
   title?: string;

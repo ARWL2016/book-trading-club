@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AddBooksService } from './add-books.service';
 import { Book } from '../models/book';
+import { MaterializeAction } from 'angular2-materialize';
 
 @Component({
   selector: 'btc-add-books',
@@ -12,6 +13,8 @@ export class AddBooksComponent implements OnInit {
   titleQuery: string;
   authorQuery: string;
   bookData: Book[] | { error: string };
+  modalActions = new EventEmitter<string|MaterializeAction>();
+  selectedBook: Book;
 
   constructor(
     private _books: AddBooksService
@@ -31,7 +34,15 @@ export class AddBooksComponent implements OnInit {
         this.bookData = data;
         console.log(this.bookData);
       });
-
   }
 
+  openModal(book) {
+    this.selectedBook = book;
+    console.log(this.selectedBook);
+    this.modalActions.emit({action:"modal",params:['open']});
+  }
+  closeModal() {
+    this.modalActions.emit({action:"modal",params:['close']});
+  }
 }
+

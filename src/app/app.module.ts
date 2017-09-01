@@ -25,6 +25,7 @@ import { AddBooksService } from "app/add-books/add-books.service";
     BrowserModule,
     BrowserAnimationsModule,
     SimpleNotificationsModule.forRoot(),
+    MaterializeModule,
     FormsModule,
     HttpModule,
     RouterModule.forRoot([

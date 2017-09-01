@@ -1,7 +1,7 @@
 <h3>Search for Books to Add</h3>
 
 <div class="row">
-  <form class="col s12" #form="ngForm" (submit)="searchBooksAPI(form)">
+  <form materialize class="col s12" #form="ngForm" (submit)="searchBooksAPI(form)">
     <div class="row">
 
       <div class="input-field col s6">
@@ -36,17 +36,48 @@
   </form>
 </div>
 
-
 <div class="row">
-  <div class="col s12 m4 l3 btc-book-preview" *ngFor="let book of bookData">
+  <div class="col s6 m4 l3 btc-book-preview" *ngFor="let book of bookData" (click)="openModal(book)">
     <div class="btc-book-preview-image-container">
       <img class="btc-book-preview-image" src="{{book.imageLinks.thumbnail}}" >
     </div>
+
     <p class="btc-book-preview-title">{{book.title}}</p>
     <p class="btc-book-preview-author">{{book.authors[0]}}</p>
 
   </div>
 
 </div>
+
+
+<!-- Modal Structure -->
+<div id="modal1" class="modal" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalActions">
+    <div *ngIf="selectedBook" class="modal-content">
+
+      <div class="btc-modal-img-wrapper">
+        <img src="{{selectedBook.imageLinks.thumbnail}}" />
+      </div>
+
+      <div class="btc-modal-text">
+        <h4 class="btc-modal-title">{{selectedBook.title}}</h4>
+        <p *ngIf="selectedBook.subtitle" class="btc-modal-subtitle">{{selectedBook.subtitle}}</p>
+        <div>By&nbsp;
+          <span *ngFor="let author of selectedBook.authors" class="btc-modal-author">{{author}}&nbsp;&nbsp;</span>
+        </div>
+        <span *ngIf="selectedBook.publisher">Published by {{selectedBook.publisher}} </span>
+        <span *ngIf="selectedBook.publishedDate">({{selectedBook.publishedDate}})</span>
+
+        <p *ngIf="selectedBook.pageCount" class="btc-modal-pageCount">{{selectedBook.pageCount}} pages</p>
+      </div>
+
+
+
+    </div>
+    <div class="modal-footer btc-modal-footer">
+      <a class="waves-effect waves-green btn-flat" (click)="closeModal()">Close</a>
+      <a class="modal-action modal-close waves-effect waves-green btn-flat">Add to Collection</a>
+    </div>
+   </div>
+
 
 
