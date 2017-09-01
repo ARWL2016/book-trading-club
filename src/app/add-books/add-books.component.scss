@@ -1,4 +1,42 @@
 .btc-book-preview {
-  border: 1px solid lightblue;
-  height: 200px;
+  // border: 1px solid lightblue;
+  height: 360px;
+  &:hover {
+    cursor: pointer;
+
+  }
+}
+
+
+.btc-book-preview-image-container {
+  border: 1px dotted red;
+  height: 240px;
+  overflow: hidden;
+  position: relative;
+
+}
+
+.btc-book-preview-image {
+  min-width: 100%;
+  min-height: 100%;
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  &:hover {
+    border: 3px solid lightblue;
+  }
+
+}
+
+.btc-book-preview-title {
+  font-weight: bold;
+  border: 1px dotted pink;
+  margin-bottom: 0;
+}
+
+.btc-book-preview-author {
+  border: 1px dotted pink;
+  margin: 3px 0 0 0;
+  font-size: 0.9em;
+  color: #444
 }

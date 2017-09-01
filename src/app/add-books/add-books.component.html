@@ -38,7 +38,10 @@
 
 
 <div class="row">
-  <div class="col s6 m4 l3 btc-book-preview" *ngFor="let book of bookData">
+  <div class="col s12 m4 l3 btc-book-preview" *ngFor="let book of bookData">
+    <div class="btc-book-preview-image-container">
+      <img class="btc-book-preview-image" src="{{book.imageLinks.thumbnail}}" >
+    </div>
     <p class="btc-book-preview-title">{{book.title}}</p>
     <p class="btc-book-preview-author">{{book.authors[0]}}</p>
 
