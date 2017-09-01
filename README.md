@@ -26,6 +26,10 @@ data.items[0].volumeInfo.imageLinks.thumbnail - link string
 data.items[0].volumeInfo.imageLinks.smallThumbnail - link string 
 data.items[0].volumeInfo.language - string, such as 'en'
 
+To do 
+- basic styling for add book page 
+- display returned data
+
 
 
 

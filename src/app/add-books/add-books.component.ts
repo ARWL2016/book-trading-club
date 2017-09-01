@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AddBooksService } from './add-books.service';
+import { Book } from '../models/book';
 
 @Component({
   selector: 'btc-add-books',
@@ -10,7 +11,7 @@ import { AddBooksService } from './add-books.service';
 export class AddBooksComponent implements OnInit {
   titleQuery: string;
   authorQuery: string;
-  data;
+  bookData: Book[] | { error: string };
 
   constructor(
     private _books: AddBooksService
@@ -26,7 +27,10 @@ export class AddBooksComponent implements OnInit {
     };
     console.log({ titleQuery: this.titleQuery, authorQuery: this.authorQuery });
     this._books.searchBooks(this.titleQuery, this.authorQuery)
-      .then(data => console.log(data));
+      .then(data => {
+        this.bookData = data;
+        console.log(this.bookData);
+      });
 
   }
 

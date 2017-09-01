@@ -5,6 +5,8 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/toPromise';
 
+import { Book } from '../models/book';
+
 const baseUrl = `https://www.googleapis.com/books/v1/volumes?q=`;
 
 @Injectable()
@@ -12,7 +14,7 @@ export class AddBooksService {
 
   constructor(private http: Http) { }
 
-  searchBooks(title: string, author?: string): Promise<any[] | {error: string}> {
+  searchBooks(title: string, author?: string): Promise<Book[] | {error: string}> {
     let encodedTitle = encodeURI(title);
     let url = `${baseUrl}${encodedTitle}`;
 
@@ -30,7 +32,7 @@ export class AddBooksService {
         }
         let filteredArray = [];
         data.items.forEach(item => {
-          if (item.volumeInfo.language === 'en') {
+          if (item.volumeInfo.language === 'en' && item.volumeInfo.title && item.volumeInfo.authors && item.volumeInfo.imageLinks.smallThumbnail) {
             let { title, subtitle, authors, publisher, publishedDate, pageCount, imageLinks, description } = item.volumeInfo;
             filteredArray.push({ title, subtitle, authors, publisher, publishedDate, pageCount, imageLinks, description });
           }

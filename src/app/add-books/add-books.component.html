@@ -1,25 +1,49 @@
 <h3>Search for Books to Add</h3>
 
-<form #form="ngForm" (submit)="searchBooksAPI(form)">
-  <label>Title</label>
-  <input
-    [(ngModel)]="titleQuery"
-    type="search"
-    name="titleQuery"
-    placeholder="enter a search term">
+<div class="row">
+  <form class="col s12" #form="ngForm" (submit)="searchBooksAPI(form)">
+    <div class="row">
 
-  <label>Author (optional)</label>
-  <input
-    [(ngModel)]="authorQuery"
-    type="search"
-    name="authorQuery"
-    placeholder="enter an author's name">
+      <div class="input-field col s6">
+        <!-- <i class="material-icons prefix">search</i> -->
+        <input
+          [(ngModel)]="titleQuery"
+          type="text"
+          name="titleQuery"
+          id="titleQuery">
+          <label for="titleQuery">Title</label>
+      </div>
 
-</form>
-<button type="submit" (click)="searchBooksAPI()">Search</button>
+      <div class="input-field col s6">
+        <!-- <i class="material-icons prefix">search</i> -->
+        <input
+          [(ngModel)]="authorQuery"
+          type="text"
+          name="authorQuery"
+          id="authorQuery">
+        <label for="authorQuery">Author (optional)</label>
+      </div>
 
-<div class="output">
-Model: {{ model | json}}
-<br>
-Angular: {{ form.value | json}}
+    </div>
+    <!-- inputs row end -->
+
+    <div class="row">
+      <button class="btn waves-effect waves-light" type="submit" (click)="searchBooksAPI()">Search
+          <i class="material-icons right">search</i>
+      </button>
+    </div>
+
+  </form>
 </div>
+
+
+<div class="row">
+  <div class="col s6 m4 l3 btc-book-preview" *ngFor="let book of bookData">
+    <p class="btc-book-preview-title">{{book.title}}</p>
+    <p class="btc-book-preview-author">{{book.authors[0]}}</p>
+
+  </div>
+
+</div>
+
+
