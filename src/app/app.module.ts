@@ -13,13 +13,17 @@ import { AddBooksComponent } from './add-books/add-books.component';
 import { AuthService } from './services/auth.service';
 import { HelperService } from './services/helper.service';
 import { CreateTopicGuard } from 'app/services/create-topic-guard.service';
-import { AddBooksService } from "app/add-books/add-books.service";
+import { AddBooksService } from 'app/add-books/add-books.service';
+import { RegisterComponent } from './auth/register/register.component';
+import { LoginComponent } from './auth/login/login.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    AddBooksComponent
+    AddBooksComponent,
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -29,8 +33,10 @@ import { AddBooksService } from "app/add-books/add-books.service";
     FormsModule,
     HttpModule,
     RouterModule.forRoot([
-      { path: '', component: AddBooksComponent }, // dev only
       { path: 'add', component: AddBooksComponent },
+      { path: 'register', component: RegisterComponent },
+      { path: 'login', component: LoginComponent },
+      { path: '', redirectTo: 'register', pathMatch: 'full' },
       { path: '**', redirectTo: '', pathMatch: 'full' }
     ])
   ],

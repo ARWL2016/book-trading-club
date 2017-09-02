@@ -1,5 +1,6 @@
 const AuthController = require('../controllers/auth-controller');
 const {authenticate} = require('../middleware/authenticate');
+const path = require('path');
 
 module.exports = (app) => {
 
@@ -9,6 +10,8 @@ module.exports = (app) => {
 
   app.get('*', (req, res) => {
     res.redirect('/');
+    // res.sendFile(path.join(__dirname, '../../', 'dist/index.html'));
+
   })
 
 }

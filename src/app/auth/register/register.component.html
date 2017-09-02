@@ -1,0 +1,34 @@
+<p>
+  register works!
+</p>
+
+<div class="">
+  <div class=" btc-form-wrapper">
+    <div class="btc-form-header">
+      <h2 class="btc-form-heading">Register</h2>
+    </div>
+  <form materialize #form="ngForm" (submit)="register(form)">
+
+    <div class="btc-input-wrapper">
+
+        <div class="input-field">
+          <input id="username" type="text">
+          <label for="username">Username</label>
+        </div>
+
+        <div class="input-field">
+          <input id="password" type="text">
+          <label  for="password">Password</label>
+        </div>
+
+    </div>
+
+    <div class="btc-form-button-wrapper">
+      <button class="btn waves-effect waves-light btc-form-button" type="submit">Register
+          <i class="material-icons right">check</i>
+      </button>
+    </div>
+
+  </form>
+  </div>
+</div>

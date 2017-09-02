@@ -26,9 +26,9 @@ data.items[0].volumeInfo.imageLinks.thumbnail - link string
 data.items[0].volumeInfo.imageLinks.smallThumbnail - link string 
 data.items[0].volumeInfo.language - string, such as 'en'
 
-To do 
-- basic styling for add book page 
-- display returned data
+Routes 
+https://stackoverflow.com/questions/43869961/node-js-express-redirect-all-to-angular-2-page 
+- Remember to redirect Node routes to Angular if they are not used - else cannot GET
 
 
 
