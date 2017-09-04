@@ -16,15 +16,16 @@ const UserSchema = new mongoose.Schema({
   books: [{
     title: {
       type: String,
-      required: true
+      required: false
     },
     author: {
       type: String,
-      required: true,
+      required: false,
     },
     id: {
       type: String,
-      required: true
+      required: false,
+      unique: true
     }
   }],
   tokens: [{

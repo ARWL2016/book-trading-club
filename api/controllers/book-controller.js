@@ -12,7 +12,7 @@ module.exports = {
 
     Book.create(bookToAdd).then(data => {
       console.log('ADDED TO BOOK COLLECTION ', data);
-      res.status(400).send(data);
+      res.status(200).send(data);
     })
 
   }
