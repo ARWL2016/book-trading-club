@@ -6,8 +6,9 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/toPromise';
 
 import { Book } from '../models/Book';
-import { User } from "app/models/User";
-import { HelperService } from "app/services/helper.service";
+import { User } from 'app/models/User';
+import {HelperService} from 'app/services/helper.service';
+import {AuthService} from 'app/services/auth.service';
 
 const baseUrl = `https://www.googleapis.com/books/v1/volumes?q=`;
 
@@ -16,7 +17,8 @@ export class AddBooksService {
 
   constructor(
     private http: Http,
-    private helper: HelperService ) { }
+    private helper: HelperService,
+    private auth: AuthService ) { }
 
   searchBooks(title: string, author?: string): Promise<Book[] | {error: string}> {
     const encodedTitle = encodeURI(title);
@@ -34,10 +36,11 @@ export class AddBooksService {
         if (!data.totalItems) {
           return { error: 'the search returned no items' };
         }
-        let filteredArray = [];
+        const filteredArray = [];
         data.items.forEach(item => {
-          if (item.volumeInfo.language === 'en' && item.volumeInfo.title && item.volumeInfo.authors && item.volumeInfo.imageLinks.smallThumbnail) {
-            let { title, subtitle, authors, publisher, publishedDate, pageCount, imageLinks, description } = item.volumeInfo;
+          if (item.volumeInfo.language === 'en' && item.volumeInfo.title &&
+            item.volumeInfo.authors && item.volumeInfo.imageLinks.smallThumbnail) {
+            const { title, subtitle, authors, publisher, publishedDate, pageCount, imageLinks, description } = item.volumeInfo;
             filteredArray.push({ title, subtitle, authors, publisher, publishedDate, pageCount, imageLinks, description });
           }
         });
@@ -49,11 +52,13 @@ export class AddBooksService {
       .toPromise();
   }
 
-  addBookToCollection(user: User, book: Book){
-    console.log(`Adding ${book.title} to the collection of ${user.username}`);
+  addBookToCollection(user: User, bookToAdd: Book){
+    console.log(`Adding ${bookToAdd.title} to the collection of ${user.username} with id of ${user._id}`);
     // post data to API - error checking
-    const url = 'app/book/addBook';
-    const body = {user, book};
+    const url = '/api/book/addBook';
+    user._id = this.auth.getCurrentUserId();
+    const body = {user, bookToAdd};
+    console.log('user sent', user);
     const options = this.helper.addAuthTokenToHeader();
     return this.http.post(url, body, options)
       .subscribe();

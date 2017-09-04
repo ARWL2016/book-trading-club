@@ -13,6 +13,20 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  books: [{
+    title: {
+      type: String,
+      required: true
+    },
+    author: {
+      type: String,
+      required: true,
+    },
+    id: {
+      type: String,
+      required: true
+    }
+  }],
   tokens: [{
     access: {
       type: String,

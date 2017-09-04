@@ -2,9 +2,10 @@ const User = require('../db/models/user');
 
 const authenticate = (req, res, next) => {
   const token = req.header('X-Auth');
-  console.log("AUTH");
+  console.log("AUTH: ", token);
 
   User.findByToken(token).then((user) => {
+    console.log('authenticate ', user);
     if(!user) {
       return Promise.reject();
     }

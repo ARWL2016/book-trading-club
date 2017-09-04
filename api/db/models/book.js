@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const BookSchema = new mongoose.Schema({
   authors: [{
-    type: String[],
+    type: String,
     required: false
   }],
   description: {
@@ -39,6 +39,10 @@ const BookSchema = new mongoose.Schema({
     type: String,
     required: false
   },
+  userId: {
+    type: String,
+    required: true
+  }
 });
 
 

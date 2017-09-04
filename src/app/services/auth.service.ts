@@ -5,7 +5,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 
 import { User } from '../models/User';
-import { HelperService } from "./helper.service";
+import { HelperService } from './helper.service';
 
 @Injectable()
 
@@ -35,6 +35,7 @@ export class AuthService {
       .do(response => {
         const token = this._helper.getAuthTokenFromHeader(response);
         window.localStorage.setItem('token', token);
+        console.log('User submitted: ', user);
       })
       .map(response => response.json())
       .do(authorizedUser => this.updateCurrentUser(authorizedUser))
@@ -58,21 +59,28 @@ export class AuthService {
 
   updateCurrentUser(user: User) {
 
-    const { username } = user;
+    const { username, _id } = user;
     this.currentUser = user;
     console.log('USER', this.currentUser);
     window.localStorage.setItem('username', username);
+    window.localStorage.setItem('_id', _id);
   }
 
   isValidated(): string {
     const token = window.localStorage.getItem('token');
     const username = window.localStorage.getItem('username');
+    const _id = window.localStorage.getItem('_id');
 
     if (token && username) {
-      this.currentUser = {username};
+      this.currentUser = {username, _id};
       return username;
     }
     return null;
+  }
+
+  getCurrentUserId() {
+    console.log('get ID', this.currentUser._id);
+    return this.currentUser._id;
   }
 
 

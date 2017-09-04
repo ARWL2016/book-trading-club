@@ -11,7 +11,7 @@ module.exports = (app) => {
   app.delete('/api/auth/logout', authenticate, AuthController.logout);
 
   //book routes
-  app.post('app/book/addBook', authenticate, BookController.addBook);
+  app.post('/api/book/addBook', authenticate, BookController.addBook);
 
   // default route
   app.get('*', (req, res) => {

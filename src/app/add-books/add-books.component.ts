@@ -30,7 +30,7 @@ export class AddBooksComponent implements OnInit {
   }
 
   searchBooksAPI() {
-    let query = {
+    const query = {
       titleQuery: this.titleQuery,
       authorQuery: this.authorQuery
     };
