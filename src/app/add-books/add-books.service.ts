@@ -6,6 +6,7 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/toPromise';
 
 import { Book } from '../models/Book';
+import { User } from "app/models/User";
 
 const baseUrl = `https://www.googleapis.com/books/v1/volumes?q=`;
 
@@ -43,7 +44,10 @@ export class AddBooksService {
         return filteredArray;
       })
       .toPromise();
+  }
 
+  addBookToCollection(user: User, book: Book){
+    console.log(`Adding ${book.title} to the collection of ${user.username}`);
   }
 
 }

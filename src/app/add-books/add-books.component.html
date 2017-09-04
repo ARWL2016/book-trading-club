@@ -68,14 +68,16 @@
         <span *ngIf="selectedBook.publishedDate">({{selectedBook.publishedDate}})</span>
 
         <p *ngIf="selectedBook.pageCount" class="btc-modal-pageCount">{{selectedBook.pageCount}} pages</p>
+        <p *ngIf="!username" class="anon-user-message">To add books to your collection, please
+          <a class="modal-link" (click)="authenticate($event)">register</a> or <a class="modal-link" (click)="authenticate($event)">log in</a>.</p>
       </div>
 
 
 
     </div>
     <div class="modal-footer btc-modal-footer">
-      <a class="waves-effect waves-green btn-flat" (click)="closeModal()">Close</a>
-      <a class="modal-action modal-close waves-effect waves-green btn-flat">Add to Collection</a>
+      <a *ngIf="username" class="modal-action modal-close waves-effect waves-green btn-flat" (click)="addBook()">Add to Collection<i class="material-icons right">add_circle</i></a>
+      <a class="waves-effect waves-green btn-flat" (click)="closeModal()">Close<i class="material-icons right">cancel</i></a>
     </div>
    </div>
 

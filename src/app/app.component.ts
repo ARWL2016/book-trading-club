@@ -1,6 +1,7 @@
 import { Component, OnInit, DoCheck } from '@angular/core';
 import { AuthService } from "app/services/auth.service";
 import { User } from "app/models/User";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -12,24 +13,24 @@ export class AppComponent implements OnInit {
   username: string;
 
   ngOnInit(): void {
-    console.log('App Component Initialized');
     this.username = this.auth.isValidated();
-    console.log('Username: ', this.username);
   }
 
   ngDoCheck() {
-    console.log('do check');
+
     this.username = this.auth.isValidated();
   }
 
   constructor(
-    private auth: AuthService
+    private auth: AuthService,
+    private router: Router
   ) { }
 
   signOut() {
     console.log('Signing out ', this.username);
     this.auth.logout();
     this.username = null;
+    this.router.navigate(['/login']);
   }
 
 }

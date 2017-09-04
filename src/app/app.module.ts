@@ -36,7 +36,7 @@ import { LoginComponent } from './auth/login/login.component';
       { path: 'add', component: AddBooksComponent },
       { path: 'register', component: RegisterComponent },
       { path: 'login', component: LoginComponent },
-      { path: '', redirectTo: 'register', pathMatch: 'full' },
+      { path: '', redirectTo: 'add', pathMatch: 'full' },
       { path: '**', redirectTo: '', pathMatch: 'full' }
     ])
   ],
