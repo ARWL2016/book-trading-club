@@ -57,16 +57,16 @@ export class AuthService {
   }
 
   updateCurrentUser(user: User) {
-    console.log('USER', user);
+
     const { username } = user;
     this.currentUser = user;
+    console.log('USER', this.currentUser);
     window.localStorage.setItem('username', username);
   }
 
   isValidated(): string {
     const token = window.localStorage.getItem('token');
     const username = window.localStorage.getItem('username');
-    console.log('is validated ? ', username);
 
     if (token && username) {
       this.currentUser = {username};

@@ -36,8 +36,6 @@ module.exports = {
     }).catch((err) => {
       res.status(400).send();
     });
-
-
   },
 
   logout(req, res) {

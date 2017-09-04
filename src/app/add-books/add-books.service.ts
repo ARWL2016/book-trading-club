@@ -7,20 +7,23 @@ import 'rxjs/add/operator/toPromise';
 
 import { Book } from '../models/Book';
 import { User } from "app/models/User";
+import { HelperService } from "app/services/helper.service";
 
 const baseUrl = `https://www.googleapis.com/books/v1/volumes?q=`;
 
 @Injectable()
 export class AddBooksService {
 
-  constructor(private http: Http) { }
+  constructor(
+    private http: Http,
+    private helper: HelperService ) { }
 
   searchBooks(title: string, author?: string): Promise<Book[] | {error: string}> {
-    let encodedTitle = encodeURI(title);
+    const encodedTitle = encodeURI(title);
     let url = `${baseUrl}${encodedTitle}`;
 
     if (author) {
-      let encodedAuthor = encodeURI(author);
+      const encodedAuthor = encodeURI(author);
       url = url.concat(`+inauthor:${encodedAuthor}`);
     }
     console.log('search books service', url);
@@ -48,6 +51,13 @@ export class AddBooksService {
 
   addBookToCollection(user: User, book: Book){
     console.log(`Adding ${book.title} to the collection of ${user.username}`);
+    // post data to API - error checking
+    const url = 'app/book/addBook';
+    const body = {user, book};
+    const options = this.helper.addAuthTokenToHeader();
+    return this.http.post(url, body, options)
+      .subscribe();
+
   }
 
 }
