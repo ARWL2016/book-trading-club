@@ -1,26 +1,42 @@
-<p>
-  register works!
-</p>
-
-<div class="">
+<div class>
   <div class=" btc-form-wrapper">
     <div class="btc-form-header">
       <h2 class="btc-form-heading">Register</h2>
     </div>
-  <form materialize #form="ngForm" (submit)="register(form)">
+  <form materialize #form="ngForm" (submit)="submitForm(form)" novalidate>
 
     <div class="btc-input-wrapper">
 
         <div class="input-field">
-          <input id="username" type="text">
+          <input
+            [(ngModel)]="username"
+            name="username"
+            id="username"
+            type="text">
           <label for="username">Username</label>
         </div>
 
         <div class="input-field">
-          <input id="password" type="text">
+          <input
+            [(ngModel)]="password"
+            name="password"
+            id="password"
+            type="text">
           <label  for="password">Password</label>
         </div>
 
+        <div class="input-field">
+          <input
+            [(ngModel)]="confirmation"
+            name="confirmation"
+            id="password"
+            type="text">
+          <label  for="password">Confirm Password</label>
+        </div>
+
+    </div>
+    <div class="btc-error">
+      {{error}}
     </div>
 
     <div class="btc-form-button-wrapper">
@@ -32,3 +48,11 @@
   </form>
   </div>
 </div>
+
+<br>
+Touched: {{ form.touched }} <br>
+
+Pristine: {{ form.pristine}}<br>
+
+{{ model | json }}<br>
+{{ form.value | json }}

@@ -4,7 +4,7 @@ import { CanActivate } from '@angular/router';
 import { AuthService } from 'app/services/auth.service';
 
 @Injectable()
-export class CreateTopicGuard implements CanActivate {
+export class IsValidatedGuard implements CanActivate {
 
   constructor(private _auth: AuthService) {}
 

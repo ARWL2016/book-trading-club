@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { AddBooksService } from './add-books.service';
 import { Book } from '../models/book';
 import { MaterializeAction } from 'angular2-materialize';
+import { AuthService } from "app/services/auth.service";
 
 @Component({
   selector: 'btc-add-books',
@@ -17,7 +18,8 @@ export class AddBooksComponent implements OnInit {
   selectedBook: Book;
 
   constructor(
-    private _books: AddBooksService
+    private books: AddBooksService,
+    private auth: AuthService
   ) { }
 
   ngOnInit() {
@@ -29,7 +31,7 @@ export class AddBooksComponent implements OnInit {
       authorQuery: this.authorQuery
     };
     console.log({ titleQuery: this.titleQuery, authorQuery: this.authorQuery });
-    this._books.searchBooks(this.titleQuery, this.authorQuery)
+    this.books.searchBooks(this.titleQuery, this.authorQuery)
       .then(data => {
         this.bookData = data;
         console.log(this.bookData);
@@ -39,10 +41,10 @@ export class AddBooksComponent implements OnInit {
   openModal(book) {
     this.selectedBook = book;
     console.log(this.selectedBook);
-    this.modalActions.emit({action:"modal",params:['open']});
+    this.modalActions.emit({action:"modal", params:['open']});
   }
   closeModal() {
-    this.modalActions.emit({action:"modal",params:['close']});
+    this.modalActions.emit({action:"modal", params:['close']});
   }
 }
 

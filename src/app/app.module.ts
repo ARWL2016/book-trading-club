@@ -12,7 +12,7 @@ import { AddBooksComponent } from './add-books/add-books.component';
 
 import { AuthService } from './services/auth.service';
 import { HelperService } from './services/helper.service';
-import { CreateTopicGuard } from 'app/services/create-topic-guard.service';
+import { IsValidatedGuard } from 'app/services/is-validated-guard.service';
 import { AddBooksService } from 'app/add-books/add-books.service';
 import { RegisterComponent } from './auth/register/register.component';
 import { LoginComponent } from './auth/login/login.component';
@@ -44,7 +44,7 @@ import { LoginComponent } from './auth/login/login.component';
     AddBooksService,
     AuthService,
     HelperService,
-    CreateTopicGuard
+    IsValidatedGuard
     ],
   bootstrap: [AppComponent]
 })

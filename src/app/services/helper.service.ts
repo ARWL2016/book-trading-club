@@ -8,7 +8,13 @@ export class HelperService {
 
    getAuthTokenFromHeader(response: Response): string {
     const headers = response.headers.toJSON();
-    return headers['X-Auth'][0];
+    console.log('GATFH: ', headers);
+    if (headers['X-Auth']) {
+      return headers['X-Auth'][0];
+    } else {
+      return headers['x-auth'][0];
+    }
+
   }
 
   addAuthTokenToHeader(): RequestOptions {

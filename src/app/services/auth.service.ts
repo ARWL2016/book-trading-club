@@ -4,20 +4,20 @@ import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 
-import { IUser } from 'app/models/user';
+import { User } from '../models/User';
 import { HelperService } from "./helper.service";
 
 @Injectable()
 
 export class AuthService {
-  currentUser: IUser;
+  currentUser: User;
 
   constructor(
     private _http: Http,
     private _helper: HelperService
     ) {}
 
-  register(user: IUser): Promise<void> {
+  register(user: User): Promise<void> {
     const url = `/api/auth/register`;
     return this._http.post(url, user)
       .do (response => {
@@ -29,7 +29,7 @@ export class AuthService {
       .toPromise();
   }
 
-  login(user: IUser): Promise<boolean> {
+  login(user: User): Promise<boolean> {
     const url = `/api/auth/login`;
     return this._http.post(url, user)
       .do(response => {
@@ -51,11 +51,12 @@ export class AuthService {
         this.currentUser = undefined;
         window.localStorage.removeItem('token');
         window.localStorage.removeItem('username');
+        console.log('User has been logged out');
       })
       .catch(e => console.log(e));
   }
 
-  updateCurrentUser(user: IUser) {
+  updateCurrentUser(user: User) {
     console.log('USER', user);
     const { username } = user;
     this.currentUser = user;
@@ -65,6 +66,7 @@ export class AuthService {
   isValidated(): string {
     const token = window.localStorage.getItem('token');
     const username = window.localStorage.getItem('username');
+    console.log('is validated ? ', username);
 
     if (token && username) {
       this.currentUser = {username};

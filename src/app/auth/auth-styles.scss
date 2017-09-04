@@ -1,0 +1,44 @@
+.btc-form-wrapper {
+  border: 2px solid lightcoral;
+  padding: 0;
+  margin: 0 auto;
+  margin-top: 50px;
+  width: 300px;
+}
+
+.btc-form-header {
+  height: 92px;
+  background-color: lightcoral;
+}
+
+
+.btc-form-heading {
+  color: white;
+  text-align: center;
+  padding: 30px 0 30px 0;
+  margin: 0;
+  font-size: 2em; // 32px
+}
+
+.btc-input-wrapper {
+  padding-top: 20px;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.btc-error {
+  width: 80%;
+  color: red;
+  margin: 0 auto;
+}
+
+.btc-form-button-wrapper {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.btc-form-button {
+  width: 100%;
+}

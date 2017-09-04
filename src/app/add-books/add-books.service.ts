@@ -5,7 +5,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/toPromise';
 
-import { Book } from '../models/book';
+import { Book } from '../models/Book';
 
 const baseUrl = `https://www.googleapis.com/books/v1/volumes?q=`;
 

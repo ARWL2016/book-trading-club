@@ -3,14 +3,13 @@
     <a href="#" class="brand-logo">Book Trading Club</a>
     <ul id="nav-mobile" class="right hide-on-med-and-down">
       <li><a [routerLink]="['/add']">Add Books</a></li>
-      <li><a [routerLink]="['/register']">Register</a></li>
-      <li><a [routerLink]="['/login']">Login</a></li>
+      <li *ngIf="!username"><a [routerLink]="['/register']">Register</a></li>
+      <li *ngIf="!username"><a [routerLink]="['/login']">Login</a></li>
+      <li *ngIf="username">Signed in as <b>{{ username }}</b></li>
+      <li *ngIf="username"><a class="waves-effect waves-light btn" (click)="signOut()"> SIGN OUT</a></li>
     </ul>
   </div>
 </nav>
-
-
-
 
 
 <div class="container">
