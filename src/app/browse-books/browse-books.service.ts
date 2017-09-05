@@ -25,4 +25,11 @@ export class BrowseBooksService {
         .map(res => res.json());
     }
 
+    searchBooks(title: string, author?: string) {
+      const url = `/api/book/searchBooks/${title}`;
+      console.log('search books', title);
+      return this.http.get(url)
+        .map(res => res.json());
+    }
+
 }

@@ -3,8 +3,8 @@ import { NgForm } from '@angular/forms';
 import { BrowseBooksService } from './browse-books.service';
 import { Book } from '../models/book';
 import { MaterializeAction } from 'angular2-materialize';
-import { AuthService } from "app/services/auth.service";
-import { Router } from "@angular/router";
+import { AuthService } from 'app/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'btc-browse-books',
@@ -18,6 +18,7 @@ export class BrowseBooksComponent implements OnInit {
   modalActions = new EventEmitter<string|MaterializeAction>();
   selectedBook: Book;
   username: string;
+  nullResult: string;
 
   constructor(
     private browse: BrowseBooksService,
@@ -34,25 +35,29 @@ export class BrowseBooksComponent implements OnInit {
   }
 
   searchBooks() {
+    this.nullResult = undefined;
+    this.bookData = undefined;
     const query = {
       titleQuery: this.titleQuery,
       authorQuery: this.authorQuery
     };
     console.log({ titleQuery: this.titleQuery, authorQuery: this.authorQuery });
-    // this.books.searchBooks(this.titleQuery, this.authorQuery)
-    //   .then(data => {
-    //     this.bookData = data;
-    //     console.log(this.bookData);
-    //   });
+    this.browse.searchBooks(this.titleQuery, this.authorQuery)
+      .subscribe(data => {
+        if (data.length > 0) {
+          return this.bookData = data;
+        }
+        this.nullResult = 'Nothing to see here...';
+      });
   }
 
   openModal(book) {
     this.selectedBook = book;
-    this.modalActions.emit({action:"modal", params:['open']});
+    this.modalActions.emit({action: 'modal', params: ['open']});
   }
 
   closeModal() {
-    this.modalActions.emit({action:"modal", params:['close']});
+    this.modalActions.emit({action: 'modal', params: ['close']});
   }
 
   authenticate(e) {

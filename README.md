@@ -31,14 +31,13 @@ https://stackoverflow.com/questions/43869961/node-js-express-redirect-all-to-ang
 - Remember to redirect Node routes to Angular if they are not used - else cannot GET
 
 To do
-- push book information on to user
-- add page to view available books 
-- add READ function and automate on init 
 - add borrow object to backend data structures 
 - wire up the borrow functions 
 - add a profile page 
 - add a dropdown with profile and add books
 - extract the search box && modal as a separate component
+- add server side logging
+- integrate toasts
 
 Accounts 
 ARW / 123

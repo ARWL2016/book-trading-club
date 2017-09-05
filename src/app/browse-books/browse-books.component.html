@@ -11,7 +11,7 @@
           type="text"
           name="titleQuery"
           id="titleQuery">
-          <label for="titleQuery">Title</label>
+          <label for="titleQuery">Title or Keyword</label>
       </div>
 
       <div class="input-field col s6">
@@ -36,6 +36,7 @@
   </form>
 </div>
 
+<!-- Results -->
 <div class="row">
   <div class="col s6 m4 l3 btc-book-preview" *ngFor="let book of bookData" (click)="openModal(book)">
     <div class="btc-book-preview-image-container">
@@ -44,10 +45,10 @@
 
     <p class="btc-book-preview-title">{{book.title}}</p>
     <p class="btc-book-preview-author">{{book.authors[0]}}</p>
-
   </div>
-
 </div>
+
+<p *ngIf="nullResult" class="btc-null-result-message">{{nullResult}}</p>
 
 
 <!-- Modal Structure -->

@@ -10,6 +10,22 @@ module.exports = {
     })
       .catch(e => console.log(e));
   },
+
+
+  searchBooks(req, res) {
+    const title = req.params.title;
+    console.log(chalk.red(title));
+    Book.find({ "title" : { $regex: new RegExp(title), $options: 'i' } })
+      .then(data => {
+      console.log(chalk.green(data));
+      if (data) {
+        res.status(200).send(data);
+      } else {
+        res.status(200).send('The query returned no results');
+      }
+
+    })
+  },
   addBook(req, res) {
     const {user, bookToAdd} = req.body;
 

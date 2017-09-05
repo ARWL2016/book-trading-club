@@ -40,7 +40,7 @@ import { BrowseBooksService } from "app/browse-books/browse-books.service";
       { path: 'add', component: AddBooksComponent },
       { path: 'register', component: RegisterComponent },
       { path: 'login', component: LoginComponent },
-      { path: '', redirectTo: 'add', pathMatch: 'full' },
+      { path: '', redirectTo: 'browse', pathMatch: 'full' },
       { path: '**', redirectTo: '', pathMatch: 'full' }
     ])
   ],

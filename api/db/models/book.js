@@ -37,6 +37,7 @@ const BookSchema = new mongoose.Schema({
   },
   title: {
     type: String,
+    text: true,
     required: false
   },
   userId: {
