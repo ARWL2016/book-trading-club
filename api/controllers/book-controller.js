@@ -1,18 +1,28 @@
 const { Book } = require('../db');
 const { User } = require('../db');
+const chalk = require('chalk');
 
 module.exports = {
   addBook(req, res) {
     const {user, bookToAdd} = req.body;
-    bookToAdd.userId = user._id;
-    // find this user in db
-    // see if this book exists there
-    // if so, send an error
-    // else, add to collection
 
-    Book.create(bookToAdd).then(data => {
-      console.log('ADDED TO BOOK COLLECTION ', data);
-      res.status(200).send(data);
+    // add user id to the book we will save
+    const id = user._id;
+    bookToAdd.userId = id;
+
+    Book.create(bookToAdd).then(bookData => {
+
+      // add the new book ID to the users
+      // for now, duplicate books are allowed
+      User.findById(id).then((user) => {
+        user.bookIDs.push(bookData._id);
+        user.save()
+          .then(() => {
+            res.status(200).send(bookData);
+            console.log(chalk.green(`Book data was added successfully`));
+        })
+          .catch(e => console.log(chalk.red(e)));
+      })
     })
 
   }
