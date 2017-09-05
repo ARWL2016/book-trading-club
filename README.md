@@ -37,6 +37,8 @@ To do
 - add borrow object to backend data structures 
 - wire up the borrow functions 
 - add a profile page 
+- add a dropdown with profile and add books
+- extract the search box && modal as a separate component
 
 Accounts 
 ARW / 123

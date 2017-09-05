@@ -1,0 +1,81 @@
+.btc-book-preview {
+  // border: 1px solid lightblue;
+  height: 360px;
+}
+
+.btc-book-preview-image-container {
+  // border: 1px dotted red;
+  background: #555;
+  height: 240px;
+  overflow: hidden;
+  position: relative;
+  &:hover {
+    cursor: pointer;
+   }
+}
+
+.btc-book-preview-image {
+  min-width: 100%;
+  min-height: 100%;
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  &:hover {
+    opacity: 0.4;
+  }
+
+}
+
+.btc-book-preview-title {
+  font-weight: bold;
+  // border: 1px dotted pink;
+  margin-bottom: 0;
+}
+
+.btc-book-preview-author {
+  // border: 1px dotted pink;
+  margin: 3px 0 0 0;
+  font-size: 0.9em;
+  color: #444
+}
+
+// MODAL COMPONENT
+
+.btc-modal-text {
+  float: left;
+  max-width:  60%;
+}
+
+.btc-modal-img-wrapper {
+  float: left;
+  margin-right: 20px;
+}
+
+.btc-modal-footer {
+  clear: both;
+}
+
+.btc-modal-title {
+  font-weight: bold;
+}
+
+.btc-modal-subtitle {
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.btc-modal-author {
+  font-size: 1.1em;
+}
+
+.btc-modal-pageCount {
+  font-style: italic;
+  font-size: 0.9em;
+  color: #444;
+}
+
+.modal-link {
+  &:hover {
+    cursor: pointer;
+  }
+}

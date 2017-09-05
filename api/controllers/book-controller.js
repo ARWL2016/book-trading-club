@@ -3,6 +3,13 @@ const { User } = require('../db');
 const chalk = require('chalk');
 
 module.exports = {
+  getAllBooks(req, res) {
+    Book.find()
+      .then(bookData => {
+        res.status(200).send(bookData);
+    })
+      .catch(e => console.log(e));
+  },
   addBook(req, res) {
     const {user, bookToAdd} = req.body;
 
@@ -24,6 +31,5 @@ module.exports = {
           .catch(e => console.log(chalk.red(e)));
       })
     })
-
   }
 }

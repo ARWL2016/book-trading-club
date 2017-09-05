@@ -1,7 +1,8 @@
 <nav>
   <div class="nav-wrapper container">
-    <a href="#" class="brand-logo">Book Trading Club</a>
+    <a href="#" class="brand-logo">Book Exchange</a>
     <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <li><a [routerLink]="['/browse']">Browse Books</a></li>
       <li><a [routerLink]="['/add']">Add Books</a></li>
       <li *ngIf="!username"><a [routerLink]="['/register']">Register</a></li>
       <li *ngIf="!username"><a [routerLink]="['/login']">Login</a></li>

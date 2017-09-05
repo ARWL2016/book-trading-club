@@ -16,6 +16,8 @@ import { IsValidatedGuard } from 'app/services/is-validated-guard.service';
 import { AddBooksService } from 'app/add-books/add-books.service';
 import { RegisterComponent } from './auth/register/register.component';
 import { LoginComponent } from './auth/login/login.component';
+import { BrowseBooksComponent } from './browse-books/browse-books.component';
+import { BrowseBooksService } from "app/browse-books/browse-books.service";
 
 
 @NgModule({
@@ -23,7 +25,8 @@ import { LoginComponent } from './auth/login/login.component';
     AppComponent,
     AddBooksComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    BrowseBooksComponent
   ],
   imports: [
     BrowserModule,
@@ -33,6 +36,7 @@ import { LoginComponent } from './auth/login/login.component';
     FormsModule,
     HttpModule,
     RouterModule.forRoot([
+      { path: 'browse', component: BrowseBooksComponent },
       { path: 'add', component: AddBooksComponent },
       { path: 'register', component: RegisterComponent },
       { path: 'login', component: LoginComponent },
@@ -42,6 +46,7 @@ import { LoginComponent } from './auth/login/login.component';
   ],
   providers: [
     AddBooksService,
+    BrowseBooksService,
     AuthService,
     HelperService,
     IsValidatedGuard
