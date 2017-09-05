@@ -27,6 +27,10 @@ export class BrowseBooksComponent implements OnInit {
 
   ngOnInit() {
     this.username = this.auth.isValidated();
+    this.browse.getAllBooks()
+      .subscribe(data => {
+       this.bookData = data;
+      });
   }
 
   searchBooks() {
