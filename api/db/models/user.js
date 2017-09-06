@@ -19,7 +19,6 @@ const UserSchema = new mongoose.Schema({
       required: false,
       unique: true
   }],
-  requestsToUser: [RequestSchema],
   requestsFromUser: [RequestSchema],
   tokens: [{
     access: {

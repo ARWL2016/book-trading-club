@@ -54,30 +54,19 @@ module.exports = {
 
     Book.findById(request.bookId)
       .then(bookData => {
-        console.log(bookData);
         bookData.requests.push(request);
         bookData.save()
-          .then(output => {
-            console.log(output);
-          });
-      });
-    User.findById(request.requesterId)
-      .then(userData => {
-        userData.requestsFromUser.push(request);
-        userData.save()
-          .then(output => {
-            console.log(output);
+          .then(() => {
+            User.findById(request.requesterId)
+            .then(userData => {
+              userData.requestsFromUser.push(request);
+              userData.save()
+              .then(() => {
+                res.status(200).send('Request was made successfully');
+              })
+              .catch(error => console.log(error));
+            });
           })
       });
-
-      // does not work to to data gaps
-    User.findById(request.ownerId)
-    .then(userData => {
-      userData.requestsToUser.push(request);
-      userData.save()
-        .then(output => {
-          console.log(output);
-        })
-    });
   }
 }

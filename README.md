@@ -40,7 +40,8 @@ To do
 - integrate toasts
 
 Accounts 
-ARW / 123
+ARW / 123 (computers)
+cat / 123 (animals)
 
 
 
