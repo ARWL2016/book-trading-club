@@ -47,5 +47,37 @@ module.exports = {
           .catch(e => console.log(chalk.red(e)));
       })
     })
+  },
+  requestBook(req, res) {
+    const {request} = req.body;
+    console.log(request);
+
+    Book.findById(request.bookId)
+      .then(bookData => {
+        console.log(bookData);
+        bookData.requests.push(request);
+        bookData.save()
+          .then(output => {
+            console.log(output);
+          });
+      });
+    User.findById(request.requesterId)
+      .then(userData => {
+        userData.requestsFromUser.push(request);
+        userData.save()
+          .then(output => {
+            console.log(output);
+          })
+      });
+
+      // does not work to to data gaps
+    User.findById(request.ownerId)
+    .then(userData => {
+      userData.requestsToUser.push(request);
+      userData.save()
+        .then(output => {
+          console.log(output);
+        })
+    });
   }
 }

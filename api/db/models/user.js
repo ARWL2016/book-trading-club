@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
+const RequestSchema = require('./request');
 
 const UserSchema = new mongoose.Schema({
   username: {
@@ -18,6 +19,8 @@ const UserSchema = new mongoose.Schema({
       required: false,
       unique: true
   }],
+  requestsToUser: [RequestSchema],
+  requestsFromUser: [RequestSchema],
   tokens: [{
     access: {
       type: String,

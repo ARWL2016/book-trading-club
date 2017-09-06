@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const RequestSchema = require('./request');
 
 const BookSchema = new mongoose.Schema({
   authors: [{
@@ -43,7 +44,8 @@ const BookSchema = new mongoose.Schema({
   userId: {
     type: String,
     required: true
-  }
+  },
+  requests: [RequestSchema]
 });
 
 

@@ -10,4 +10,6 @@ export interface Book {
   publisher?: string;
   subtitle?: string;
   title?: string;
+  userId?: string;
+  _id?: string;
 }

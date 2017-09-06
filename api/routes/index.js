@@ -14,6 +14,7 @@ module.exports = (app) => {
   app.post('/api/book/addBook', authenticate, BookController.addBook);
   app.get('/api/book/getBooks', BookController.getAllBooks);
   app.get('/api/book/searchBooks/:title', BookController.searchBooks);
+  app.post('/api/book/requestBook', BookController.requestBook);
 
   // default route
   app.get('*', (req, res) => {

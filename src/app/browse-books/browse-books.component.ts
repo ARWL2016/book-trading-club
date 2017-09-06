@@ -31,6 +31,7 @@ export class BrowseBooksComponent implements OnInit {
     this.browse.getAllBooks()
       .subscribe(data => {
        this.bookData = data;
+       console.log(this.bookData);
       });
   }
 
@@ -69,9 +70,11 @@ export class BrowseBooksComponent implements OnInit {
   }
 
   requestBook() {
+    // the book owner ID is on the book object
+    // the requester is the current user
     const user = {username: this.username };
     const book = this.selectedBook;
-    // this.books.addBookToCollection(user, book);
+    this.browse.requestBook(user, book);
     this.closeModal();
   }
 
