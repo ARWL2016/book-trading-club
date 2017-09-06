@@ -18,6 +18,7 @@ import { RegisterComponent } from './auth/register/register.component';
 import { LoginComponent } from './auth/login/login.component';
 import { BrowseBooksComponent } from './browse-books/browse-books.component';
 import { BrowseBooksService } from "app/browse-books/browse-books.service";
+import { ProfileComponent } from './profile/profile.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { BrowseBooksService } from "app/browse-books/browse-books.service";
     AddBooksComponent,
     RegisterComponent,
     LoginComponent,
-    BrowseBooksComponent
+    BrowseBooksComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -38,9 +40,10 @@ import { BrowseBooksService } from "app/browse-books/browse-books.service";
     RouterModule.forRoot([
       { path: 'browse', component: BrowseBooksComponent },
       { path: 'add', component: AddBooksComponent },
+      { path: 'profile', component: ProfileComponent },
       { path: 'register', component: RegisterComponent },
       { path: 'login', component: LoginComponent },
-      { path: '', redirectTo: 'browse', pathMatch: 'full' },
+      { path: '', redirectTo: 'profile', pathMatch: 'full' },
       { path: '**', redirectTo: '', pathMatch: 'full' }
     ])
   ],

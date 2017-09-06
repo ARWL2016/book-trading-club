@@ -31,7 +31,6 @@ https://stackoverflow.com/questions/43869961/node-js-express-redirect-all-to-ang
 - Remember to redirect Node routes to Angular if they are not used - else cannot GET
 
 To do
-- add borrow object to backend data structures 
 - wire up the borrow functions 
 - add a profile page 
 - add a dropdown with profile and add books
