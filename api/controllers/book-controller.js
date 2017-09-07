@@ -66,21 +66,16 @@ module.exports = {
     const id = req.params.id;
     Book.findByIdAndRemove(id)
       .then(book => {
-        console.log(book._id);
         User.findById(book.userId)
           .then(user => {
-            console.log(chalk.green(user.bookIDs));
-            console.log(book._id);
-            let filteredArray = user.bookIDs.filter(id => {
-              return id !== book._id
-            });
-            console.log(chalk.green(filteredArray));
+            const bookIdString = book._id.toString();
+            const filteredArray = user.bookIDs.filter(id => id !== bookIdString);
             user.bookIDs = filteredArray;
-            console.log(chalk.green(user.bookIDs));
-            user.save();
-          })
-
-      })
+            user.save().then(() => {
+              res.status(200).send({message: 'Book was removed from the collection'});
+            });
+          });
+      });
   },
 
   requestBook(req, res) {

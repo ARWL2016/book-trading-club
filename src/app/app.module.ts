@@ -17,9 +17,9 @@ import { AddBooksService } from 'app/add-books/add-books.service';
 import { RegisterComponent } from './auth/register/register.component';
 import { LoginComponent } from './auth/login/login.component';
 import { BrowseBooksComponent } from './browse-books/browse-books.component';
-import { BrowseBooksService } from "app/browse-books/browse-books.service";
+import { BrowseBooksService } from 'app/browse-books/browse-books.service';
 import { ProfileComponent } from './profile/profile.component';
-import { ProfileService } from "app/profile/profile.service";
+import { ProfileService } from 'app/profile/profile.service';
 
 
 @NgModule({

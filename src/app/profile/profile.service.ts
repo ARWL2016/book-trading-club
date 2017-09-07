@@ -18,8 +18,8 @@ export class ProfileService {
 
   deleteBookById(id) {
     const url = `/api/book/delete/${id}`;
-    return this.http.delete(url)
-      .map(res => res.json());
+    return this.http.delete(url);
+      // .map(res => res.json());
   }
 
 

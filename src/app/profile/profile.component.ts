@@ -39,16 +39,20 @@ export class ProfileComponent implements OnInit {
   }
 
   confirmDelete(book) {
-    this.profile.deleteBookById(book._id).subscribe();
+    this.profile.deleteBookById(book._id).subscribe(res => {
+      console.log(res);
+      this.closeModal();
+      this.ngOnInit();
+    });
 
   }
 
   openModal() {
-    this.modalActions.emit({action:"modal", params:['open']});
+    this.modalActions.emit({action: 'modal', params: ['open']});
   }
 
   closeModal() {
-    this.modalActions.emit({action:"modal", params:['close']});
+    this.modalActions.emit({action: 'modal', params: ['close']});
   }
 
 }

@@ -61,7 +61,7 @@ export class AddBooksService {
     console.log('user sent', user);
     const options = this.helper.addAuthTokenToHeader();
     return this.http.post(url, body, options)
-      .subscribe();
+      .subscribe(res => console.log(res));
 
   }
 

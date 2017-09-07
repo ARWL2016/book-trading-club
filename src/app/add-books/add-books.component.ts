@@ -3,8 +3,9 @@ import { NgForm } from '@angular/forms';
 import { AddBooksService } from './add-books.service';
 import { Book } from '../models/book';
 import { MaterializeAction } from 'angular2-materialize';
-import { AuthService } from "app/services/auth.service";
-import { Router } from "@angular/router";
+import { AuthService } from 'app/services/auth.service';
+import { Router } from '@angular/router';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'btc-add-books',
@@ -19,10 +20,13 @@ export class AddBooksComponent implements OnInit {
   selectedBook: Book;
   username: string;
 
+
   constructor(
     private books: AddBooksService,
     private auth: AuthService,
-    private router: Router
+    private router: Router,
+    private _service: NotificationsService
+
   ) { }
 
   ngOnInit() {
@@ -65,6 +69,7 @@ export class AddBooksComponent implements OnInit {
     const book = this.selectedBook;
     this.books.addBookToCollection(user, book);
     this.closeModal();
+    this._service.success('Success', `${this.selectedBook.title} was added to your collection`);
   }
 
 }

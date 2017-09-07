@@ -1,7 +1,7 @@
 import { Component, OnInit, DoCheck } from '@angular/core';
-import { AuthService } from "app/services/auth.service";
-import { User } from "app/models/User";
-import { Router } from "@angular/router";
+import { AuthService } from 'app/services/auth.service';
+import { User } from 'app/models/User';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -9,21 +9,27 @@ import { Router } from "@angular/router";
   styleUrls: ['./app.component.scss']
 
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, DoCheck {
   username: string;
+  public options = {
+    timeOut: 3000,
+    lastOnBottom: true,
+    showProgressBar: true,
+    pauseOnHover: true
+  };
 
   ngOnInit(): void {
     this.username = this.auth.isValidated();
   }
 
   ngDoCheck() {
-
     this.username = this.auth.isValidated();
   }
 
   constructor(
     private auth: AuthService,
-    private router: Router
+    private router: Router,
+
   ) { }
 
   signOut() {
