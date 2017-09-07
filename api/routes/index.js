@@ -16,6 +16,7 @@ module.exports = (app) => {
   app.get('/api/book/searchBooks/:title', BookController.searchBooksByTitle);
   app.post('/api/book/requestBook', BookController.requestBook);
   app.get('/api/book/getCurrentUsersBooks?', BookController.getBooksById);
+  app.delete('/api/book/delete/:id', BookController.deleteBookById);
 
   // default route
   app.get('*', (req, res) => {

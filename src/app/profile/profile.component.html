@@ -1,21 +1,11 @@
-<h3>User Profile</h3>
+<h4>User Profile</h4>
 <p>User: {{currentUser.username}}</p>
 
-<h3>My Books</h3>
-<!-- <div *ngFor="let book of myBooks" class="btc-panel">
-  <div class="btc-panel-img-wrapper">
-    <img class="btc-panel-img" src="{{book.imageLinks.thumbnail}}">
-  </div>
+<h4>My Books</h4>
 
-    <div class="btc-panel-cell">{{book.title}}</div>
-    <div class="btc-panel-cell">{{book.authors[0]}}</div>
-    <div class="btc-panel-cell">Requests</div>
-    <div class="btc-panel-cell">X</div>
-
-</div> -->
-
-<div class="btc-table-wrapper">
+<div class="responsive-table btc-table-wrapper">
     <table>
+      <thead>
         <tr class="btc-table-row">
             <th class="btc-image-column">Image</th>
             <th class="btc-title-column">Title</th>
@@ -23,14 +13,33 @@
             <th class="btc-requests-column">Requests</th>
             <th class="btc-remove-column">Remove</th>
         </tr>
+      </thead>
+      <tbody>
         <tr *ngFor="let book of myBooks" class="btc-table-row">
-            <td class="btc-image-column"><img src="{{book.imageLinks.thumbnail}}" ></td>
+            <td class="btc-image-column"><img class="btc-table-image" src="{{book.imageLinks.thumbnail}}" ></td>
             <td class="btc-title-column">{{book.title}}</td>
             <td class="btc-author-column">{{book.authors[0]}}</td>
-            <td class="btc-requests-column">{{packet.price_data[0][1]}}</td>
-            <td class="btc-remove-column"><i class="material-icons delete" ng-click="removeData(packet.symbol)">delete</i></td>
+            <td class="btc-requests-column">{{book.requests.length}}</td>
+            <td class="btc-remove-column"><i (click)="deleteBook(book)" class="material-icons">delete_forever</i></td>
         </tr>
+      </tbody>
     </table>
   </div>
 
-<h3>My Requests</h3>
+  <!-- delete modal -->
+
+  <div id="modal1" class="modal" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalActions">
+      <div class="modal-content">
+        <h4 *ngIf="selectedBook">{{selectedBook.title}}</h4>
+        <p>Are you sure you want to remove this book from your collection?</p>
+      </div>
+      <div class="modal-footer">
+          <a class="waves-effect waves-green btn-flat" (click)="confirmDelete(this.selectedBook)">Remove<i class="material-icons right">delete_forever</i></a>
+          <a class="waves-effect waves-green btn-flat" (click)="closeModal()">Cancel<i class="material-icons right">cancel</i></a>
+      </div>
+    </div>
+
+<h4>My Requests</h4>
+
+
+

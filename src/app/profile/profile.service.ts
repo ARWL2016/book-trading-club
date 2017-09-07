@@ -16,6 +16,12 @@ export class ProfileService {
       .map(res => res.json());
   }
 
+  deleteBookById(id) {
+    const url = `/api/book/delete/${id}`;
+    return this.http.delete(url)
+      .map(res => res.json());
+  }
+
 
   // get my requests
   // get my user profile data - location, interests, name, number of books

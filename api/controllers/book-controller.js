@@ -21,7 +21,6 @@ module.exports = {
       })
   },
 
-
   searchBooksByTitle(req, res) {
     const title = req.params.title;
     console.log(chalk.red(title));
@@ -58,6 +57,32 @@ module.exports = {
       })
     })
   },
+
+
+  // db.profiles.update( { _id: 1 }, { $pull: { votes: { $gte: 6 } } } )
+  // https://docs.mongodb.com/manual/reference/operator/update/pull/#up._S_pull
+
+  deleteBookById(req, res) {
+    const id = req.params.id;
+    Book.findByIdAndRemove(id)
+      .then(book => {
+        console.log(book._id);
+        User.findById(book.userId)
+          .then(user => {
+            console.log(chalk.green(user.bookIDs));
+            console.log(book._id);
+            let filteredArray = user.bookIDs.filter(id => {
+              return id !== book._id
+            });
+            console.log(chalk.green(filteredArray));
+            user.bookIDs = filteredArray;
+            console.log(chalk.green(user.bookIDs));
+            user.save();
+          })
+
+      })
+  },
+
   requestBook(req, res) {
     const {request} = req.body;
     console.log(request);

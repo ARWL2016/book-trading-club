@@ -1,9 +1,27 @@
-.btc-table-wrapper {}
+.btc-table-wrapper {
+  // border: 1px solid pink;
+}
 
-.btc-table-row {}
+.btc-table-row {
+
+}
 .btc-image-column {}
-.btc-title-column {}
+.btc-table-image {
+  height: 50px;
+}
+.btc-title-column {
+  max-width: 20%;
+  font-weight: bold;
+  font-size: 1.1em;
+}
 .btc-author-column {}
-.btc-requests-column {}
-.btc-remove-column {}
+.btc-requests-column {
+  text-align: center;
+}
+.btc-remove-column {
+  text-align: center;
+  &>i:hover {
+    cursor: pointer;
+  }
+}
 
