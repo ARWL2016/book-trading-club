@@ -19,6 +19,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { BrowseBooksComponent } from './browse-books/browse-books.component';
 import { BrowseBooksService } from "app/browse-books/browse-books.service";
 import { ProfileComponent } from './profile/profile.component';
+import { ProfileService } from "app/profile/profile.service";
 
 
 @NgModule({
@@ -43,13 +44,14 @@ import { ProfileComponent } from './profile/profile.component';
       { path: 'profile', component: ProfileComponent },
       { path: 'register', component: RegisterComponent },
       { path: 'login', component: LoginComponent },
-      { path: '', redirectTo: 'profile', pathMatch: 'full' },
+      // { path: '', redirectTo: 'profile', pathMatch: 'full' },
       { path: '**', redirectTo: '', pathMatch: 'full' }
     ])
   ],
   providers: [
     AddBooksService,
     BrowseBooksService,
+    ProfileService,
     AuthService,
     HelperService,
     IsValidatedGuard

@@ -1,3 +1,36 @@
-<p>
-  profile works!
-</p>
+<h3>User Profile</h3>
+<p>User: {{currentUser.username}}</p>
+
+<h3>My Books</h3>
+<!-- <div *ngFor="let book of myBooks" class="btc-panel">
+  <div class="btc-panel-img-wrapper">
+    <img class="btc-panel-img" src="{{book.imageLinks.thumbnail}}">
+  </div>
+
+    <div class="btc-panel-cell">{{book.title}}</div>
+    <div class="btc-panel-cell">{{book.authors[0]}}</div>
+    <div class="btc-panel-cell">Requests</div>
+    <div class="btc-panel-cell">X</div>
+
+</div> -->
+
+<div class="btc-table-wrapper">
+    <table>
+        <tr class="btc-table-row">
+            <th class="btc-image-column">Image</th>
+            <th class="btc-title-column">Title</th>
+            <th class="btc-author-column">Author</th>
+            <th class="btc-requests-column">Requests</th>
+            <th class="btc-remove-column">Remove</th>
+        </tr>
+        <tr *ngFor="let book of myBooks" class="btc-table-row">
+            <td class="btc-image-column"><img src="{{book.imageLinks.thumbnail}}" ></td>
+            <td class="btc-title-column">{{book.title}}</td>
+            <td class="btc-author-column">{{book.authors[0]}}</td>
+            <td class="btc-requests-column">{{packet.price_data[0][1]}}</td>
+            <td class="btc-remove-column"><i class="material-icons delete" ng-click="removeData(packet.symbol)">delete</i></td>
+        </tr>
+    </table>
+  </div>
+
+<h3>My Requests</h3>

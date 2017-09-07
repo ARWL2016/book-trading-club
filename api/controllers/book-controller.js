@@ -11,8 +11,18 @@ module.exports = {
       .catch(e => console.log(e));
   },
 
+  getBooksById(req, res) {
+    const id = req.query.id;
+    console.log('get books', id);
+    Book.find({userId: id})
+      .then(data => {
+        console.log(data);
+        res.status(200).send(data);
+      })
+  },
 
-  searchBooks(req, res) {
+
+  searchBooksByTitle(req, res) {
     const title = req.params.title;
     console.log(chalk.red(title));
     Book.find({ "title" : { $regex: new RegExp(title), $options: 'i' } })
