@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
       this.auth.login(this.user)
         .then((res) => {
           console.log(res);
-            this.router.navigate(['/add']);
+            this.router.navigate(['/browse']);
             this.notify.success(this.user.username, 'You have been logged in');
         })
         .catch(e => {

@@ -1,7 +1,9 @@
 <h4>User Profile</h4>
 <p>User: {{currentUser.username}}</p>
 
-<h4>My Books</h4>
+<h4>My Collection</h4>
+
+<!-- My Collection Table -->
 
 <div class="responsive-table btc-table-wrapper">
     <table>
@@ -40,6 +42,29 @@
     </div>
 
 <h4>My Requests</h4>
+
+<div class="responsive-table btc-table-wrapper">
+    <table>
+      <thead>
+        <tr class="btc-table-row">
+            <th class="btc-image-column">Image</th>
+            <th class="btc-title-column">Title</th>
+            <th class="btc-requests-column">Owner</th>
+            <th class="btc-message-column">Message</th>
+            <th class="btc-cancel-column">Cancel</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let request of myRequests" class="btc-table-row">
+            <td class="btc-image-column"><img class="btc-table-image" src="{{book.imageLinks.thumbnail}}" ></td>
+            <td class="btc-title-column"></td>
+            <td class="btc-requests-column"></td>
+            <td class="btc-message-column"><i class="material-icons">message</i></td>
+            <td class="btc-cancel-column"><i class="material-icons">cancel</i></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
 
 

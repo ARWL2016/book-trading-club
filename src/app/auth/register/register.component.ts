@@ -41,7 +41,7 @@ export class RegisterComponent implements OnInit {
         .then((res) => {
           console.log('user created', res);
 
-          this.router.navigate(['/add']);
+          this.router.navigate(['/browse']);
         })
         .catch(err => {
           console.log(err);

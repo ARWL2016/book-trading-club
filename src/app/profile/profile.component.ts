@@ -48,7 +48,10 @@ export class ProfileComponent implements OnInit {
       this.notify.success(book.title, 'This book was removed from your collection');
       this.selectedBook = null;
     });
+  }
 
+  getMyRequests() {
+    // fetch all requests and for each one, the book title and image
   }
 
   openModal() {
