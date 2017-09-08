@@ -4,6 +4,7 @@ import { User } from "app/models/User";
 import { ProfileService } from "app/profile/profile.service";
 import { Book } from "app/models/Book";
 import { MaterializeAction } from 'angular2-materialize';
+import { NotificationsService } from "angular2-notifications";
 
 @Component({
   selector: 'btc-profile',
@@ -19,7 +20,8 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private auth: AuthService,
-    private profile: ProfileService
+    private profile: ProfileService,
+    private notify: NotificationsService
   ) { }
 
   ngOnInit() {
@@ -43,6 +45,8 @@ export class ProfileComponent implements OnInit {
       console.log(res);
       this.closeModal();
       this.ngOnInit();
+      this.notify.success(book.title, 'This book was removed from your collection');
+      this.selectedBook = null;
     });
 
   }

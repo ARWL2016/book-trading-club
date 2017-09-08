@@ -79,8 +79,12 @@ export class AuthService {
   }
 
   getCurrentUserId() {
-    console.log('get ID', this.currentUser._id);
-    return this.currentUser._id;
+    if (this.currentUser) {
+      console.log('get ID', this.currentUser._id);
+      return this.currentUser._id;
+    }
+    return null;
+
   }
 
   getCurrentUser() {

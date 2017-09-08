@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from 'app/models/User';
 import { AuthService } from "app/services/auth.service";
 import { Router } from '@angular/router';
+import { NotificationsService } from "angular2-notifications";
 
 @Component({
   selector: 'btc-login',
@@ -16,7 +17,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private auth: AuthService,
-    private router: Router) { }
+    private router: Router,
+    private notify: NotificationsService) { }
 
   ngOnInit() {
   }
@@ -27,8 +29,8 @@ export class LoginComponent implements OnInit {
       this.auth.login(this.user)
         .then((res) => {
           console.log(res);
-
             this.router.navigate(['/add']);
+            this.notify.success(this.user.username, 'You have been logged in');
         })
         .catch(e => {
           console.log(e);

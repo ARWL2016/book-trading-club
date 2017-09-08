@@ -5,6 +5,7 @@ import { Book } from '../models/book';
 import { MaterializeAction } from 'angular2-materialize';
 import { AuthService } from 'app/services/auth.service';
 import { Router } from '@angular/router';
+import { NotificationsService } from "angular2-notifications";
 
 @Component({
   selector: 'btc-browse-books',
@@ -23,15 +24,17 @@ export class BrowseBooksComponent implements OnInit {
   constructor(
     private browse: BrowseBooksService,
     private auth: AuthService,
-    private router: Router
+    private router: Router,
+    private notify: NotificationsService
   ) { }
 
   ngOnInit() {
     this.username = this.auth.isValidated();
     this.browse.getAllBooks()
       .subscribe(data => {
-       this.bookData = data;
-       console.log(this.bookData);
+        let filteredData = this.removeCurrentUsersBooks(data);
+        console.log(filteredData);
+       this.bookData = filteredData;
       });
   }
 
@@ -46,10 +49,21 @@ export class BrowseBooksComponent implements OnInit {
     this.browse.searchBooks(this.titleQuery, this.authorQuery)
       .subscribe(data => {
         if (data.length > 0) {
+          console.log(data);
           return this.bookData = data;
         }
         this.nullResult = 'Nothing to see here...';
       });
+  }
+
+  removeCurrentUsersBooks(bookData) {
+    let currentUserId = this.auth.getCurrentUserId();
+    console.log(currentUserId, typeof currentUserId);
+    let filteredData = bookData.filter(book => {
+      return book.userId !== currentUserId;
+    })
+    console.log(filteredData);
+    return filteredData;
   }
 
   openModal(book) {
@@ -76,6 +90,7 @@ export class BrowseBooksComponent implements OnInit {
     const book = this.selectedBook;
     this.browse.requestBook(user, book);
     this.closeModal();
+    this.notify.success(this.selectedBook.title, 'This book was requested.');
   }
 
 }

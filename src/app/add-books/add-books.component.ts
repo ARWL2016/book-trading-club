@@ -25,7 +25,7 @@ export class AddBooksComponent implements OnInit {
     private books: AddBooksService,
     private auth: AuthService,
     private router: Router,
-    private _service: NotificationsService
+    private notify: NotificationsService
 
   ) { }
 
@@ -69,7 +69,7 @@ export class AddBooksComponent implements OnInit {
     const book = this.selectedBook;
     this.books.addBookToCollection(user, book);
     this.closeModal();
-    this._service.success('Success', `${this.selectedBook.title} was added to your collection`);
+    this.notify.success(this.selectedBook.title, 'This book was added to your collection');
   }
 
 }

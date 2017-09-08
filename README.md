@@ -31,12 +31,11 @@ https://stackoverflow.com/questions/43869961/node-js-express-redirect-all-to-ang
 - Remember to redirect Node routes to Angular if they are not used - else cannot GET
 
 To do
-- wire up the borrow functions 
-- add a profile page 
+- add requested books to profile 
 - add a dropdown with profile and add books
 - extract the search box && modal as a separate component
 - add server side logging
-- integrate toasts
+- create a welcome page
 
 Accounts 
 ARW / 123 (computers)

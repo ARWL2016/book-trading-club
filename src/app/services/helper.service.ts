@@ -14,7 +14,6 @@ export class HelperService {
     } else {
       return headers['x-auth'][0];
     }
-
   }
 
   addAuthTokenToHeader(): RequestOptions {
@@ -23,7 +22,5 @@ export class HelperService {
     const options = new RequestOptions({ headers });
     return options;
   }
-
-
 
 }

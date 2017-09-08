@@ -1,14 +1,18 @@
+<ul materialize="dropdown" id="dropdown1" class="dropdown-content">
+    <li><a href="#!">Profile</a></li>
+    <li class="divider"></li>
+    <li><a (click)="signOut()">Sign Out</a></li>
+  </ul>
 <nav>
   <div class="nav-wrapper container">
     <a href="#" class="brand-logo">Book Exchange</a>
     <ul id="nav-mobile" class="right hide-on-med-and-down">
-      <li><a [routerLink]="['/browse']">Browse Books</a></li>
-      <li><a [routerLink]="['/add']">Add Books</a></li>
-      <li><a *ngIf="username" [routerLink]="['/profile']">Profile</a></li>
-      <li *ngIf="!username"><a [routerLink]="['/register']">Register</a></li>
-      <li *ngIf="!username"><a [routerLink]="['/login']">Login</a></li>
-      <li *ngIf="username">Signed in as <b>{{ username }}</b></li>
-      <li *ngIf="username"><a class="waves-effect waves-light btn" (click)="signOut()"> SIGN OUT</a></li>
+      <li [className]="linkClassBrowse"><a [routerLink]="['/browse']" >Browse Books</a></li>
+      <li [className]="linkClassAdd"><a [routerLink]="['/add']">Add Books</a></li>
+      <li [className]="linkClassRegister" *ngIf="!username"><a [routerLink]="['/register']">Register</a></li>
+      <li [className]="linkClassLogin" *ngIf="!username"><a [routerLink]="['/login']">Login</a></li>
+
+      <li *ngIf="username"><a class="dropdown-button" href="#!" data-activates="dropdown1"><i class="material-icons btc-account-icon">account_circle</i></a></li>
     </ul>
   </div>
 </nav>
