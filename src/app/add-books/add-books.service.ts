@@ -52,13 +52,11 @@ export class AddBooksService {
       .toPromise();
   }
 
-  addBookToCollection(user: User, bookToAdd: Book){
+  addBookToCollection(bookToAdd: Book){
+    const user = this.auth.getCurrentUser();
     console.log(`Adding ${bookToAdd.title} to the collection of ${user.username} with id of ${user._id}`);
-    // post data to API - error checking
     const url = '/api/book/addBook';
-    user._id = this.auth.getCurrentUserId();
     const body = {user, bookToAdd};
-    console.log('user sent', user);
     const options = this.helper.addAuthTokenToHeader();
     return this.http.post(url, body, options)
       .subscribe(res => console.log(res));

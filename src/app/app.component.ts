@@ -2,7 +2,7 @@ import { Component, OnInit, DoCheck } from '@angular/core';
 import { AuthService } from 'app/services/auth.service';
 import { User } from 'app/models/User';
 import { Router, ActivatedRoute } from '@angular/router';
-import { NotificationsService } from "angular2-notifications";
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'app-root',

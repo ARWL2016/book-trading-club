@@ -5,7 +5,15 @@ const RequestSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  requesterName: {
+    type: String,
+    required: true
+  },
   ownerId: {
+    type: String,
+    required: true
+  },
+  ownerName: {
     type: String,
     required: true
   },

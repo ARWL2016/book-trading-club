@@ -5,7 +5,7 @@ import { Book } from '../models/book';
 import { MaterializeAction } from 'angular2-materialize';
 import { AuthService } from 'app/services/auth.service';
 import { Router } from '@angular/router';
-import { NotificationsService } from "angular2-notifications";
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'btc-browse-books',
@@ -15,7 +15,7 @@ import { NotificationsService } from "angular2-notifications";
 export class BrowseBooksComponent implements OnInit {
   titleQuery: string;
   authorQuery: string;
-  bookData: Book[] | { error: string };
+  bookData: Book[];
   modalActions = new EventEmitter<string|MaterializeAction>();
   selectedBook: Book;
   username: string;
@@ -32,9 +32,11 @@ export class BrowseBooksComponent implements OnInit {
     this.username = this.auth.isValidated();
     this.browse.getAllBooks()
       .subscribe(data => {
-        let filteredData = this.removeCurrentUsersBooks(data);
+        const filteredData = this.removeCurrentUsersBooks(data);
         console.log(filteredData);
-       this.bookData = filteredData;
+        const flaggedData = this.addAlreadyRequestedFlag(filteredData);
+        console.log(flaggedData);
+       this.bookData = flaggedData;
       });
   }
 
@@ -57,17 +59,28 @@ export class BrowseBooksComponent implements OnInit {
   }
 
   removeCurrentUsersBooks(bookData) {
-    let currentUserId = this.auth.getCurrentUserId();
-    console.log(currentUserId, typeof currentUserId);
-    let filteredData = bookData.filter(book => {
+    const currentUserId = this.auth.getCurrentUserId();
+    const filteredData = bookData.filter(book => {
       return book.userId !== currentUserId;
-    })
-    console.log(filteredData);
+    });
     return filteredData;
+  }
+
+  addAlreadyRequestedFlag(bookData) {
+    bookData.forEach(book => {
+      book.requested = false;
+      book.requests.forEach(request => {
+        if (request.requesterName === this.username) {
+          book.requested = true;
+        }
+      });
+    });
+    return bookData;
   }
 
   openModal(book) {
     this.selectedBook = book;
+    console.log(this.selectedBook);
     this.modalActions.emit({action: 'modal', params: ['open']});
   }
 
@@ -88,9 +101,16 @@ export class BrowseBooksComponent implements OnInit {
     // the requester is the current user
     const user = {username: this.username };
     const book = this.selectedBook;
-    this.browse.requestBook(user, book);
+    this.browse.requestBook(user, book).subscribe(res => {
+      this.notify.success(book.title, 'This book was requested.');
+      this.bookData.forEach(item => {
+        if (item._id === book._id) {
+          item.requested = true;
+        }
+      });
+    }, err => {
+      console.log(err);
+    });
     this.closeModal();
-    this.notify.success(this.selectedBook.title, 'This book was requested.');
   }
-
 }

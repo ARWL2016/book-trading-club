@@ -39,7 +39,9 @@ export class BrowseBooksService {
       const timestamp = new Date().toString();
       const request: BorrowRequest = {
         requesterId: requesterId,
+        requesterName: user.username,
         ownerId: book.userId,
+        ownerName: book.username,
         bookId: book._id,
         dateRequested: timestamp,
         status: 'new'
@@ -49,8 +51,8 @@ export class BrowseBooksService {
       const url = '/api/book/requestBook';
       const body = {request};
       const options = this.helper.addAuthTokenToHeader();
-      return this.http.post(url, body, options)
-        .subscribe();
+      return this.http.post(url, body, options);
+
     }
 
 }

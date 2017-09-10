@@ -1,11 +1,19 @@
 <h4>User Profile</h4>
 <p>User: {{currentUser.username}}</p>
+<p>UserID: {{currentUser._id}}</p>
 
-<h4>My Collection</h4>
+<nav class="nav-extended">
+    <div class="nav-content">
+      <ul class="tabs tabs-transparent">
+        <li class="tab"><a (click)="showContent($event)" [className]="linkClassCollection">Collection</a></li>
+        <li class="tab"><a (click)="showContent($event)" [className]="linkClassRequests">Requests</a></li>
+      </ul>
+    </div>
+  </nav>
 
 <!-- My Collection Table -->
 
-<div class="responsive-table btc-table-wrapper">
+<div *ngIf="activeTab === 'Collection'" class="responsive-table btc-table-wrapper">
     <table>
       <thead>
         <tr class="btc-table-row">
@@ -41,9 +49,9 @@
       </div>
     </div>
 
-<h4>My Requests</h4>
+<!-- Requests Table -->
 
-<div class="responsive-table btc-table-wrapper">
+<div *ngIf="activeTab !== 'Collection'" class="responsive-table btc-table-wrapper">
     <table>
       <thead>
         <tr class="btc-table-row">
@@ -55,8 +63,8 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let request of myRequests" class="btc-table-row">
-            <td class="btc-image-column"><img class="btc-table-image" src="{{book.imageLinks.thumbnail}}" ></td>
+        <tr  class="btc-table-row">
+            <td class="btc-image-column"><img class="btc-table-image" src="" ></td>
             <td class="btc-title-column"></td>
             <td class="btc-requests-column"></td>
             <td class="btc-message-column"><i class="material-icons">message</i></td>

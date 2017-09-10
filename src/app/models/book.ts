@@ -1,15 +1,17 @@
 export interface Book {
   authors?: string[];
   description?: string;
-  imageLinks? : {
+  imageLinks?: {
     smallThumbnail?: string;
     thumbnail?: string;
   };
   pageCount?: number;
   publishedDate?: string;
   publisher?: string;
+  requested?: boolean;
   subtitle?: string;
   title?: string;
-  userId?: string;
+  userId: string;
+  username: string;
   _id?: string;
 }

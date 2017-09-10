@@ -1,10 +1,11 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
-import { AuthService } from "app/services/auth.service";
-import { User } from "app/models/User";
-import { ProfileService } from "app/profile/profile.service";
+import { AuthService } from 'app/services/auth.service';
+import { User } from 'app/models/User';
+import { ProfileService } from 'app/profile/profile.service';
 import { Book } from "app/models/Book";
 import { MaterializeAction } from 'angular2-materialize';
-import { NotificationsService } from "angular2-notifications";
+import {NotificationsService} from 'angular2-notifications';
+import {BorrowRequest} from 'app/models/Borrow-Request';
 
 @Component({
   selector: 'btc-profile',
@@ -16,7 +17,11 @@ export class ProfileComponent implements OnInit {
   currentUser: User;
   myBooks: Book[];
   selectedBook: Book;
+  myRequests: BorrowRequest[];
   modalActions = new EventEmitter<string|MaterializeAction>();
+  activeTab = 'Collection';
+  linkClassCollection = 'active';
+  linkClassRequests: String;
 
   constructor(
     private auth: AuthService,
@@ -27,11 +32,30 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.currentUser = this.auth.getCurrentUser();
     console.log(this.currentUser);
-    this.profile.getCurrentUsersBooks(this.currentUser._id)
+
+    this.profile.getMyBooks(this.currentUser._id)
       .subscribe(data => {
         this.myBooks = data;
-        console.log(this.myBooks);
+        // console.log(this.myBooks);
       });
+
+    this.profile.getMyRequests(this.currentUser._id)
+      .subscribe(data => {
+        this.myRequests = data;
+        console.log(this.myRequests);
+      });
+  }
+
+  showContent(e) {
+    if (e.target.innerHTML === 'Collection') {
+      this.activeTab = 'Collection';
+      this.linkClassCollection = 'active';
+      this.linkClassRequests = '';
+    } else if (e.target.innerHTML === 'Requests') {
+      this.activeTab = 'Requests';
+      this.linkClassCollection = '';
+      this.linkClassRequests = 'active';
+    }
   }
 
   deleteBook(book) {
@@ -48,10 +72,6 @@ export class ProfileComponent implements OnInit {
       this.notify.success(book.title, 'This book was removed from your collection');
       this.selectedBook = null;
     });
-  }
-
-  getMyRequests() {
-    // fetch all requests and for each one, the book title and image
   }
 
   openModal() {

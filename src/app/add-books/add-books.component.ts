@@ -65,10 +65,11 @@ export class AddBooksComponent implements OnInit {
   }
 
   addBook() {
-    const user = {username: this.username };
+    // const user = {username: this.username };
     const book = this.selectedBook;
-    this.books.addBookToCollection(user, book);
+    this.books.addBookToCollection(book);
     this.closeModal();
+    // need some error handling here
     this.notify.success(this.selectedBook.title, 'This book was added to your collection');
   }
 

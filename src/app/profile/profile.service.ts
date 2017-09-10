@@ -9,9 +9,16 @@ export class ProfileService {
 
   // methods
   // get my books
-  getCurrentUsersBooks(id) {
-    console.log('service', id)
+  getMyBooks(id) {
+    console.log('service', id);
     const url = `/api/book/getCurrentUsersBooks?id=${id}`;
+    return this.http.get(url)
+      .map(res => res.json());
+  }
+
+  getMyRequests(id) {
+    console.log('get requests', id);
+    const url = `/api/book/getCurrentUsersRequests?id=${id}`;
     return this.http.get(url)
       .map(res => res.json());
   }

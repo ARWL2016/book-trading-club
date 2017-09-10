@@ -44,7 +44,7 @@ import { ProfileService } from 'app/profile/profile.service';
       { path: 'profile', component: ProfileComponent },
       { path: 'register', component: RegisterComponent },
       { path: 'login', component: LoginComponent },
-      // { path: '', redirectTo: 'profile', pathMatch: 'full' },
+      // { path: '', redirectTo: 'browse', pathMatch: 'full' },
       { path: '**', redirectTo: '', pathMatch: 'full' }
     ])
   ],

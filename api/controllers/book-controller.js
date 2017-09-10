@@ -13,12 +13,12 @@ module.exports = {
 
   getBooksById(req, res) {
     const id = req.query.id;
-    console.log('get books', id);
+    // console.log('get books', id);
     Book.find({userId: id})
       .then(data => {
-        console.log(data);
+        // console.log(data);
         res.status(200).send(data);
-      })
+      });
   },
 
   searchBooksByTitle(req, res) {
@@ -36,15 +36,16 @@ module.exports = {
     })
   },
   addBook(req, res) {
+    console.log(chalk.green('ADD BOOKS'));
     const {user, bookToAdd} = req.body;
 
     // add user id to the book we will save
     const id = user._id;
     bookToAdd.userId = id;
+    bookToAdd.username = user.username;
 
     Book.create(bookToAdd).then(bookData => {
 
-      // add the new book ID to the users
       // for now, duplicate books are allowed
       User.findById(id).then((user) => {
         user.bookIDs.push(bookData._id);
@@ -52,9 +53,12 @@ module.exports = {
           .then(() => {
             res.status(200).send(bookData);
             console.log(chalk.green(`Book data was added successfully`));
-        })
-          .catch(e => console.log(chalk.red(e)));
-      })
+        });
+      }).catch(e => {
+        res.status(400).send('Data could not be added');
+        console.log(chalk.red(e));
+      });
+
     })
   },
 
@@ -97,6 +101,28 @@ module.exports = {
               .catch(error => console.log(error));
             });
           })
+      });
+  },
+
+  // var query = PUser.find({'userID': {$in:array}});
+
+  getRequestsForUserId(req, res) {
+    const id = req.query.id;
+    console.log('get books', id);
+    User.findById(id)
+      .then(user => {
+        const requests = user.requestsFromUser;
+        let bookIds = [];
+        requests.forEach(request => {
+          bookIds.push(request.bookId)
+        });
+
+        Book.find({'_id': {$in:bookIds}})
+          .then(books => {
+            console.log(books);
+            const responseData = { requests, books};
+            res.status(200).send(responseData);
+          });
       });
   }
 }
