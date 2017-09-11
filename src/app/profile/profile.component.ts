@@ -67,7 +67,11 @@ export class ProfileComponent implements OnInit {
   }
 
   cancelRequest(request) {
-
+    console.log(request);
+    this.profile.deleteRequestById(request._id)
+      .subscribe(data => {
+        console.log(data);
+      })
   }
 
   openModal() {

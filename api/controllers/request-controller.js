@@ -34,6 +34,7 @@ module.exports = {
       Book.findById(requestData.bookId)
         .then(bookData => {
           bookData.requestsReceived.push(requestData._id);
+          bookData.usersRequesting.push(requestData.requesterName);
           bookData.save()
             .then(() => {
               User.findById(requestData.requesterId)
@@ -45,6 +46,28 @@ module.exports = {
             });
         });
     });
+  },
+
+  deleteRequest(req, res) {
+    const id = req.params.id;
+    console.log('DELETE', id);
+    Request.findByIdAndRemove(id)
+      .then(request => {
+        Book.findById(request.bookId)
+          .then(book => {
+            book.usersRequesting.filter(users => users !== request.requesterName);
+            book.requestsReceived.filter(requests => requests !== request._id);
+            book.save().then(() => {
+              User.findById(request.requesterId)
+              .then(user => {
+                user.requestsMade.filter(request => request !== request._id);
+                user.save()
+                  .then(() => res.status(200).send());
+              });
+            })
+          });
+      })
+        .catch(e => res.status(400).send());
   },
 
 

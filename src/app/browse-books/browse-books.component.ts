@@ -33,10 +33,9 @@ export class BrowseBooksComponent implements OnInit {
     this.browse.getAllBooks()
       .subscribe(data => {
         const filteredData = this.removeCurrentUsersBooks(data);
-        console.log(filteredData);
         const flaggedData = this.addAlreadyRequestedFlag(filteredData);
         console.log(flaggedData);
-       this.bookData = flaggedData;
+        this.bookData = flaggedData;
       });
   }
 
@@ -58,6 +57,24 @@ export class BrowseBooksComponent implements OnInit {
       });
   }
 
+  requestBook() {
+    // the book owner ID is on the book object
+    // the requester is the current user
+    const user = {username: this.username };
+    const book = this.selectedBook;
+    this.browse.requestBook(user, book).subscribe(res => {
+      this.notify.success(book.title, 'This book was requested.');
+      this.bookData.forEach(item => {
+        if (item._id === book._id) {
+          item.requested = true;
+        }
+      });
+    }, err => {
+      console.log(err);
+    });
+    this.closeModal();
+  }
+
   removeCurrentUsersBooks(bookData) {
     const currentUserId = this.auth.getCurrentUserId();
     const filteredData = bookData.filter(book => {
@@ -69,8 +86,8 @@ export class BrowseBooksComponent implements OnInit {
   addAlreadyRequestedFlag(bookData) {
     bookData.forEach(book => {
       book.requested = false;
-      book.requests.forEach(request => {
-        if (request.requesterName === this.username) {
+      book.usersRequesting.forEach(username => {
+        if (username === this.username) {
           book.requested = true;
         }
       });
@@ -96,21 +113,5 @@ export class BrowseBooksComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
-  requestBook() {
-    // the book owner ID is on the book object
-    // the requester is the current user
-    const user = {username: this.username };
-    const book = this.selectedBook;
-    this.browse.requestBook(user, book).subscribe(res => {
-      this.notify.success(book.title, 'This book was requested.');
-      this.bookData.forEach(item => {
-        if (item._id === book._id) {
-          item.requested = true;
-        }
-      });
-    }, err => {
-      console.log(err);
-    });
-    this.closeModal();
-  }
+
 }

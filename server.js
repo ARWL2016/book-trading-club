@@ -10,7 +10,7 @@ const routes = require('./api/routes');
 const app = express();
 app.use(compression());
 
-let port = process.env.PORT || 4500;
+let port = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 

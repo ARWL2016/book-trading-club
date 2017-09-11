@@ -21,8 +21,9 @@ module.exports = (app) => {
 
   // request routes
   // app.post('/api/book/requestBook', RequestController.requestBook);
-  app.post('/api/book/createRequest', RequestController.createRequest);
-  app.get('/api/book/getCurrentUsersRequests?', RequestController.getRequestsByUser);
+  app.post('/api/request/createRequest', RequestController.createRequest);
+  app.get('/api/request/getCurrentUsersRequests?', RequestController.getRequestsByUser);
+  app.delete('/api/request/delete/:id', RequestController.deleteRequest);
 
   // default route
   app.get('*', (req, res) => {

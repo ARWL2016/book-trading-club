@@ -48,7 +48,7 @@ export class BrowseBooksService {
       };
       console.log(request);
 
-      const url = '/api/book/createRequest';
+      const url = '/api/request/createRequest';
       const body = {request};
       const options = this.helper.addAuthTokenToHeader();
       return this.http.post(url, body, options);

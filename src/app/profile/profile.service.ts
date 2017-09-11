@@ -17,7 +17,7 @@ export class ProfileService {
   }
 
   getMyRequests(id) {
-    const url = `/api/book/getCurrentUsersRequests?id=${id}`;
+    const url = `/api/request/getCurrentUsersRequests?id=${id}`;
     return this.http.get(url)
       .map(res => res.json());
   }
@@ -26,6 +26,11 @@ export class ProfileService {
     const url = `/api/book/delete/${id}`;
     return this.http.delete(url);
       // .map(res => res.json());
+  }
+
+  deleteRequestById(id) {
+    const url = `api/request/delete/${id}`;
+    return this.http.delete(url);
   }
 
 
