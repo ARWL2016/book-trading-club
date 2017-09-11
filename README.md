@@ -32,15 +32,24 @@ https://stackoverflow.com/questions/43869961/node-js-express-redirect-all-to-ang
 
 To do
 - add requested books to profile 
-- add a dropdown with profile and add books
+- add a messaging component
 - extract the search box && modal as a separate component
 - add server side logging
 - create a welcome page
+- add progress bar 
+- authenticate routes
 
 Accounts 
 ARW / 123 (computers)
 cat / 123 (animals)
 
+Bugs: 
+- after registering a new user, the profile symbol shows but is not active; also browse books not displaying - call ngInit? 
+- id is not cleared from local storage after logout 
+
+Improvements
+- add empty messages in profile
+- remove description from bookData
 
 
 

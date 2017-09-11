@@ -1,27 +1,22 @@
-.btc-table-wrapper {
-  // border: 1px solid pink;
+.btc-page-navbar {
+  margin: 30px 0 20px 0;
 }
 
-.btc-table-row {
-
-}
-.btc-image-column {}
 .btc-table-image {
   height: 50px;
 }
+
 .btc-title-column {
   max-width: 20%;
   font-weight: bold;
   font-size: 1.1em;
 }
-.btc-author-column {}
-.btc-requests-column {
+
+.btc-centered {
   text-align: center;
 }
-.btc-remove-column {
-  text-align: center;
-  &>i:hover {
-    cursor: pointer;
-  }
+
+.btc-icon:hover {
+  cursor: pointer;
 }
 

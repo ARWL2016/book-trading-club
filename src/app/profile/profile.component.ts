@@ -4,8 +4,9 @@ import { User } from 'app/models/User';
 import { ProfileService } from 'app/profile/profile.service';
 import { Book } from "app/models/Book";
 import { MaterializeAction } from 'angular2-materialize';
-import {NotificationsService} from 'angular2-notifications';
-import {BorrowRequest} from 'app/models/Borrow-Request';
+import { NotificationsService } from 'angular2-notifications';
+import { BorrowRequest } from 'app/models/Borrow-Request';
+import { RequestView } from "app/models/request-view";
 
 @Component({
   selector: 'btc-profile',
@@ -17,7 +18,7 @@ export class ProfileComponent implements OnInit {
   currentUser: User;
   myBooks: Book[];
   selectedBook: Book;
-  myRequests: BorrowRequest[];
+  myRequests: [{Book, Request}];
   modalActions = new EventEmitter<string|MaterializeAction>();
   activeTab = 'Collection';
   linkClassCollection = 'active';
@@ -31,18 +32,15 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.currentUser = this.auth.getCurrentUser();
-    console.log(this.currentUser);
-
     this.profile.getMyBooks(this.currentUser._id)
       .subscribe(data => {
         this.myBooks = data;
-        // console.log(this.myBooks);
+        console.log(data);
       });
-
     this.profile.getMyRequests(this.currentUser._id)
       .subscribe(data => {
         this.myRequests = data;
-        console.log(this.myRequests);
+
       });
   }
 
@@ -59,19 +57,17 @@ export class ProfileComponent implements OnInit {
   }
 
   deleteBook(book) {
-    this.selectedBook = book;
-    console.log(book);
-    this.openModal();
-  }
-
-  confirmDelete(book) {
     this.profile.deleteBookById(book._id).subscribe(res => {
       console.log(res);
-      this.closeModal();
-      this.ngOnInit();
-      this.notify.success(book.title, 'This book was removed from your collection');
-      this.selectedBook = null;
+      if (res.status === 200) {
+        this.ngOnInit();
+        this.notify.success(book.title, 'This book was removed from your collection');
+      }
     });
+  }
+
+  cancelRequest(request) {
+
   }
 
   openModal() {

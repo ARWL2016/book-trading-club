@@ -31,4 +31,6 @@ const RequestSchema = new mongoose.Schema({
   }
 });
 
-module.exports = RequestSchema;
+const Request = mongoose.model('request', RequestSchema)
+
+module.exports = Request;

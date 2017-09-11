@@ -2,6 +2,7 @@ const chalk = require('chalk');
 const mongoose = require('mongoose');
 const User = require('./models/user');
 const Book = require('./models/book');
+const Request = require('./models/request');
 
 
 mongoose.Promise = global.Promise;
@@ -19,7 +20,8 @@ mongoose.connection.on('error', (err) => {
 module.exports = {
   mongoose,
   User,
-  Book
+  Book,
+  Request
 }
 
 

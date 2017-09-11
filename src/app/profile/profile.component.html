@@ -2,7 +2,10 @@
 <p>User: {{currentUser.username}}</p>
 <p>UserID: {{currentUser._id}}</p>
 
-<nav class="nav-extended">
+
+<!-- Secondary NavBar -->
+
+<nav class="nav-extended btc-page-navbar">
     <div class="nav-content">
       <ul class="tabs tabs-transparent">
         <li class="tab"><a (click)="showContent($event)" [className]="linkClassCollection">Collection</a></li>
@@ -17,20 +20,20 @@
     <table>
       <thead>
         <tr class="btc-table-row">
-            <th class="btc-image-column">Image</th>
+            <th></th>
             <th class="btc-title-column">Title</th>
-            <th class="btc-author-column">Author</th>
-            <th class="btc-requests-column">Requests</th>
+            <th>Author</th>
+            <th class="btc-centered">Requests</th>
             <th class="btc-remove-column">Remove</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let book of myBooks" class="btc-table-row">
-            <td class="btc-image-column"><img class="btc-table-image" src="{{book.imageLinks.thumbnail}}" ></td>
+            <td><img class="btc-table-image" src="{{book.imageLinks.thumbnail}}" ></td>
             <td class="btc-title-column">{{book.title}}</td>
-            <td class="btc-author-column">{{book.authors[0]}}</td>
-            <td class="btc-requests-column">{{book.requests.length}}</td>
-            <td class="btc-remove-column"><i (click)="deleteBook(book)" class="material-icons">delete_forever</i></td>
+            <td>{{book.authors[0]}}</td>
+            <td class="btc-centered">{{book.requestsReceived.length}}</td>
+            <td class="btc-centered"><i (click)="deleteBook(book)" class="material-icons btc-icon">delete_forever</i></td>
         </tr>
       </tbody>
     </table>
@@ -40,11 +43,11 @@
 
   <div id="modal1" class="modal" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalActions">
       <div class="modal-content">
-        <h4 *ngIf="selectedBook">{{selectedBook.title}}</h4>
-        <p>Are you sure you want to remove this book from your collection?</p>
+        <h4 *ngIf="selectedBook"></h4>
+        <p></p>
       </div>
       <div class="modal-footer">
-          <a class="waves-effect waves-green btn-flat" (click)="confirmDelete(this.selectedBook)">Remove<i class="material-icons right">delete_forever</i></a>
+          <a class="waves-effect waves-green btn-flat" >Remove<i class="material-icons right">delete_forever</i></a>
           <a class="waves-effect waves-green btn-flat" (click)="closeModal()">Cancel<i class="material-icons right">cancel</i></a>
       </div>
     </div>
@@ -55,20 +58,20 @@
     <table>
       <thead>
         <tr class="btc-table-row">
-            <th class="btc-image-column">Image</th>
+            <th></th>
             <th class="btc-title-column">Title</th>
-            <th class="btc-requests-column">Owner</th>
-            <th class="btc-message-column">Message</th>
-            <th class="btc-cancel-column">Cancel</th>
+            <th class="btc-centered">Owner</th>
+            <th class="btc-centered">Message</th>
+            <th class="btc-centered">Cancel</th>
         </tr>
       </thead>
       <tbody>
-        <tr  class="btc-table-row">
-            <td class="btc-image-column"><img class="btc-table-image" src="" ></td>
-            <td class="btc-title-column"></td>
-            <td class="btc-requests-column"></td>
-            <td class="btc-message-column"><i class="material-icons">message</i></td>
-            <td class="btc-cancel-column"><i class="material-icons">cancel</i></td>
+        <tr *ngFor="let request of myRequests" class="btc-table-row">
+            <td class="btc-image-column btc-centered"><img class="btc-table-image" src="{{request.book.imageLinks.thumbnail}}" ></td>
+            <td class="btc-title-column">{{request.book.title}}</td>
+            <td class="btc-owner-column btc-centered">{{request.request.ownerName | uppercase}} </td>
+            <td class="btc-message-column btc-centered"><i (click)="openMessageModal(request)" class="material-icons btc-icon">message</i></td>
+            <td class="btc-cancel-column btc-centered"><i class="material-icons" (click)="cancelRequest(request)">cancel</i></td>
         </tr>
       </tbody>
     </table>
