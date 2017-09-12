@@ -31,13 +31,14 @@ https://stackoverflow.com/questions/43869961/node-js-express-redirect-all-to-ang
 - Remember to redirect Node routes to Angular if they are not used - else cannot GET
 
 To do
-- add requested books to profile 
+
 - add a messaging component
 - extract the search box && modal as a separate component
 - add server side logging
 - create a welcome page
-- add progress bar 
 - authenticate routes
+- add footer
+
 
 Accounts 
 ARW / 123 (computers)
@@ -50,6 +51,7 @@ Bugs:
 Improvements
 - add empty messages in profile
 - remove description from bookData
+- add dismissable tips
 
 
 

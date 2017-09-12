@@ -15,7 +15,7 @@ import { Book } from '../models/book';
 })
 export class BrowseBooksComponent implements OnInit {
   titleQuery: string;
-  authorQuery: string;
+  // authorQuery: string;
   bookData: Book[];
   modalActions = new EventEmitter<string|MaterializeAction>();
   selectedBook: Book;
@@ -46,10 +46,9 @@ export class BrowseBooksComponent implements OnInit {
     this.bookData = undefined;
     const query = {
       titleQuery: this.titleQuery,
-      authorQuery: this.authorQuery
+      // authorQuery: this.authorQuery
     };
-    console.log({ titleQuery: this.titleQuery, authorQuery: this.authorQuery });
-    this.bookService.searchBooks(this.titleQuery, this.authorQuery)
+    this.bookService.searchBooks(this.titleQuery)
       .subscribe(data => {
         if (data.length > 0) {
           console.log(data);

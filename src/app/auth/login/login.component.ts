@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'app/models/User';
-import { AuthService } from "app/services/auth.service";
+import { AuthService } from 'app/services/auth.service';
 import { Router } from '@angular/router';
-import { NotificationsService } from "angular2-notifications";
+import {NotificationsService} from 'angular2-notifications';
+import {ProgressBarService} from "app/services/progress-bar.service";
 
 @Component({
   selector: 'btc-login',
@@ -17,6 +18,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private auth: AuthService,
+    private progressBarService: ProgressBarService,
     private router: Router,
     private notify: NotificationsService) { }
 
@@ -25,12 +27,14 @@ export class LoginComponent implements OnInit {
 
   submitForm() {
     if (this.username && this.password) {
+      this.progressBarService.showProgressBar();
       this.user = { username: this.username, password: this.password };
       this.auth.login(this.user)
         .then((res) => {
           console.log(res);
             this.router.navigate(['/browse']);
             this.notify.success(this.user.username, 'You have been logged in');
+            this.progressBarService.hideProgressBar();
         })
         .catch(e => {
           console.log(e);

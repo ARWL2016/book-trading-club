@@ -55,19 +55,18 @@ module.exports = {
       .then(request => {
         Book.findById(request.bookId)
           .then(book => {
-            book.usersRequesting.filter(users => users !== request.requesterName);
-            book.requestsReceived.filter(requests => requests !== request._id);
+            book.usersRequesting = book.usersRequesting.filter(user => user !== request.requesterName);
+            book.requestsReceived = book.requestsReceived.filter(req => req !== request._id.toString());
             book.save().then(() => {
               User.findById(request.requesterId)
               .then(user => {
-                user.requestsMade.filter(request => request !== request._id);
+                user.requestsMade = user.requestsMade.filter(req => req !== request._id.toString());
                 user.save()
                   .then(() => res.status(200).send());
               });
-            })
+            });
           });
-      })
-        .catch(e => res.status(400).send());
+      }).catch(e => res.status(400).send());
   },
 
 

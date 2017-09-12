@@ -1,13 +1,14 @@
-<p class="btc-instruction-panel">
-  On this page, you can browse books available from our users, and search available books by topic, title
-  and author. Click on a book to see more details or make a borrow request.
-</p>
+<div class="btc-instruction-panel">
+  <p>On this page, you can browse books available from our users, and search available books by topic, title
+  and author.</p>
+  <p>Click on a book to see more details or make a borrow request.</p>
+</div>
 
 <div class="row">
   <form materialize class="col s12" #form="ngForm" (submit)="searchBooks(form)">
     <div class="row">
 
-      <div class="input-field col s6">
+      <div class="input-field col s12">
         <!-- <i class="material-icons prefix">search</i> -->
         <input
           [(ngModel)]="titleQuery"
@@ -17,15 +18,14 @@
           <label for="titleQuery">Title or Keyword</label>
       </div>
 
-      <div class="input-field col s6">
-        <!-- <i class="material-icons prefix">search</i> -->
+      <!-- <div class="input-field col s6">
         <input
           [(ngModel)]="authorQuery"
           type="text"
           name="authorQuery"
           id="authorQuery">
         <label for="authorQuery">Author (optional)</label>
-      </div>
+      </div> -->
 
     </div>
     <!-- inputs row end -->

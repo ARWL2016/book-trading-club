@@ -3,7 +3,7 @@
     <div class="btc-form-header">
       <h2 class="btc-form-heading">Register</h2>
     </div>
-  <form materialize #form="ngForm" (submit)="submitForm(form)" novalidate>
+  <form materialize #form="ngForm" (submit)="submitForm($event)" novalidate>
 
     <div class="btc-input-wrapper">
 

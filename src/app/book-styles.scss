@@ -1,13 +1,17 @@
 .btc-instruction-panel {
-  background-color: #DDD;
-  box-shadow: 2px 2px 2px #888888;
-  padding: 20px 30px 20px 30px;
-  font-weight: bold;
-  width: 80%;
+  background-color: #26a69a;
+  // background-color: #F4744D;
+  color: #FFF;
+  box-shadow: 1px 1px 1px #777;
+  padding: 15px 30px 15px 30px;
+  // font-weight: bold;
+  width: 90%;
   margin: 0 auto;
   margin-top: 30px;
   margin-bottom: 30px;
   border-radius: 5px;
+  line-height: 2em;
+  letter-spacing: 1px;
 }
 
 .btc-book-preview {

@@ -7,7 +7,8 @@ import { NotificationsService } from 'angular2-notifications';
 import { BorrowRequest } from 'app/models/Borrow-Request';
 import { RequestView } from "app/models/request-view";
 import { BookService } from "app/services/book.service";
-import { RequestService } from "app/services/request.service";
+import {RequestService} from "app/services/request.service";
+import {ProgressBarService} from "app/services/progress-bar.service";
 
 @Component({
   selector: 'btc-profile',
@@ -25,8 +26,10 @@ export class ProfileComponent implements OnInit {
   linkClassCollection = 'active';
   linkClassRequests: String;
 
+
   constructor(
     private auth: AuthService,
+    private progressBarService: ProgressBarService,
     private bookService: BookService,
     private requestService: RequestService,
     private notify: NotificationsService
@@ -68,10 +71,16 @@ export class ProfileComponent implements OnInit {
   }
 
   cancelRequest(request) {
+    this.progressBarService.showProgressBar();
     console.log(request);
     this.requestService.deleteRequestById(request._id)
-      .subscribe(data => {
-        console.log(data);
+      .subscribe(resp => {
+        console.log(resp);
+        if (resp.status === 200) {
+          this.progressBarService.hideProgressBar();
+          this.ngOnInit();
+          this.notify.success(request.ownerName, `Your request to ${request.ownerName} was cancelled`);
+        }
       })
   }
 

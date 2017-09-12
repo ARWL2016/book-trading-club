@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'app/models/User';
-import { AuthService } from "app/services/auth.service";
-import { Router } from '@angular/router';
+import { AuthService } from 'app/services/auth.service';
+import {Router} from '@angular/router';
+import {ProgressBarService} from 'app/services/progress-bar.service';
+import {NotificationsService} from 'angular2-notifications';
 
 @Component({
   selector: 'btc-register',
@@ -17,12 +19,15 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private auth: AuthService,
+    private progress: ProgressBarService,
+    private notify: NotificationsService,
     private router: Router) { }
 
   ngOnInit() {
   }
 
-  submitForm() {
+  submitForm(e) {
+    e.preventDefault();
     console.log({'username': this.username, 'password': this.password});
     if (this.password.length < 3) {
       this.error = 'Password must be at least 3 characters.';
@@ -32,15 +37,17 @@ export class RegisterComponent implements OnInit {
       this.error = 'Passwords do not match. Please try again.';
       return;
     }
-    if (this.username) {
+    if (this.username && this.password) {
+      this.progress.showProgressBar();
       this.user = {
         username: this.username,
         password: this.password
       };
       this.auth.register(this.user)
-        .then((res) => {
-          console.log('user created', res);
-
+        .then(resp => {
+          console.log('user created', resp);
+          this.notify.success(this.username, 'You have been registered and logged in');
+          this.progress.hideProgressBar();
           this.router.navigate(['/browse']);
         })
         .catch(err => {

@@ -3,6 +3,7 @@ import { AuthService } from 'app/services/auth.service';
 import { User } from 'app/models/User';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NotificationsService } from 'angular2-notifications';
+import { ProgressBarService } from 'app/services/progress-bar.service';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +19,9 @@ export class AppComponent implements OnInit, DoCheck {
   linkClassRegister: string;
   linkClassLogin: String;
 
+  dropdownVisible = false;
+  progressBar = true;
+
   public options = {
     timeOut: 3000,
     lastOnBottom: true,
@@ -31,6 +35,7 @@ export class AppComponent implements OnInit, DoCheck {
 
   ngDoCheck() {
     this.username = this.auth.isValidated();
+    this.progressBar = this.progressBarService.status;
 
     this.linkClassBrowse = this.router.url === '/browse' ? 'active' : '';
     this.linkClassAdd = this.router.url === '/add' ? 'active' : '';
@@ -40,9 +45,16 @@ export class AppComponent implements OnInit, DoCheck {
 
   constructor(
     private auth: AuthService,
+    private progressBarService: ProgressBarService,
     private router: Router,
     private notify: NotificationsService
   ) { }
+
+  toggleDropdown() {
+    console.log('show DD');
+    this.dropdownVisible = this.dropdownVisible === false ? true : false;
+    console.log(this.dropdownVisible);
+  }
 
   signOut() {
     console.log('Signing out ', this.username);
