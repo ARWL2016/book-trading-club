@@ -15,13 +15,11 @@ const UserSchema = new mongoose.Schema({
   },
   bookIDs: [{
       type: String,
-      required: false,
-      unique: true
+      required: false
   }],
   requestsMade: [{
     type: String,
-    required: false,
-    unique: true
+    required: false
   }],
   tokens: [{
     access: {

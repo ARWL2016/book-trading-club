@@ -50,13 +50,11 @@ const BookSchema = new mongoose.Schema({
   },
   requestsReceived: [{
     type: String,
-    required: false,
-    unique: true
+    required: false
   }],
   usersRequesting: [{
     type: String,
-    required:  false,
-    unique: true
+    required:  false
   }]
 });
 

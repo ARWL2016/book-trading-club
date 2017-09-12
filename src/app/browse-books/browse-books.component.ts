@@ -1,11 +1,12 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { BrowseBooksService } from './browse-books.service';
-import { Book } from '../models/book';
+import { Router } from '@angular/router';
 import { MaterializeAction } from 'angular2-materialize';
 import { AuthService } from 'app/services/auth.service';
-import { Router } from '@angular/router';
 import { NotificationsService } from 'angular2-notifications';
+import { BookService } from "app/services/book.service";
+import { RequestService } from "app/services/request.service";
+import { Book } from '../models/book';
 
 @Component({
   selector: 'btc-browse-books',
@@ -22,15 +23,16 @@ export class BrowseBooksComponent implements OnInit {
   nullResult: string;
 
   constructor(
-    private browse: BrowseBooksService,
-    private auth: AuthService,
+    private authService: AuthService,
+    private bookService: BookService,
+    private requestService: RequestService,
     private router: Router,
     private notify: NotificationsService
   ) { }
 
   ngOnInit() {
-    this.username = this.auth.isValidated();
-    this.browse.getAllBooks()
+    this.username = this.authService.isValidated();
+    this.bookService.getAllBooks()
       .subscribe(data => {
         const filteredData = this.removeCurrentUsersBooks(data);
         const flaggedData = this.addAlreadyRequestedFlag(filteredData);
@@ -47,7 +49,7 @@ export class BrowseBooksComponent implements OnInit {
       authorQuery: this.authorQuery
     };
     console.log({ titleQuery: this.titleQuery, authorQuery: this.authorQuery });
-    this.browse.searchBooks(this.titleQuery, this.authorQuery)
+    this.bookService.searchBooks(this.titleQuery, this.authorQuery)
       .subscribe(data => {
         if (data.length > 0) {
           console.log(data);
@@ -62,7 +64,7 @@ export class BrowseBooksComponent implements OnInit {
     // the requester is the current user
     const user = {username: this.username };
     const book = this.selectedBook;
-    this.browse.requestBook(user, book).subscribe(res => {
+    this.requestService.requestBook(user, book).subscribe(res => {
       this.notify.success(book.title, 'This book was requested.');
       this.bookData.forEach(item => {
         if (item._id === book._id) {
@@ -76,7 +78,7 @@ export class BrowseBooksComponent implements OnInit {
   }
 
   removeCurrentUsersBooks(bookData) {
-    const currentUserId = this.auth.getCurrentUserId();
+    const currentUserId = this.authService.getCurrentUserId();
     const filteredData = bookData.filter(book => {
       return book.userId !== currentUserId;
     });

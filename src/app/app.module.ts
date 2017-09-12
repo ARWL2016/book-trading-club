@@ -13,13 +13,13 @@ import { AddBooksComponent } from './add-books/add-books.component';
 import { AuthService } from './services/auth.service';
 import { HelperService } from './services/helper.service';
 import { IsValidatedGuard } from 'app/services/is-validated-guard.service';
-import { AddBooksService } from 'app/add-books/add-books.service';
 import { RegisterComponent } from './auth/register/register.component';
 import { LoginComponent } from './auth/login/login.component';
 import { BrowseBooksComponent } from './browse-books/browse-books.component';
-import { BrowseBooksService } from 'app/browse-books/browse-books.service';
 import { ProfileComponent } from './profile/profile.component';
-import { ProfileService } from 'app/profile/profile.service';
+import { BookService } from "app/services/book.service";
+import { RequestService } from "app/services/request.service";
+import { GoogleBooksApiService } from "app/services/google-books-api.service";
 
 
 @NgModule({
@@ -49,10 +49,10 @@ import { ProfileService } from 'app/profile/profile.service';
     ])
   ],
   providers: [
-    AddBooksService,
-    BrowseBooksService,
-    ProfileService,
     AuthService,
+    BookService,
+    RequestService,
+    GoogleBooksApiService,
     HelperService,
     IsValidatedGuard
     ],
