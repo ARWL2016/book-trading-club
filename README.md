@@ -31,7 +31,6 @@ https://stackoverflow.com/questions/43869961/node-js-express-redirect-all-to-ang
 - Remember to redirect Node routes to Angular if they are not used - else cannot GET
 
 To do
-- add progress bar wherever needed - wire up on modal - bbs
 - add a messaging component
 - extract the search box && modal as a separate component
 - add server side logging
@@ -44,13 +43,16 @@ ARW / 123 (computers)
 cat / 123 (animals)
 
 Bugs: 
-
+- searching books on bb still shows own books
+- binding of click on bbs fails by one
 
 Enhancements
+- add mobile menu
 - add empty messages in profile
 - remove description from bookData
 - add dismissable tips
 - username availability
+- browse books by date
 
 
 

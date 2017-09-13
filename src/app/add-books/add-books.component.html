@@ -55,7 +55,10 @@
 
 <!-- Modal Structure -->
 <div id="modal1" class="modal" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalActions">
-    <div *ngIf="selectedBook" class="modal-content">
+  <div *ngIf="modalProgressBar" class="progress btc-modal-progress-bar">
+    <div class="indeterminate"></div>
+  </div>
+  <div *ngIf="selectedBook" class="modal-content">
 
       <div class="btc-modal-img-wrapper">
         <img src="{{selectedBook.imageLinks.thumbnail}}" />

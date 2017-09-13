@@ -1,3 +1,17 @@
+@import '../book-styles';
+
+.btc-profile-username {
+  font-weight: bold;
+  margin-top: 40px;
+  margin-bottom: 0;
+
+}
+
+.btc-profile-icon {
+  font-size: 40px;
+  margin-right: 10px !important;
+}
+
 .btc-page-navbar {
   margin: 30px 0 20px 0;
 }
@@ -18,5 +32,10 @@
 
 .btc-icon:hover {
   cursor: pointer;
+}
+
+.btc-profile-instruction-panel {
+  padding-top: 3px;
+  padding-bottom: 3px;
 }
 

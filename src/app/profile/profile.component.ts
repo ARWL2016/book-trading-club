@@ -1,4 +1,5 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'app/services/auth.service';
 import { User } from 'app/models/User';
 import { Book } from "app/models/Book";
@@ -29,7 +30,7 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private auth: AuthService,
-    private progressBarService: ProgressBarService,
+    private pBarService: ProgressBarService,
     private bookService: BookService,
     private requestService: RequestService,
     private notify: NotificationsService
@@ -61,9 +62,11 @@ export class ProfileComponent implements OnInit {
   }
 
   deleteBook(book) {
+    this.pBarService.showProgressBar();
     this.bookService.deleteBookById(book._id).subscribe(res => {
       console.log(res);
       if (res.status === 200) {
+        this.pBarService.hideProgressBar();
         this.ngOnInit();
         this.notify.success(book.title, 'This book was removed from your collection');
       }
@@ -71,13 +74,13 @@ export class ProfileComponent implements OnInit {
   }
 
   cancelRequest(request) {
-    this.progressBarService.showProgressBar();
+    this.pBarService.showProgressBar();
     console.log(request);
     this.requestService.deleteRequestById(request._id)
       .subscribe(resp => {
         console.log(resp);
         if (resp.status === 200) {
-          this.progressBarService.hideProgressBar();
+          this.pBarService.hideProgressBar();
           this.ngOnInit();
           this.notify.success(request.ownerName, `Your request to ${request.ownerName} was cancelled`);
         }

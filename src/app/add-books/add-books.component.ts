@@ -22,6 +22,7 @@ export class AddBooksComponent implements OnInit {
   selectedBook: Book;
   username: string;
   nullResultError: string;
+  modalProgressBar = false;
 
   constructor(
     private authService: AuthService,
@@ -56,9 +57,6 @@ export class AddBooksComponent implements OnInit {
           this.nullResultError = 'The search returned no results';
           this.pBarService.hideProgressBar();
         }
-
-
-
       });
   }
 
@@ -80,11 +78,20 @@ export class AddBooksComponent implements OnInit {
   }
 
   addBook() {
+    this.modalProgressBar = true;
     const book = this.selectedBook;
-    this.bookService.addBookToCollection(book);
-    this.closeModal();
+    this.bookService.addBookToCollection(book)
+    .subscribe(res => {
+      console.log(res);
+      this.closeModal();
+      this.notify.success(this.selectedBook.title, 'This book was added to your collection');
+      this.modalProgressBar = false;
+    }, err => {
+      console.log(err);
+      this.modalProgressBar = false;
+    });
     // need some error handling here
-    this.notify.success(this.selectedBook.title, 'This book was added to your collection');
+
   }
 
 }

@@ -2,7 +2,9 @@
 <simple-notifications [options]="options"></simple-notifications>
   <nav>
     <div class="nav-wrapper container">
-      <a href="#" class="brand-logo">BookEx</a>
+      <a [routerLink]="['/browse']" class="brand-logo btc-logo">
+        <i class="material-icons left btc-logo-icon">bookmark_border</i>
+        BookExchange</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li [className]="linkClassBrowse"><a [routerLink]="['/browse']" >Browse Books</a></li>
         <li [className]="linkClassAdd"><a [routerLink]="['/add']">Add Books</a></li>

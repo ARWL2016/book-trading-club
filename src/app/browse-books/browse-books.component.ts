@@ -22,6 +22,7 @@ export class BrowseBooksComponent implements OnInit {
   selectedBook: Book;
   username: string;
   nullResult: string;
+  modalProgressBar = false;
 
   constructor(
     private authService: AuthService,
@@ -33,6 +34,7 @@ export class BrowseBooksComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.pBarService.showProgressBar();
     this.username = this.authService.isValidated();
     this.bookService.getAllBooks()
       .subscribe(data => {
@@ -40,6 +42,7 @@ export class BrowseBooksComponent implements OnInit {
         const flaggedData = this.addAlreadyRequestedFlag(filteredData);
         console.log(flaggedData);
         this.bookData = flaggedData;
+        this.pBarService.hideProgressBar();
       });
   }
 
@@ -66,21 +69,22 @@ export class BrowseBooksComponent implements OnInit {
   requestBook() {
     // the book owner ID is on the book object
     // the requester is the current user
-    this.pBarService.showProgressBar();
+    this.modalProgressBar = true;
     const user = {username: this.username };
     const book = this.selectedBook;
     this.requestService.requestBook(user, book).subscribe(res => {
       this.notify.success(book.title, 'This book was requested.');
+      this.modalProgressBar = false;
 
       this.bookData.forEach(item => {
         if (item._id === book._id) {
           item.requested = true;
         }
       });
-      this.pBarService.hideProgressBar();
+
     }, err => {
       console.log(err);
-      this.pBarService.hideProgressBar();
+      this.modalProgressBar = false;
     });
     this.closeModal();
   }

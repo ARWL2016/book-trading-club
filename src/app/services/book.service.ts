@@ -41,8 +41,8 @@ export class BookService {
     const url = '/api/book/addBook';
     const body = {user, bookToAdd};
     const options = this.helperService.addAuthTokenToHeader();
-    return this.http.post(url, body, options)
-      .subscribe(res => console.log(res));
+    return this.http.post(url, body, options);
+
   }
 
   deleteBookById(id) {
