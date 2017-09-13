@@ -10,18 +10,24 @@
           <div class="input-field">
             <input
               [(ngModel)]="username"
+              #inp1="ngModel"
               name="username"
               id="username"
-              type="text">
+              type="text"
+              required
+              minlength="3">
             <label for="username">Username</label>
           </div>
 
           <div class="input-field">
             <input
               [(ngModel)]="password"
+              #inp2="ngModel"
               name="password"
               id="password"
-              type="text">
+              type="text"
+              required
+              minlength="3">
             <label  for="password">Password</label>
           </div>
 
@@ -31,19 +37,13 @@
       </div>
 
       <div class="btc-form-button-wrapper">
-        <button class="btn waves-effect waves-light btc-form-button" type="submit">Login
+        <button class="btn waves-effect waves-light btc-form-button" type="submit" [disabled]="form.invalid">Login
             <i class="material-icons right">check</i>
         </button>
       </div>
-
     </form>
     </div>
   </div>
-
   <br>
-  Touched: {{ form.touched }} <br>
 
-  Pristine: {{ form.pristine}}<br>
 
-  {{ model | json }}<br>
-  {{ form.value | json }}

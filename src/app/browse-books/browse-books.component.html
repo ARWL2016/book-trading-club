@@ -1,7 +1,11 @@
 <div class="btc-instruction-panel">
-  <p>On this page, you can browse books available from our users, and search available books by topic, title
-  and author.</p>
-  <p>Click on a book to see more details or make a borrow request.</p>
+  <h4>Welcome to Book Exchange</h4>
+  <p>On this page, you can browse books available to from our users, and search books by topic or title.
+    Click on a book to see more details or make a borrow request.</p>
+    <p *ngIf="!username">To borrow books and list your own collection,
+      <a [routerLink]="['/login']" class="btc-panel-link">login</a> or
+      <a [routerLink]="['/register']" class="btc-panel-link">register</a>
+    </p>
 </div>
 
 <div class="row">
@@ -9,7 +13,6 @@
     <div class="row">
 
       <div class="input-field col s12">
-        <!-- <i class="material-icons prefix">search</i> -->
         <input
           [(ngModel)]="titleQuery"
           type="text"
@@ -56,7 +59,10 @@
 
 <!-- Modal Structure -->
 <div *ngIf="selectedBook" id="modal1" class="modal" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalActions">
-    <div  class="modal-content">
+  <div class="progress btc-progress-bar">
+      <div class="indeterminate"></div>
+    </div>
+  <div  class="modal-content">
 
       <div class="btc-modal-img-wrapper">
         <img src="{{selectedBook.imageLinks.thumbnail}}" />

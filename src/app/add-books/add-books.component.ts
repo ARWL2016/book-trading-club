@@ -7,6 +7,7 @@ import { BookService } from "app/services/book.service";
 import { GoogleBooksApiService } from "app/services/google-books-api.service";
 import { Router } from '@angular/router';
 import { NotificationsService } from 'angular2-notifications';
+import { ProgressBarService } from "app/services/progress-bar.service";
 
 @Component({
   selector: 'btc-add-books',
@@ -16,19 +17,19 @@ import { NotificationsService } from 'angular2-notifications';
 export class AddBooksComponent implements OnInit {
   titleQuery: string;
   authorQuery: string;
-  bookData: Book[] | { error: string };
+  bookData: Book[];
   modalActions = new EventEmitter<string|MaterializeAction>();
   selectedBook: Book;
   username: string;
-
+  nullResultError: string;
 
   constructor(
-
     private authService: AuthService,
     private bookService: BookService,
     private gBooksApiService: GoogleBooksApiService,
     private router: Router,
-    private notify: NotificationsService
+    private notify: NotificationsService,
+    private pBarService: ProgressBarService
 
   ) { }
 
@@ -37,6 +38,9 @@ export class AddBooksComponent implements OnInit {
   }
 
   searchBooksAPI() {
+    this.nullResultError = '';
+    this.bookData = [];
+    this.pBarService.showProgressBar();
     const query = {
       titleQuery: this.titleQuery,
       authorQuery: this.authorQuery
@@ -44,8 +48,17 @@ export class AddBooksComponent implements OnInit {
     console.log({ titleQuery: this.titleQuery, authorQuery: this.authorQuery });
     this.gBooksApiService.searchBooks(this.titleQuery, this.authorQuery)
       .then(data => {
-        this.bookData = data;
-        console.log(this.bookData);
+        if (data) {
+          this.bookData = data;
+          console.log(this.bookData);
+          this.pBarService.hideProgressBar();
+        } else {
+          this.nullResultError = 'The search returned no results';
+          this.pBarService.hideProgressBar();
+        }
+
+
+
       });
   }
 
@@ -58,7 +71,7 @@ export class AddBooksComponent implements OnInit {
     this.modalActions.emit({action:"modal", params:['close']});
   }
 
-  authenticate(e) {
+  linkToAuthPage(e) {
     this.closeModal();
     if (e.target.firstChild.data === 'register') {
       return this.router.navigate(['/register']);

@@ -1,17 +1,22 @@
 .btc-instruction-panel {
   background-color: #26a69a;
-  // background-color: #F4744D;
   color: #FFF;
   box-shadow: 1px 1px 1px #777;
-  padding: 15px 30px 15px 30px;
-  // font-weight: bold;
-  width: 90%;
+  padding: 15px 40px 15px 40px;
+  width: 100%;
   margin: 0 auto;
   margin-top: 30px;
   margin-bottom: 30px;
   border-radius: 5px;
-  line-height: 2em;
+  line-height: 1.8em;
   letter-spacing: 1px;
+}
+
+.btc-panel-link {
+  color: white;
+  font-weight: bold;
+  background-color:#ee6e73;
+  padding:3px 5px 3px 5px;
 }
 
 .btc-book-preview {
@@ -70,7 +75,7 @@
 .btc-modal-chip {
   display: block;
   margin-top: 10px;
-  background-color: green;
+  background-color: #26a69a;
   text-align: center;
   color: white;
 }

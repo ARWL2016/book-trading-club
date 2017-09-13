@@ -12,7 +12,10 @@
             [(ngModel)]="username"
             name="username"
             id="username"
-            type="text">
+            type="text"
+            required
+            minlength="3"
+            maxlength="8">
           <label for="username">Username</label>
         </div>
 
@@ -21,7 +24,10 @@
             [(ngModel)]="password"
             name="password"
             id="password"
-            type="text">
+            type="text"
+            required
+            minlength="3"
+            maxlength="12">
           <label  for="password">Password</label>
         </div>
 
@@ -30,7 +36,10 @@
             [(ngModel)]="confirmation"
             name="confirmation"
             id="password"
-            type="text">
+            type="text"
+            required
+            minlength="3"
+            maxlength="12">
           <label  for="password">Confirm Password</label>
         </div>
 
@@ -40,7 +49,7 @@
     </div>
 
     <div class="btc-form-button-wrapper">
-      <button class="btn waves-effect waves-light btc-form-button" type="submit">Register
+      <button class="btn waves-effect waves-light btc-form-button" type="submit" [disabled]="form.invalid">Register
           <i class="material-icons right">check</i>
       </button>
     </div>
@@ -50,9 +59,4 @@
 </div>
 
 <br>
-Touched: {{ form.touched }} <br>
 
-Pristine: {{ form.pristine}}<br>
-
-{{ model | json }}<br>
-{{ form.value | json }}

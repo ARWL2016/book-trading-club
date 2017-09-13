@@ -1,12 +1,14 @@
 <div class="btc-instruction-panel">
-  <p>On this page, you can use search Google Books for titles to add to your collection. Other users
+  <h5>Search Google Books</h5>
+  <p>On this page, you can search Google Books for titles to add to your collection. Other users
   will be able to see the books you add and send you borrow requests.</p>
 </div>
+
+<!-- Search Form -->
 
 <div class="row">
   <form materialize class="col s12" #form="ngForm" (submit)="searchBooksAPI(form)">
     <div class="row">
-
       <div class="input-field col s6">
         <!-- <i class="material-icons prefix">search</i> -->
         <input
@@ -16,7 +18,6 @@
           id="titleQuery">
           <label for="titleQuery">Title</label>
       </div>
-
       <div class="input-field col s6">
         <!-- <i class="material-icons prefix">search</i> -->
         <input
@@ -26,18 +27,17 @@
           id="authorQuery">
         <label for="authorQuery">Author (optional)</label>
       </div>
-
     </div>
-    <!-- inputs row end -->
-
     <div class="row">
       <button class="btn waves-effect waves-light" type="submit">Search
           <i class="material-icons right">search</i>
       </button>
     </div>
-
   </form>
 </div>
+
+<!-- Results -->
+<p *ngIf="nullResultError" class="btc-null-results-message">{{nullResultError}}</p>
 
 <div class="row">
   <div class="col s6 m4 l3 btc-book-preview" *ngFor="let book of bookData" (click)="openModal(book)">
@@ -72,7 +72,7 @@
 
         <p *ngIf="selectedBook.pageCount" class="btc-modal-pageCount">{{selectedBook.pageCount}} pages</p>
         <p *ngIf="!username" class="anon-user-message">To add books to your collection, please
-          <a class="modal-link" (click)="authenticate($event)">register</a> or <a class="modal-link" (click)="authenticate($event)">log in</a>.</p>
+          <a class="modal-link" (click)="linkToAuthPage($event)">register</a> or <a class="modal-link" (click)="linkToAuthPage($event)">log in</a>.</p>
       </div>
 
 

@@ -31,11 +31,10 @@ https://stackoverflow.com/questions/43869961/node-js-express-redirect-all-to-ang
 - Remember to redirect Node routes to Angular if they are not used - else cannot GET
 
 To do
-
+- add progress bar wherever needed - wire up on modal - bbs
 - add a messaging component
 - extract the search box && modal as a separate component
 - add server side logging
-- create a welcome page
 - authenticate routes
 - add footer
 
@@ -45,13 +44,13 @@ ARW / 123 (computers)
 cat / 123 (animals)
 
 Bugs: 
-- after registering a new user, the profile symbol shows but is not active; also browse books not displaying - call ngInit? 
-- id is not cleared from local storage after logout 
 
-Improvements
+
+Enhancements
 - add empty messages in profile
 - remove description from bookData
 - add dismissable tips
+- username availability
 
 
 

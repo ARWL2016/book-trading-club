@@ -7,6 +7,7 @@ import { NotificationsService } from 'angular2-notifications';
 import { BookService } from "app/services/book.service";
 import { RequestService } from "app/services/request.service";
 import { Book } from '../models/book';
+import { ProgressBarService } from "app/services/progress-bar.service";
 
 @Component({
   selector: 'btc-browse-books',
@@ -27,7 +28,8 @@ export class BrowseBooksComponent implements OnInit {
     private bookService: BookService,
     private requestService: RequestService,
     private router: Router,
-    private notify: NotificationsService
+    private notify: NotificationsService,
+    private pBarService: ProgressBarService
   ) { }
 
   ngOnInit() {
@@ -42,6 +44,7 @@ export class BrowseBooksComponent implements OnInit {
   }
 
   searchBooks() {
+    this.pBarService.showProgressBar();
     this.nullResult = undefined;
     this.bookData = undefined;
     const query = {
@@ -52,26 +55,32 @@ export class BrowseBooksComponent implements OnInit {
       .subscribe(data => {
         if (data.length > 0) {
           console.log(data);
-          return this.bookData = data;
+          this.bookData = data;
+        } else {
+          this.nullResult = 'Nothing to see here...';
         }
-        this.nullResult = 'Nothing to see here...';
+        this.pBarService.hideProgressBar();
       });
   }
 
   requestBook() {
     // the book owner ID is on the book object
     // the requester is the current user
+    this.pBarService.showProgressBar();
     const user = {username: this.username };
     const book = this.selectedBook;
     this.requestService.requestBook(user, book).subscribe(res => {
       this.notify.success(book.title, 'This book was requested.');
+
       this.bookData.forEach(item => {
         if (item._id === book._id) {
           item.requested = true;
         }
       });
+      this.pBarService.hideProgressBar();
     }, err => {
       console.log(err);
+      this.pBarService.hideProgressBar();
     });
     this.closeModal();
   }

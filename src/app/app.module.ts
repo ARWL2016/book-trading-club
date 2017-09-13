@@ -46,7 +46,7 @@ import {ProgressBarService} from "app/services/progress-bar.service";
       { path: 'register', component: RegisterComponent },
       { path: 'login', component: LoginComponent },
       { path: '', redirectTo: 'browse', pathMatch: 'full' },
-      { path: '**', redirectTo: '', pathMatch: 'full' }
+      { path: '**', redirectTo: 'browse', pathMatch: 'full' }
     ])
   ],
   providers: [

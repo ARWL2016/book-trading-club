@@ -26,8 +26,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
   }
 
-  submitForm(e) {
-    e.preventDefault();
+  submitForm() {
     console.log({'username': this.username, 'password': this.password});
     if (this.password.length < 3) {
       this.error = 'Password must be at least 3 characters.';
@@ -38,6 +37,7 @@ export class RegisterComponent implements OnInit {
       return;
     }
     if (this.username && this.password) {
+      this.error = '';
       this.progress.showProgressBar();
       this.user = {
         username: this.username,
@@ -46,13 +46,14 @@ export class RegisterComponent implements OnInit {
       this.auth.register(this.user)
         .then(resp => {
           console.log('user created', resp);
+          this.router.navigate(['/browse']);
           this.notify.success(this.username, 'You have been registered and logged in');
           this.progress.hideProgressBar();
-          this.router.navigate(['/browse']);
         })
         .catch(err => {
           console.log(err);
           this.error = 'UNDEFINED ERROR';
+          this.progress.hideProgressBar();
         });
     }
   }

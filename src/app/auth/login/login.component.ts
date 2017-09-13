@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
 
   submitForm() {
     if (this.username && this.password) {
+      this.error ='';
       this.progressBarService.showProgressBar();
       this.user = { username: this.username, password: this.password };
       this.auth.login(this.user)
@@ -38,7 +39,8 @@ export class LoginComponent implements OnInit {
         })
         .catch(e => {
           console.log(e);
-          this.error = 'Your login details were incorrect. Please try again.';
+          this.error = 'Your login details were incorrect.';
+          this.progressBarService.hideProgressBar();
         });
     }
   }

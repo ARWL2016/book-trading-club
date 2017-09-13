@@ -11,7 +11,7 @@ export class GoogleBooksApiService {
     private http: Http
   ) { }
 
-  searchBooks(title: string, author?: string): Promise<Book[] | {error: string}> {
+  searchBooks(title: string, author?: string): Promise<Book[] | undefined> {
     const baseUrl = `https://www.googleapis.com/books/v1/volumes?q=`;
     const encodedTitle = encodeURI(title);
     let url = `${baseUrl}${encodedTitle}`;
@@ -26,7 +26,7 @@ export class GoogleBooksApiService {
       .map(res => res.json())
       .map(data => {
         if (!data.totalItems) {
-          return { error: 'the search returned no items' };
+          return undefined;
         }
         const filteredArray = [];
         data.items.forEach(item => {
@@ -37,7 +37,7 @@ export class GoogleBooksApiService {
           }
         });
         if (filteredArray.length === 0) {
-          return { error: 'the search returned no items' };
+          return undefined;
         }
         return filteredArray;
       })

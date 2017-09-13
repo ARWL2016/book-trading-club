@@ -52,13 +52,13 @@ export class AuthService {
         this.currentUser = undefined;
         window.localStorage.removeItem('token');
         window.localStorage.removeItem('username');
+        window.localStorage.removeItem('_id');
         console.log('User has been logged out');
       })
       .catch(e => console.log(e));
   }
 
   updateCurrentUser(user: User) {
-
     const { username, _id } = user;
     this.currentUser = user;
     console.log('USER', this.currentUser);
