@@ -11,11 +11,14 @@ import {NotificationsService} from 'angular2-notifications';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
+  user: User;
   username: string;
   password: string;
   confirmation: string;
+  usernameChecked = false;
+  usernameValid = false;
+  passwordMatch: boolean;
   error: string;
-  user: User;
 
   constructor(
     private auth: AuthService,
@@ -26,14 +29,44 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
   }
 
-  submitForm() {
-    console.log({'username': this.username, 'password': this.password});
-    if (this.password.length < 3) {
-      this.error = 'Password must be at least 3 characters.';
-      return;
+  checkUsername() {
+    if (!this.username) {
+      return this.error = 'enter a username';
     }
+    if (this.username.length < 3) {
+      return this.error = 'username must be minimum 3 characters';
+    }
+    this.auth.checkUsername(this.username)
+      .subscribe(res => {
+        this.usernameChecked = true;
+        this.usernameValid = true;
+      }, err => {
+        this.error = 'username already exists';
+        this.usernameChecked = true;
+        this.usernameValid = false;
+      });
+  }
+
+  clearUsernameCheck() {
+    this.error = '';
+    this.usernameChecked = false;
+    this.usernameValid = false;
+  }
+
+  checkMatch() {
+    if (this.password && this.confirmation) {
+      if (this.password.length > 2 && this.confirmation.length > 0 && this.password === this.confirmation) {
+        this.passwordMatch = true;
+        this.error = '';
+        } else {
+        this.passwordMatch = false;
+      }
+    }
+  }
+
+  submitForm() {
     if (this.password !== this.confirmation) {
-      this.error = 'Passwords do not match. Please try again.';
+      this.error = 'passwords do not match.';
       return;
     }
     if (this.username && this.password) {
@@ -44,16 +77,20 @@ export class RegisterComponent implements OnInit {
         password: this.password
       };
       this.auth.register(this.user)
-        .then(resp => {
-          console.log('user created', resp);
+        .then(res => {
+          console.log('user created', res);
           this.router.navigate(['/browse']);
           this.notify.success(this.username, 'You have been registered and logged in');
           this.progress.hideProgressBar();
         })
         .catch(err => {
           console.log(err);
-          this.error = 'UNDEFINED ERROR';
-          this.progress.hideProgressBar();
+          if (err.status === 409) {
+            this.error = 'Username not available.';
+            this.progress.hideProgressBar();
+          } else {
+            this.error = 'Oops! Something went wrong...';
+          }
         });
     }
   }

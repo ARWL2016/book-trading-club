@@ -3,7 +3,7 @@
   padding: 0;
   margin: 0 auto;
   margin-top: 50px;
-  width: 300px;
+  width: 320px;
 }
 
 .btc-form-header {
@@ -26,11 +26,12 @@
   margin: 0 auto;
 }
 
-.btc-error {
-  width: 80%;
-  color: red;
-  margin: 0 auto;
-}
+
+.btc-check-icon {
+  color: green;
+  font-size: 30px;
+  }
+
 
 .btc-form-button-wrapper {
   width: 80%;
@@ -42,3 +43,15 @@
 .btc-form-button {
   width: 100%;
 }
+
+.btc-error {
+  width: 80%;
+  color: white;
+  background-color: lightcoral;
+  padding: 5px;
+  margin: 0 auto;
+  // font-weight: bold;
+  text-align: center
+}
+
+

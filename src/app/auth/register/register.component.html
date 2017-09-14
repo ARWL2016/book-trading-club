@@ -7,9 +7,13 @@
 
     <div class="btc-input-wrapper">
 
-        <div class="input-field">
+        <div class="input-field btc-input-field">
+            <i *ngIf="usernameValid" class="material-icons prefix btc-check-icon">check_circle</i>
+            <i *ngIf="!usernameValid" class="material-icons prefix btc-person-icon">person</i>
           <input
             [(ngModel)]="username"
+            (blur)="checkUsername()"
+            (focus)="clearUsernameCheck()"
             name="username"
             id="username"
             type="text"
@@ -20,11 +24,14 @@
         </div>
 
         <div class="input-field">
+          <i *ngIf="!passwordMatch" class="material-icons prefix btc-lock-icon">lock_outline</i>
+          <i *ngIf="passwordMatch" class="material-icons prefix btc-check-icon">check_circle</i>
           <input
             [(ngModel)]="password"
+            (keyup)="checkMatch()"
             name="password"
             id="password"
-            type="text"
+            type="password"
             required
             minlength="3"
             maxlength="12">
@@ -32,11 +39,14 @@
         </div>
 
         <div class="input-field">
+          <i *ngIf="!passwordMatch" class="material-icons prefix btc-lock-icon">lock_outline</i>
+          <i *ngIf="passwordMatch" class="material-icons prefix btc-check-icon">check_circle</i>
           <input
             [(ngModel)]="confirmation"
+            (keyup)="checkMatch()"
             name="confirmation"
             id="password"
-            type="text"
+            type="password"
             required
             minlength="3"
             maxlength="12">
@@ -44,12 +54,12 @@
         </div>
 
     </div>
-    <div class="btc-error">
+    <div *ngIf="error" class="btc-error">
       {{error}}
     </div>
 
     <div class="btc-form-button-wrapper">
-      <button class="btn waves-effect waves-light btc-form-button" type="submit" [disabled]="form.invalid">Register
+      <button class="btn waves-effect waves-light btc-form-button" type="submit" [disabled]="form.invalid || !usernameValid">Register
           <i class="material-icons right">check</i>
       </button>
     </div>

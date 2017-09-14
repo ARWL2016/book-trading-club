@@ -8,9 +8,11 @@ const Request = require('./models/request');
 mongoose.Promise = global.Promise;
 
 mongoose.connect(process.env.MLAB_URI);
+// mongoose.connect(process.env.MONGO_LOCAL);
 
 mongoose.connection.on('connected', () => {
   console.log(chalk.green('mongoose connected to: ' + process.env.MLAB_URI));
+  // console.log(chalk.green('mongoose connected to: ' + process.env.MONGO_LOCAL));
 });
 
 mongoose.connection.on('error', (err) => {

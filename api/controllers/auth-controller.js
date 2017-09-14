@@ -23,6 +23,18 @@ module.exports = {
       }).catch(err => res.status(400).send(err));
   },
 
+  checkUsername(req, res) {
+    const username = req.params.username;
+    User.findOne({username})
+      .then(user => {
+        if (user) {
+          res.status(409).send("username not available");
+        } else {
+          res.status(200).send("username available");
+        }
+      });
+  },
+
   login(req, res) {
     const { username, password } = req.body;
 

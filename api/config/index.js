@@ -9,6 +9,7 @@ if (env === 'development') {
   console.log(config);
   process.env.JWT_SECRET = config.JWT_SECRET;
   process.env.MLAB_URI = config.MLAB_URI;
-  console.log(process.env.MLAB_URI);
+  process.env.MONGO_LOCAL = config.MONGO_LOCAL;
+  console.log(process.env.MONGO_LOCAL);
 }
 

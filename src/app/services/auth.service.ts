@@ -29,6 +29,11 @@ export class AuthService {
       .toPromise();
   }
 
+  checkUsername(username) {
+    const url = `/api/auth/check/${username}`;
+    return this._http.get(url);
+  }
+
   login(user: User): Promise<boolean> {
     const url = `/api/auth/login`;
     return this._http.post(url, user)

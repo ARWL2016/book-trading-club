@@ -30,13 +30,12 @@ Routes
 https://stackoverflow.com/questions/43869961/node-js-express-redirect-all-to-angular-2-page 
 - Remember to redirect Node routes to Angular if they are not used - else cannot GET
 
-To do
+Features
 - add a messaging component
-- extract the search box && modal as a separate component
+
+Production
 - add server side logging
 - authenticate routes
-- add footer
-
 
 Accounts 
 ARW / 123 (computers)
@@ -45,14 +44,16 @@ cat / 123 (animals)
 Bugs: 
 - searching books on bb still shows own books
 - binding of click on bbs fails by one
+- signout appears to work even when wrong db connected - but username not removed
 
 Enhancements
+- add footer
 - add mobile menu
-- add empty messages in profile
 - remove description from bookData
 - add dismissable tips
-- username availability
 - browse books by date
+- remove dropdown when click outside
+- add animations 
 
 
 

@@ -11,10 +11,10 @@
         <li [className]="linkClassRegister" *ngIf="!username"><a [routerLink]="['/register']">Register</a></li>
         <li [className]="linkClassLogin" *ngIf="!username"><a [routerLink]="['/login']">Login</a></li>
 
-        <!-- <li *ngIf="username"><a class="dropdown-button" data-activates="dropdown1"><i (click)="showDropdown()" class="material-icons btc-account-icon">account_circle</i></a></li> -->
         <!-- materialize dropdown not functioning reliably so toggleDropdown method substituted -->
-        <li *ngIf="username"><a>
-          <i (click)="toggleDropdown()" class="material-icons btc-account-icon">account_circle</i></a>
+        <li *ngIf="username"><a> <i (click)="toggleDropdown()" class="material-icons btc-account-icon">account_circle</i></a>
+
+
           <ul *ngIf="dropdownVisible" (click)="toggleDropdown()" class="dropdown-content btc-dropdown-content">
               <!-- <ul *ngIf="dropdownVisible" materialize="dropdown" id="dropdown1" class="dropdown-content"> -->
                 <li><a [routerLink]="['/profile']">Profile</a></li>
