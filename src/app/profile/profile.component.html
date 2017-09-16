@@ -80,7 +80,7 @@
         <tr *ngFor="let request of myRequests" class="btc-table-row">
             <td class="btc-image-column btc-centered"><img class="btc-table-image" src="{{request.book.imageLinks.thumbnail}}" ></td>
             <td class="btc-title-column">{{request.book.title}}</td>
-            <td class="btc-owner-column btc-centered">{{request.request.ownerName | uppercase}} </td>
+            <td class="btc-owner-column btc-centered">{{request.book.username | uppercase}} </td>
             <td class="btc-message-column btc-centered"><i (click)="openMessageModal(request)" class="material-icons btc-message-icon">message</i></td>
             <td class="btc-cancel-column btc-centered"><i class="material-icons btc-icon" (click)="cancelRequest(request.request)">cancel</i></td>
         </tr>
@@ -89,7 +89,7 @@
 
     <div *ngIf="myRequests?.length === 0" class="btc-instruction-panel btc-profile-instruction-panel">
       <p>Nothing to see here... Go to
-        <a [routerLink]="['/add']" class="btc-panel-link">browse books</a> to search available titles.
+        <a [routerLink]="['/browse']" class="btc-panel-link">browse books</a> to search available titles.
       </p>
     </div>
   </div>
