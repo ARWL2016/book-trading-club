@@ -4,96 +4,50 @@ const { Request } = require('../db');
 const chalk = require('chalk');
 
 module.exports = {
-  // requestBook(req, res) {
-  //   const {request} = req.body;
-  //   console.log(request);
-
-  //   Book.findById(request.bookId)
-  //     .then(bookData => {
-  //       bookData.requests.push(request);
-  //       bookData.save()
-  //         .then(() => {
-  //           User.findById(request.requesterId)
-  //           .then(userData => {
-  //             userData.requestsFromUser.push(request);
-  //             userData.save()
-  //             .then(() => {
-  //               res.status(200).send('Request was made successfully');
-  //             })
-  //             .catch(error => console.log(error));
-  //           });
-  //         })
-  //     });
-  // },
 
   createRequest(req, res) {
     const {request} = req.body;
-    console.log(chalk.green(request));
 
-    Request.create(request).then(requestData => {
-      Book.findById(requestData.bookId)
-        .then(bookData => {
-          bookData.requestsReceived.push(requestData._id);
-          bookData.usersRequesting.push(requestData.requesterName);
-          bookData.save()
-            .then(() => {
-              User.findById(requestData.requesterId)
-              .then(user => {
-                user.requestsMade.push(requestData._id);
-                user.save()
-                  .then(() => res.status(200).send());
-              });
+    Request
+      .create(request)
+      .then(requestData => {
+        const {_id, bookId, requesterName, requesterId} = requestData;
+
+        Book
+          .findByIdAndUpdate(bookId, {$push: {
+            requestsReceived: _id,
+            usersRequesting: requesterName
+          }})
+          .then(() => {
+              User.findByIdAndUpdate(requesterId, {$push: {requestsMade: _id}});
             });
-        });
-    });
+          })
+      .then(() => res.status(200).send('Request added'));
   },
 
   deleteRequest(req, res) {
     const id = req.params.id;
-    console.log('DELETE', id);
-    Request.findByIdAndRemove(id)
+
+    Request
+      .findByIdAndRemove(id)
       .then(request => {
-        Book.findById(request.bookId)
-          .then(book => {
-            book.usersRequesting = book.usersRequesting.filter(user => user !== request.requesterName);
-            book.requestsReceived = book.requestsReceived.filter(req => req !== request._id.toString());
-            book.save().then(() => {
-              User.findById(request.requesterId)
-              .then(user => {
-                user.requestsMade = user.requestsMade.filter(req => req !== request._id.toString());
-                user.save()
-                  .then(() => res.status(200).send());
-              });
-            });
+        const {bookId, _id, requesterName, requesterId} = request;
+
+        Book
+          .findByIdAndUpdate(bookId, {$pull: {requestsReceived: _id, usersRequesting: requesterName }})
+          .then(() => {
+            User.findByIdAndUpdate(requesterId, {$pull: {requestsMade: _id}});
           });
-      }).catch(e => res.status(400).send());
+      })
+      .then(() => res.status(200).send('Request deleted'))
+      .catch(e => res.status(400).send());
   },
-
-
-  // getRequestsForUserId(req, res) {
-  //   const id = req.query.id;
-  //   console.log('get books', id);
-  //   User.findById(id)
-  //     .then(user => {
-  //       const requests = user.requestsFromUser;
-  //       let bookIds = [];
-  //       requests.forEach(request => {
-  //         bookIds.push(request.bookId)
-  //       });
-
-  //       Book.find({'_id': {$in:bookIds}})
-  //         .then(books => {
-  //           console.log(books);
-  //           const responseData = { requests, books};
-  //           res.status(200).send(responseData);
-  //         });
-  //     });
-  // },
 
   getRequestsByUser(req, res) {
     const id = req.query.id;
 
     Request.find({ requesterId: id })
+
       .then(requests => {
         let results = [];
 

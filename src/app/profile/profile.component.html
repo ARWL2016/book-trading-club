@@ -81,7 +81,7 @@
             <td class="btc-image-column btc-centered"><img class="btc-table-image" src="{{request.book.imageLinks.thumbnail}}" ></td>
             <td class="btc-title-column">{{request.book.title}}</td>
             <td class="btc-owner-column btc-centered">{{request.request.ownerName | uppercase}} </td>
-            <td class="btc-message-column btc-centered"><i (click)="openMessageModal(request)" class="material-icons btc-icon">message</i></td>
+            <td class="btc-message-column btc-centered"><i (click)="openMessageModal(request)" class="material-icons btc-message-icon">message</i></td>
             <td class="btc-cancel-column btc-centered"><i class="material-icons btc-icon" (click)="cancelRequest(request.request)">cancel</i></td>
         </tr>
       </tbody>

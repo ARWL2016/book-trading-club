@@ -71,6 +71,7 @@
       <div class="btc-modal-img-wrapper">
         <img src="{{selectedBook.imageLinks.thumbnail}}" />
         <div class="chip btc-modal-chip" *ngIf="selectedBook.requested">Requested</div>
+        <div class="chip btc-modal-chip" *ngIf="selectedBook.username === username">Owned</div>
       </div>
 
       <div class="btc-modal-text">
@@ -90,7 +91,7 @@
 
     </div>
     <div class="modal-footer btc-modal-footer">
-      <a *ngIf="username && !selectedBook.requested" class="modal-action modal-close waves-effect waves-green btn-flat" (click)="requestBook()">Request<i class="material-icons right">add_circle</i></a>
+      <a *ngIf="username && !selectedBook.requested  && selectedBook.username !== username" class="modal-action modal-close waves-effect waves-green btn-flat" (click)="requestBook()">Request<i class="material-icons right">add_circle</i></a>
       <a class="waves-effect waves-green btn-flat" (click)="closeModal()">Close<i class="material-icons right">cancel</i></a>
     </div>
    </div>

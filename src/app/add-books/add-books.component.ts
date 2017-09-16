@@ -22,6 +22,7 @@ export class AddBooksComponent implements OnInit {
   selectedBook: Book;
   username: string;
   nullResultError: string;
+  error: string;
   modalProgressBar = false;
 
   constructor(
@@ -39,6 +40,10 @@ export class AddBooksComponent implements OnInit {
   }
 
   searchBooksAPI() {
+    this.error = '';
+    if (!this.titleQuery) {
+      return this.error = 'enter a title or keyword';
+    }
     this.nullResultError = '';
     this.bookData = [];
     this.pBarService.showProgressBar();
@@ -59,6 +64,7 @@ export class AddBooksComponent implements OnInit {
         }
       });
   }
+
 
   openModal(book) {
     this.selectedBook = book;

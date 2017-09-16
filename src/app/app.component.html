@@ -12,7 +12,7 @@
         <li [className]="linkClassLogin" *ngIf="!username"><a [routerLink]="['/login']">Login</a></li>
 
         <!-- materialize dropdown not functioning reliably so toggleDropdown method substituted -->
-        <li *ngIf="username"><a> <i (click)="toggleDropdown()" class="material-icons btc-account-icon">account_circle</i></a>
+        <li *ngIf="username"><a> <i (click)="toggleDropdown()" id="dropdownIcon" class="material-icons btc-account-icon">account_circle</i></a>
 
 
           <ul *ngIf="dropdownVisible" (click)="toggleDropdown()" class="dropdown-content btc-dropdown-content">

@@ -34,6 +34,7 @@ Features
 - add a messaging component
 
 Production
+- update controllers
 - add server side logging
 - authenticate routes
 
@@ -42,9 +43,10 @@ ARW / 123 (computers)
 cat / 123 (animals)
 
 Bugs: 
-- searching books on bb still shows own books
+- browse books needs recently added
 - binding of click on bbs fails by one
 - signout appears to work even when wrong db connected - but username not removed
+
 
 Enhancements
 - add footer
@@ -52,7 +54,6 @@ Enhancements
 - remove description from bookData
 - add dismissable tips
 - browse books by date
-- remove dropdown when click outside
 - add animations 
 
 

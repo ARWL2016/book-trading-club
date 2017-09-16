@@ -1,4 +1,4 @@
-@import '../book-styles';
+@import '../styles/book-styles';
 
 .btc-profile-username {
   font-weight: bold;
@@ -32,6 +32,10 @@
 
 .btc-icon:hover {
   cursor: pointer;
+}
+
+.btc-message-icon {
+  cursor: no-drop;
 }
 
 .btc-profile-instruction-panel {

@@ -99,7 +99,7 @@
     ],
 
     "directive-selector": [true, "attribute", "btc", "camelCase"],
-    "component-selector": [true, "element", "btc", "kebab-case"],
+    "component-selector": [true, "element", "kebab-case"],
     "use-input-property-decorator": true,
     "use-output-property-decorator": true,
     "use-host-property-decorator": true,

@@ -4,10 +4,10 @@ import { Router } from '@angular/router';
 import { MaterializeAction } from 'angular2-materialize';
 import { AuthService } from 'app/services/auth.service';
 import { NotificationsService } from 'angular2-notifications';
-import { BookService } from "app/services/book.service";
-import { RequestService } from "app/services/request.service";
+import { BookService } from 'app/services/book.service';
+import { RequestService } from 'app/services/request.service';
 import { Book } from '../models/book';
-import { ProgressBarService } from "app/services/progress-bar.service";
+import { ProgressBarService } from 'app/services/progress-bar.service';
 
 @Component({
   selector: 'btc-browse-books',
@@ -38,8 +38,8 @@ export class BrowseBooksComponent implements OnInit {
     this.username = this.authService.isValidated();
     this.bookService.getAllBooks()
       .subscribe(data => {
-        const filteredData = this.removeCurrentUsersBooks(data);
-        const flaggedData = this.addAlreadyRequestedFlag(filteredData);
+        // const filteredData = this.removeCurrentUsersBooks(data);
+        const flaggedData = this.addAlreadyRequestedFlag(data);
         console.log(flaggedData);
         this.bookData = flaggedData;
         this.pBarService.hideProgressBar();
@@ -89,13 +89,13 @@ export class BrowseBooksComponent implements OnInit {
     this.closeModal();
   }
 
-  removeCurrentUsersBooks(bookData) {
-    const currentUserId = this.authService.getCurrentUserId();
-    const filteredData = bookData.filter(book => {
-      return book.userId !== currentUserId;
-    });
-    return filteredData;
-  }
+  // removeCurrentUsersBooks(bookData) {
+  //   const currentUserId = this.authService.getCurrentUserId();
+  //   const filteredData = bookData.filter(book => {
+  //     return book.userId !== currentUserId;
+  //   });
+  //   return filteredData;
+  // }
 
   addAlreadyRequestedFlag(bookData) {
     bookData.forEach(book => {

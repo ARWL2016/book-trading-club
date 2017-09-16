@@ -8,7 +8,11 @@ import { ProgressBarService } from 'app/services/progress-bar.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  // tslint:disable-next-line:use-host-property-decorator
+  host: {
+    '(click)': 'removeDropdown($event)'
+ }
 
 })
 export class AppComponent implements OnInit, DoCheck {
@@ -54,6 +58,12 @@ export class AppComponent implements OnInit, DoCheck {
     console.log('show DD');
     this.dropdownVisible = this.dropdownVisible === false ? true : false;
     console.log(this.dropdownVisible);
+  }
+
+  removeDropdown(e) {
+    if (e.target.id !== 'dropdownIcon') {
+      this.dropdownVisible = false;
+    }
   }
 
   signOut() {

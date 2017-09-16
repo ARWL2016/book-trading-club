@@ -29,7 +29,7 @@
       </div>
     </div>
     <div class="row">
-      <button class="btn waves-effect waves-light" type="submit">Search
+      <button class="btn waves-effect waves-light" type="submit" [disabled]="!titleQuery">Search
           <i class="material-icons right">search</i>
       </button>
     </div>
@@ -37,7 +37,8 @@
 </div>
 
 <!-- Results -->
-<p *ngIf="nullResultError" class="btc-null-results-message">{{nullResultError}}</p>
+<p *ngIf="nullResultError" class="btc-search-error">{{nullResultError}}</p>
+<p *ngIf="error" class="btc-search-error">{{error}}</p>
 
 <div class="row">
   <div class="col s6 m4 l3 btc-book-preview" *ngFor="let book of bookData" (click)="openModal(book)">
