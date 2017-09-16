@@ -4,6 +4,7 @@ import { User } from 'app/models/User';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NotificationsService } from 'angular2-notifications';
 import { ProgressBarService } from 'app/services/progress-bar.service';
+// import { pageTransition } from './animations';
 
 @Component({
   selector: 'app-root',
@@ -69,7 +70,6 @@ export class AppComponent implements OnInit, DoCheck {
   signOut() {
     console.log('Signing out ', this.username);
     this.auth.logout();
-
     this.router.navigate(['/login']);
     this.notify.info(this.username, 'You have been logged out');
     this.username = null;

@@ -1,6 +1,6 @@
 <div class="btc-instruction-panel">
   <h4>Welcome to Book Exchange</h4>
-  <p>On this page, you can browse books available to from our users, and search books by topic or title.
+  <p>On this page, you can browse books available from our users, and search books by topic or title.
     Click on a book to see more details or make a borrow request.</p>
     <p *ngIf="!username">To borrow books and list your own collection,
       <a [routerLink]="['/login']" class="btc-panel-link">login</a> or
@@ -13,7 +13,7 @@
 </div>
 
 <div class="row">
-  <form materialize class="col s12" #form="ngForm" (submit)="searchBooks(form)">
+  <form materialize class="col s12" #form="ngForm" (submit)="searchBooks()">
     <div class="row">
 
       <div class="input-field col s12">
@@ -40,6 +40,9 @@
     <div class="row">
       <button class="btn waves-effect waves-light" type="submit">Search
           <i class="material-icons right">search</i>
+      </button>
+      <button class="btn waves-effect waves-light btc-get-all-btn" (click)="getAllBooks()">Recently Added
+          <i class="material-icons right">autorenew</i>
       </button>
     </div>
 
@@ -95,3 +98,4 @@
       <a class="waves-effect waves-green btn-flat" (click)="closeModal()">Close<i class="material-icons right">cancel</i></a>
     </div>
    </div>
+

@@ -36,14 +36,18 @@ export class BrowseBooksComponent implements OnInit {
   ngOnInit() {
     this.pBarService.showProgressBar();
     this.username = this.authService.isValidated();
+    this.getAllBooks();
+  }
+
+  getAllBooks() {
     this.bookService.getAllBooks()
-      .subscribe(data => {
-        // const filteredData = this.removeCurrentUsersBooks(data);
-        const flaggedData = this.addAlreadyRequestedFlag(data);
-        console.log(flaggedData);
-        this.bookData = flaggedData;
-        this.pBarService.hideProgressBar();
-      });
+    .subscribe(data => {
+      // const filteredData = this.removeCurrentUsersBooks(data);
+      const flaggedData = this.addAlreadyRequestedFlag(data);
+      console.log(flaggedData);
+      this.bookData = flaggedData;
+      this.pBarService.hideProgressBar();
+    });
   }
 
   searchBooks() {
