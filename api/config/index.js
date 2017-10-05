@@ -1,7 +1,5 @@
-
 let env = process.env.NODE_ENV || 'development';
 console.log('ENV: ', env);
-
 
 //maintain development JSON file separately and don't add to source control
 if (env === 'development') {
@@ -9,6 +7,6 @@ if (env === 'development') {
   console.log(config);
   process.env.JWT_SECRET = config.JWT_SECRET;
   process.env.MONGODB_URI = config.MONGODB_URI;
-  // process.env.MONGO_LOCAL = config.MONGO_LOCAL;
+  process.env.MONGO_LOCAL = config.MONGO_LOCAL;
 }
 

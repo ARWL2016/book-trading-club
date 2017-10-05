@@ -1,13 +1,11 @@
 ### Book Trading App
+This book trading app was built by Alistair Willis as a Free Code Camp Project. The front end is built with Angular 4.0 / Typescript using the Angular CLI project template. Some components, such as the navbar and the form inputs, are from materialize-css, an implementation of the Angular Material design specifications. Custom styles are authored in Sass using the BEM naming conventions. For simplicity, styles are associated with elements in a 'flat' manner - ie they use a single class selector, nested selectors are avoided.   
+The backend is written in Javascript on the Node platform using Express 4. Data persistence is handled by the MongoDB cloud implementation at MLab. Schema and data access methods are written using the Mongoose ODM library. The authentication module uses Bcrypt.js for password encryption and JSON Web Tokens for maintaining secure sessions.
+The app is hosted on Heroku.  
+This is a personal project, not a production grade application. It uses free dynos on Heroku and a sandbox database at MLab. It has not been subject to full cross browser testing. 
 
+https://www.freecodecamp.org/challenges/manage-a-book-trading-club  
 https://github.com/ARWL2016/book-trading-club 
-
-#### Notifications 
-https://www.npmjs.com/package/angular2-notifications#documentation 
-https://github.com/flauc/angular2-notifications/blob/master/docs/toastNotifications.md 
-
-#### Remove unwanted Git history 
-https://stackoverflow.com/questions/13716658/how-to-delete-all-commit-history-in-github 
 
 Google Books API 
 https://developers.google.com/books/docs/v1/using#WorkingVolumes 
@@ -15,16 +13,6 @@ Basic search: https://www.googleapis.com/books/v1/volumes?q=search+terms
 https://www.googleapis.com/books/v1/volumes?q=flowers+inauthor:keyes&key=yourAPIKey (containing 'keyes' in author field)
 terms: inauthor: intitle: subject: 
 API Key not needed for basic search
-
-Response Data 
-data.items - array of books 
-data.items[0].volumeInfo - object with useful information 
-data.items[0].volumeInfo.title - string 
-data.items[0].volumeInfo.authors - string []
-data.items[0].volumeInfo.pageCount - number 
-data.items[0].volumeInfo.imageLinks.thumbnail - link string
-data.items[0].volumeInfo.imageLinks.smallThumbnail - link string 
-data.items[0].volumeInfo.language - string, such as 'en'
 
 Routes 
 https://stackoverflow.com/questions/43869961/node-js-express-redirect-all-to-angular-2-page 
@@ -37,10 +25,6 @@ Production
 - add server side logging
 - authenticate routes
 
-Accounts 
-ARW / 123 (computers)
-cat / 123 (animals)
-
 Bugs: 
 - binding of click on bbs fails by one
 - signout appears to work even when wrong db connected - but username not removed
@@ -50,6 +34,7 @@ Enhancements
 - add mobile menu
 - remove description from bookData
 - add dismissable tips
+
 
 
 

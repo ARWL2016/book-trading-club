@@ -15,7 +15,6 @@
 <div class="row">
   <form materialize class="col s12" #form="ngForm" (submit)="searchBooks()">
     <div class="row">
-
       <div class="input-field col s12">
         <input
           [(ngModel)]="titleQuery"
@@ -38,10 +37,10 @@
     <!-- inputs row end -->
 
     <div class="row">
-      <button class="btn waves-effect waves-light" type="submit">Search
+      <button class="btn waves-effect waves-light btc-btn" type="submit">Search
           <i class="material-icons right">search</i>
       </button>
-      <button class="btn waves-effect waves-light btc-get-all-btn" (click)="getAllBooks()">Recently Added
+      <button class="btn waves-effect waves-light btc-btn btc-get-all-btn" (click)="getAllBooks()">Recently Added
           <i class="material-icons right">autorenew</i>
       </button>
     </div>

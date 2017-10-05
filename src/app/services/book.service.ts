@@ -22,7 +22,6 @@ export class BookService {
   }
 
   getMyBooks(id) {
-    // console.log('service', id);
     const url = `/api/book/getCurrentUsersBooks?id=${id}`;
     return this.http.get(url)
       .map(res => res.json());
@@ -30,25 +29,21 @@ export class BookService {
 
   searchBooks(title: string, author?: string) {
     const url = `/api/book/searchBooks/${title}`;
-    console.log('search books', title);
     return this.http.get(url)
       .map(res => res.json());
   }
 
-  addBookToCollection(bookToAdd: Book){
+  addBookToCollection(bookToAdd: Book) {
     const user = this.authService.getCurrentUser();
-    console.log(`Adding ${bookToAdd.title} to the collection of ${user.username} with id of ${user._id}`);
     const url = '/api/book/addBook';
     const body = {user, bookToAdd};
     const options = this.helperService.addAuthTokenToHeader();
     return this.http.post(url, body, options);
-
   }
 
   deleteBookById(id) {
     const url = `/api/book/delete/${id}`;
     return this.http.delete(url);
-      // .map(res => res.json());
   }
 
 }

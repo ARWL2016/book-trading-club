@@ -20,7 +20,6 @@ export class GoogleBooksApiService {
       const encodedAuthor = encodeURI(author);
       url = url.concat(`+inauthor:${encodedAuthor}`);
     }
-    console.log('search books service', url);
 
     return this.http.get(url)
       .map(res => res.json())

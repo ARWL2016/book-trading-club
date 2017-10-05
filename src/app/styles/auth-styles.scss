@@ -1,5 +1,7 @@
+@import './settings';
+
 .btc-form-wrapper {
-  border: 2px solid lightcoral;
+  border: 2px solid $nav-colour;
   padding: 0;
   margin: 0 auto;
   margin-top: 50px;
@@ -8,7 +10,7 @@
 
 .btc-form-header {
   height: 92px;
-  background-color: lightcoral;
+  background-color: $nav-colour;
 }
 
 
@@ -22,19 +24,17 @@
 
 .btc-input-wrapper {
   padding-top: 20px;
-  width: 80%;
+  width: $auth-form-content-width;
   margin: 0 auto;
 }
 
-
 .btc-check-icon {
-  color: green;
+  color: $btn-colour;
   font-size: 30px;
-  }
-
+}
 
 .btc-form-button-wrapper {
-  width: 80%;
+  width: $auth-form-content-width;
   margin: 0 auto;
   margin-top: 20px;
   margin-bottom: 30px;
@@ -45,12 +45,11 @@
 }
 
 .btc-error {
-  width: 80%;
+  width: $auth-form-content-width;
   color: white;
-  background-color: lightcoral;
+  background-color: $nav-colour;
   padding: 5px;
   margin: 0 auto;
-  // font-weight: bold;
   text-align: center
 }
 

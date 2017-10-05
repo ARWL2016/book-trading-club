@@ -8,7 +8,6 @@ import { AuthService } from 'app/services/auth.service';
 import { Book } from '../models/Book';
 import { User } from 'app/models/User';
 
-
 @Injectable()
 export class RequestService {
 
@@ -19,7 +18,6 @@ export class RequestService {
 
   requestBook(user: User, book: Book) {
     const requesterId = this.auth.getCurrentUserId();
-    console.log(book);
     const timestamp = new Date().toString();
     const request: BorrowRequest = {
       requesterId: requesterId,
@@ -30,7 +28,6 @@ export class RequestService {
       dateRequested: timestamp,
       status: 'new'
     };
-    console.log(request);
 
     const url = '/api/request/createRequest';
     const body = {request};

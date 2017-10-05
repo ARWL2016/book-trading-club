@@ -14,9 +14,6 @@
 
 <!-- My Collection Table -->
 
-
-
-
 <div *ngIf="activeTab === 'Collection'" class="responsive-table btc-table-wrapper">
     <table>
       <thead>
@@ -38,17 +35,12 @@
         </tr>
       </tbody>
     </table>
-
     <div *ngIf="myBooks?.length === 0" class="btc-instruction-panel btc-profile-instruction-panel">
       <p>You have no books in your collection. Why don't you go ahead and
         <a [routerLink]="['/add']" class="btc-panel-link">add books</a> ?
       </p>
     </div>
-
-
   </div>
-
-
 
   <!-- delete modal -->
 

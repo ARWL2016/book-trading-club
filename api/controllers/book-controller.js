@@ -1,6 +1,5 @@
 const { Book } = require('../db');
 const { User } = require('../db');
-// const { Request } = require('../db');
 const chalk = require('chalk');
 
 module.exports = {
@@ -8,9 +7,8 @@ module.exports = {
     Book.find().sort({_id: -1})
       .then(bookData => {
         res.status(200).send(bookData);
-    })
+      })
       .catch(e => {
-        console.log(e);
         res.status(404).send();
       });
   },
@@ -23,29 +21,19 @@ module.exports = {
       });
   },
 
-  // getBooksByIds(req, res) {
-  //   const ids = req.body;
-  //   Book.find({'_id': {$in:ids}})
-  //     .then(data => {
-  //       console.log(data);
-  //       return data;
-  //     })
-  // },
-
   searchBooksByTitle(req, res) {
     const title = req.params.title;
     Book.find({ "title" : { $regex: new RegExp(title), $options: 'i' } }).sort({title: 1})
       .then(data => {
-      if (data) {
-        res.status(200).send(data);
-      } else {
-        res.status(200).send('The query returned no results');
-      }
-    })
+        if (data) {
+          res.status(200).send(data);
+        } else {
+          res.status(200).send('The query returned no results');
+       }
+    });
   },
 
   addBook(req, res) {
-    console.log(chalk.green('ADD BOOKS'));
     const {user, bookToAdd} = req.body;
 
     // add user id to the book we will save
@@ -59,13 +47,12 @@ module.exports = {
         })
         .catch(e => {
           res.status(400).send('Data could not be added');
-          console.log(chalk.red(e));
         });
-    })
+    });
   },
 
   deleteBookById(req, res) {
-    // also need to clean up any requests for this book
+    // TODO clean up any requests for this book
     const id = req.params.id;
     Book.findByIdAndRemove(id)
       .then(book => {
@@ -76,4 +63,4 @@ module.exports = {
       });
   }
 
-}
+};

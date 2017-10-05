@@ -40,7 +40,6 @@ export class AuthService {
       .do(response => {
         const token = this._helper.getAuthTokenFromHeader(response);
         window.localStorage.setItem('token', token);
-        console.log('User submitted: ', user);
       })
       .map(response => response.json())
       .do(authorizedUser => this.updateCurrentUser(authorizedUser))
@@ -58,7 +57,6 @@ export class AuthService {
         window.localStorage.removeItem('token');
         window.localStorage.removeItem('username');
         window.localStorage.removeItem('_id');
-        console.log('User has been logged out');
       })
       .catch(e => console.log(e));
   }
@@ -66,7 +64,6 @@ export class AuthService {
   updateCurrentUser(user: User) {
     const { username, _id } = user;
     this.currentUser = user;
-    console.log('USER', this.currentUser);
     window.localStorage.setItem('username', username);
     window.localStorage.setItem('_id', _id);
   }
@@ -85,18 +82,13 @@ export class AuthService {
 
   getCurrentUserId() {
     if (this.currentUser) {
-      console.log('get ID', this.currentUser._id);
       return this.currentUser._id;
     }
     return null;
-
   }
 
   getCurrentUser() {
     return this.currentUser;
   }
-
-
-
 
 }

@@ -1,5 +1,7 @@
+@import './settings';
+
 .btc-instruction-panel {
-  background-color: #26a69a;
+  background-color: $nav-colour;
   color: #FFF;
   box-shadow: 1px 1px 1px #777;
   padding: 15px 40px 15px 40px;
@@ -13,10 +15,14 @@
 }
 
 .btc-panel-link {
-  color: white;
+  color: #FFF;
   font-weight: bold;
-  background-color:#ee6e73;
-  padding:3px 5px 3px 5px;
+  background-color: $nav-colour;
+  padding: 3px 5px 3px 5px;
+}
+
+.btc-btn {
+  background-color: #8D99AE;
 }
 
 .btc-get-all-btn {
@@ -26,12 +32,10 @@
 // PREVIEW SECTION
 
 .btc-book-preview {
-  // border: 1px solid lightblue;
   height: 360px;
 }
 
 .btc-book-preview-image-container {
-  // border: 1px dotted red;
   background: #555;
   height: 240px;
   overflow: hidden;
@@ -50,17 +54,14 @@
   &:hover {
     opacity: 0.4;
   }
-
 }
 
 .btc-book-preview-title {
   font-weight: bold;
-  // border: 1px dotted pink;
   margin-bottom: 0;
 }
 
 .btc-book-preview-author {
-  // border: 1px dotted pink;
   margin: 3px 0 0 0;
   font-size: 0.9em;
   color: #444
@@ -85,7 +86,7 @@
 .btc-modal-chip {
   display: block;
   margin-top: 10px;
-  background-color: #26a69a;
+  background-color: $btn-colour;
   text-align: center;
   color: white;
 }

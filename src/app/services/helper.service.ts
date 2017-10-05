@@ -8,7 +8,6 @@ export class HelperService {
 
    getAuthTokenFromHeader(response: Response): string {
     const headers = response.headers.toJSON();
-    console.log('GATFH: ', headers);
     if (headers['X-Auth']) {
       return headers['X-Auth'][0];
     } else {

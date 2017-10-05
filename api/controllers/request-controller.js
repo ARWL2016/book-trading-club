@@ -1,7 +1,6 @@
 const { Book } = require('../db');
 const { User } = require('../db');
 const { Request } = require('../db');
-const chalk = require('chalk');
 
 module.exports = {
 
@@ -69,4 +68,4 @@ module.exports = {
       .catch(e => res.status(400).send(e));
   }
 
-}
+};

@@ -17,11 +17,9 @@ module.exports = (app) => {
   app.get('/api/book/searchBooks/:title', BookController.searchBooksByTitle);
   app.get('/api/book/getCurrentUsersBooks?', BookController.getBooksByUserId);
   app.post('/api/book/addBook', authenticate, BookController.addBook);
-  // app.post('/api/book/getBooksByIds', BookController.getBooksByIds);
   app.delete('/api/book/delete/:id', BookController.deleteBookById);
 
   // request routes
-  // app.post('/api/book/requestBook', RequestController.requestBook);
   app.post('/api/request/createRequest', RequestController.createRequest);
   app.get('/api/request/getCurrentUsersRequests?', RequestController.getRequestsByUser);
   app.delete('/api/request/delete/:id', RequestController.deleteRequest);

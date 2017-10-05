@@ -41,7 +41,6 @@ module.exports = {
     User.findByCredentials(username, password).then((user) => {
       return user.generateAuthToken()
         .then((token) => {
-          console.log('auth-contr login', user);
           user.password = undefined;
           user.tokens = undefined;
           res.header('X-Auth', token).send(user);
