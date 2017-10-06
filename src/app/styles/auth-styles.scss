@@ -13,7 +13,6 @@
   background-color: $nav-colour;
 }
 
-
 .btc-form-heading {
   color: white;
   text-align: center;
@@ -40,17 +39,21 @@
   margin-bottom: 30px;
 }
 
-.btc-form-button {
+.btc-btn {
   width: 100%;
+  background-color: $btn-colour;
 }
 
 .btc-error {
   width: $auth-form-content-width;
-  color: white;
-  background-color: $nav-colour;
+  color: $err-colour;
+  font-weight: bold;
+  // background-color: $err-colour;
   padding: 5px;
   margin: 0 auto;
-  text-align: center
+  text-align: center;
 }
+
+
 
 

@@ -1,9 +1,10 @@
 @import './settings';
 
 .btc-instruction-panel {
-  background-color: $nav-colour;
-  color: #FFF;
-  box-shadow: 1px 1px 1px #777;
+  // background-color: $nav-colour;
+  // color: #FFF;
+  // box-shadow: 1px 1px 1px #777;
+  border: 2px solid $nav-colour;
   padding: 15px 40px 15px 40px;
   width: 100%;
   margin: 0 auto;
@@ -15,14 +16,14 @@
 }
 
 .btc-panel-link {
-  color: #FFF;
+  // color: #FFF;
   font-weight: bold;
-  background-color: $nav-colour;
-  padding: 3px 5px 3px 5px;
+  // background-color: $nav-colour;
+  // padding: 3px 5px 3px 5px;
 }
 
 .btc-btn {
-  background-color: #8D99AE;
+  background-color: $btn-colour;
 }
 
 .btc-get-all-btn {
