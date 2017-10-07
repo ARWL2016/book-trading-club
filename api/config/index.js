@@ -10,3 +10,11 @@ if (env === 'development') {
   process.env.MONGO_LOCAL = config.MONGO_LOCAL;
 }
 
+if (env === 'test') {
+  const config = require('./test.json');
+  console.log(config);
+  process.env.JWT_SECRET = config.JWT_SECRET;
+  process.env.MONGODB_URI = config.MONGODB_URI;
+  process.env.PORT = config.PORT;
+}
+
