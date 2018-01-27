@@ -5,22 +5,24 @@ API testing is done with Mocha and Expect. Supertest is used for mocking HTTP re
 The app is hosted on Heroku.  
 This is a personal project, not a production grade application. It uses free dynos on Heroku and a sandbox database at MLab. It has not been subject to full cross browser testing. 
 
-https://www.freecodecamp.org/challenges/manage-a-book-trading-club  
+#### Technology 
+- Angular 4.0 / Angular CLI
+- Typescript 2.2 
+- MaterializeCSS
+- Node
+- Express 4.15
+- MongoDB 2.2 
+- Mongoose 4.11 
+- Google Books API
+- Hosting: Heroku / MLab (cloud Mongo provider)
+- Testing: Karma, Mocha, Supertest, Expect
+
+#### Useful Links
+https://arwl-book-exchange.herokuapp.com 
 https://github.com/ARWL2016/book-trading-club 
+https://developers.google.com/books/docs/v1/using#WorkingVolumes  
+https://stackoverflow.com/questions/43869961/node-js-express-redirect-all-to-angular-2-page  
 
-Google Books API 
-https://developers.google.com/books/docs/v1/using#WorkingVolumes 
-Basic search: https://www.googleapis.com/books/v1/volumes?q=search+terms
-https://www.googleapis.com/books/v1/volumes?q=flowers+inauthor:keyes&key=yourAPIKey (containing 'keyes' in author field)
-terms: inauthor: intitle: subject: 
-API Key not needed for basic search
-
-Routes 
-https://stackoverflow.com/questions/43869961/node-js-express-redirect-all-to-angular-2-page 
-- Remember to redirect Node routes to Angular if they are not used - else cannot GET
-
-Features
-- add a messaging component
 
 Production
 - add server side logging
@@ -32,10 +34,17 @@ Bugs:
 - signout appears to work even when wrong db connected - but username not removed
 
 Enhancements
+- prevent duplicate entries? - or warn
 - add footer
 - add mobile menu
 - remove description from bookData
 - add dismissable tips
+- add a messaging component
+- restructure server by feature
+
+Todo 
+- front end checklist
+- update CLI
 
 
 

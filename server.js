@@ -18,6 +18,12 @@ app.use(express.static(path.join(__dirname, 'dist')));
 
 routes(app);
 
+// default route
+app.get('*', (req, res) => {
+  // res.redirect('/');
+  res.sendFile(path.join(__dirname, '/dist/index.html'));
+})
+
 app.listen(port, () => {
   console.log(chalk.green('API Running on Port ' + port));
 })

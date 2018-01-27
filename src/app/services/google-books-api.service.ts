@@ -1,3 +1,10 @@
+/**
+ * Basic search: https://www.googleapis.com/books/v1/volumes?q=search+terms
+ * https://www.googleapis.com/books/v1/volumes?q=flowers+inauthor:keyes&key=yourAPIKey (containing 'keyes' in author field)
+ * terms: inauthor: intitle: subject:
+ * API Key not needed for basic search
+ */
+
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Book } from '../models/Book';

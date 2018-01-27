@@ -24,10 +24,4 @@ module.exports = (app) => {
   app.get('/api/request/getCurrentUsersRequests?', RequestController.getRequestsByUser);
   app.delete('/api/request/delete/:id', RequestController.deleteRequest);
 
-  // default route
-  app.get('*', (req, res) => {
-    res.redirect('/');
-    // res.sendFile(path.join(__dirname, '../../', 'dist/index.html'));
-  })
-
 }
