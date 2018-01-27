@@ -17,10 +17,10 @@ import { RegisterComponent } from './auth/register/register.component';
 import { LoginComponent } from './auth/login/login.component';
 import { BrowseBooksComponent } from './browse-books/browse-books.component';
 import { ProfileComponent } from './profile/profile.component';
-import { BookService } from "app/services/book.service";
-import { RequestService } from "app/services/request.service";
-import {GoogleBooksApiService} from "app/services/google-books-api.service";
-import {ProgressBarService} from "app/services/progress-bar.service";
+import { BookService } from 'app/services/book.service';
+import { RequestService } from 'app/services/request.service';
+import {GoogleBooksApiService} from 'app/services/google-books-api.service';
+import {ProgressBarService} from 'app/services/progress-bar.service';
 
 
 @NgModule({

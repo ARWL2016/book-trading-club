@@ -17,7 +17,8 @@ const authRoutes = require('./api/auth/auth.routes');
 const requestRoutes = require('./api/request/request.routes');
 
 const port = process.env.PORT || 3000;
-const staticOptions = process.env.NODE_ENV === 'production' ? {maxAge: ms('1yr')} : {};
+const staticOptions = process.env.NODE_ENV === 'production' ?
+        { maxAge: ms('1yr') } : {};
 const app = express();
 
 // configure app
@@ -34,12 +35,10 @@ requestRoutes(app);
 // default route
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '/dist/index.html'));
-})
+});
 
 app.listen(port, () => {
   logger.info('API Running on Port ' + port);
-})
+});
 
 module.exports = { app };
-
-

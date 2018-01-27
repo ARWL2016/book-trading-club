@@ -2,14 +2,14 @@ import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'app/services/auth.service';
 import { User } from 'app/models/User';
-import { Book } from "app/models/Book";
+import { Book } from 'app/models/Book';
 import { MaterializeAction } from 'angular2-materialize';
 import { NotificationsService } from 'angular2-notifications';
 import { BorrowRequest } from 'app/models/Borrow-Request';
-import { RequestView } from "app/models/request-view";
-import { BookService } from "app/services/book.service";
-import {RequestService} from "app/services/request.service";
-import {ProgressBarService} from "app/services/progress-bar.service";
+import { RequestView } from 'app/models/request-view';
+import { BookService } from 'app/services/book.service';
+import {RequestService} from 'app/services/request.service';
+import {ProgressBarService} from 'app/services/progress-bar.service';
 
 @Component({
   selector: 'btc-profile',
@@ -84,7 +84,7 @@ export class ProfileComponent implements OnInit {
           this.ngOnInit();
           this.notify.success(request.ownerName, `Your request to ${request.ownerName} was cancelled`);
         }
-      })
+      });
   }
 
   openModal() {

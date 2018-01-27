@@ -3,7 +3,7 @@ import { User } from 'app/models/User';
 import { AuthService } from 'app/services/auth.service';
 import { Router } from '@angular/router';
 import {NotificationsService} from 'angular2-notifications';
-import {ProgressBarService} from "app/services/progress-bar.service";
+import {ProgressBarService} from 'app/services/progress-bar.service';
 
 @Component({
   selector: 'btc-login',
@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
 
   submitForm() {
     if (this.username && this.password) {
-      this.error ='';
+      this.error = '';
       this.progressBarService.showProgressBar();
       this.user = { username: this.username, password: this.password };
       this.auth.login(this.user)

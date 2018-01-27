@@ -5,20 +5,21 @@ const { Request } = require('./request.model');
 module.exports = {
 
   createRequest(req, res) {
-    const {request} = req.body;
+    const { request } = req.body;
 
     Request
       .create(request)
       .then(requestData => {
-        const {_id, bookId, requesterName, requesterId} = requestData;
+        const { _id, bookId, requesterName, requesterId } = requestData;
 
         Book
-          .findByIdAndUpdate(bookId, {$push: {
+          .findByIdAndUpdate(bookId, { $push: {
             requestsReceived: _id,
             usersRequesting: requesterName
-          }})
+          } })
           .then(() => {
-              User.findByIdAndUpdate(requesterId, {$push: {requestsMade: _id}});
+              User.findByIdAndUpdate(requesterId,
+                  { $push: { requestsMade: _id } });
             });
           })
       .then(() => res.status(200).send('Request added'));
@@ -30,12 +31,15 @@ module.exports = {
     Request
       .findByIdAndRemove(id)
       .then(request => {
-        const {bookId, _id, requesterName, requesterId} = request;
-
+        const { bookId, _id, requesterName, requesterId } = request;
         Book
-          .findByIdAndUpdate(bookId, {$pull: {requestsReceived: _id, usersRequesting: requesterName }})
+          .findByIdAndUpdate(bookId, { $pull: {
+            requestsReceived: _id,
+            usersRequesting: requesterName
+          } })
           .then(() => {
-            User.findByIdAndUpdate(requesterId, {$pull: {requestsMade: _id}});
+            User.findByIdAndUpdate(requesterId,
+                  { $pull: { requestsMade: _id } });
           });
       })
       .then(() => res.status(200).send('Request deleted'))
@@ -54,14 +58,14 @@ module.exports = {
           return request.bookId;
         });
 
-        Book.find({'_id': {$in:bookIds}})
+        Book.find({ '_id': { $in: bookIds } })
           .then(books => {
             books.forEach((book, index) => {
               results.push({
                 book: book,
                 request: requests[index]
-              })
-            })
+              });
+            });
             res.status(200).send(results);
           });
       })

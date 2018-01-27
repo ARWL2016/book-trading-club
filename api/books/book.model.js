@@ -54,7 +54,7 @@ const BookSchema = new mongoose.Schema({
   }],
   usersRequesting: [{
     type: String,
-    required:  false
+    required: false
   }]
 });
 

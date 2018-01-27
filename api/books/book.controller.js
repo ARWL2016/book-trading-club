@@ -1,12 +1,11 @@
 const { Book } = require('./book.model');
 const { User } = require('../auth/user.model');
-const chalk = require('chalk');
 
 module.exports = {
   getAllBooks(req, res) {
     Book
       .find()
-      .sort({_id: -1})
+      .sort({ _id: -1 })
       .then(bookData => {
         res.status(200).send(bookData);
       })
@@ -18,8 +17,8 @@ module.exports = {
   getBooksByUserId(req, res) {
     const id = req.query.id;
     Book
-      .find({userId: id})
-      .sort({_id: -1})
+      .find({ userId: id })
+      .sort({ _id: -1 })
       .then(data => {
         res.status(200).send(data);
       });
@@ -27,7 +26,9 @@ module.exports = {
 
   searchBooksByTitle(req, res) {
     const title = req.params.title;
-    Book.find({ "title" : { $regex: new RegExp(title), $options: 'i' } }).sort({title: 1})
+    Book
+      .find({ 'title': { $regex: new RegExp(title), $options: 'i' } })
+      .sort({ title: 1 })
       .then(data => {
         if (data) {
           res.status(200).send(data);
@@ -38,14 +39,14 @@ module.exports = {
   },
 
   addBook(req, res) {
-    const {user, bookToAdd} = req.body;
+    const { user, bookToAdd } = req.body;
 
     // add user id to the book we will save
     bookToAdd.userId = user._id;
     bookToAdd.username = user.username;
 
     Book.create(bookToAdd).then(bookData => {
-      User.findByIdAndUpdate(user._id, {$push: {bookIds: bookData._id}})
+      User.findByIdAndUpdate(user._id, { $push: { bookIds: bookData._id } })
         .then(() => {
           res.status(200).send(bookData);
         })
@@ -60,9 +61,10 @@ module.exports = {
     const id = req.params.id;
     Book.findByIdAndRemove(id)
       .then(book => {
-        User.findByIdAndUpdate(book.userId, {$pull: { bookIDs: book._id}})
+        User
+          .findByIdAndUpdate(book.userId, { $pull: { bookIDs: book._id } })
           .then(() => {
-            res.status(200).send({message: 'Book was removed from collection'});
+            res.status(200).send({ message: 'Book removed from collection' });
           });
       });
   }

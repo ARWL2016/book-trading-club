@@ -6,7 +6,7 @@ const logger = new (winston.Logger)({
       colorize: true,
       json: false,
       prettyPrint: true
-    }),
+    })
   ]
 });
 

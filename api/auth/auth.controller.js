@@ -1,15 +1,14 @@
 const { User } = require('./user.model');
-const jwt = require('jsonwebtoken');
 
 module.exports = {
   register(req, res) {
     const body = req.body;
-    const {username} = req.body;
+    const { username } = req.body;
 
-    User.findOne({username})
+    User.findOne({ username })
       .then(user => {
         if (user) {
-          res.status(409).send("user exists");
+          res.status(409).send('user exists');
         } else {
           const user = new User(body);
           user.save().then(() => {
@@ -18,19 +17,19 @@ module.exports = {
             user.password = undefined;
             user.tokens = undefined;
             res.header('X-Auth', token).send(user);
-          })
+          });
         }
       }).catch(err => res.status(400).send(err));
   },
 
   checkUsername(req, res) {
     const username = req.params.username;
-    User.findOne({username})
+    User.findOne({ username })
       .then(user => {
         if (user) {
-          res.status(409).send("username not available");
+          res.status(409).send('username not available');
         } else {
-          res.status(200).send("username available");
+          res.status(200).send('username available');
         }
       });
   },
@@ -56,4 +55,4 @@ module.exports = {
     })
     .catch(err => res.status(400).send());
   }
-}
+};
