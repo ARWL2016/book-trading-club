@@ -1,19 +1,18 @@
 ### Book Trading App
-This book trading app was built by Alistair Willis as a Free Code Camp Project. The front end is built with Angular 4.0 / Typescript using the Angular CLI project template. Some components, such as the navbar and the form inputs, are from materialize-css, an implementation of the Angular Material design specifications. Custom styles are authored in Sass using the BEM naming conventions. For simplicity, styles are associated with elements in a 'flat' manner - ie they use a single class selector, nested selectors are avoided.   
-The backend is written in Javascript on the Node platform using Express 4. Data persistence is handled by the MongoDB cloud implementation at MLab. Schema and data access methods are written using the Mongoose ODM library. The authentication module uses Bcrypt.js for password encryption and JSON Web Tokens for maintaining secure sessions.
-API testing is done with Mocha and Expect. Supertest is used for mocking HTTP requests.  
-The app is hosted on Heroku.  
+  
+
 This is a personal project, not a production grade application. It uses free dynos on Heroku and a sandbox database at MLab. It has not been subject to full cross browser testing. 
 
 #### Technology 
 - Angular 4.0 / Angular CLI
 - Typescript 2.2 
-- MaterializeCSS
+- MaterializeCSS (Material Design implementation)
 - Node
 - Express 4.15
 - MongoDB 2.2 
 - Mongoose 4.11 
 - Google Books API
+- Auth: JSON Web Tokens, BCrypt
 - Hosting: Heroku / MLab (cloud Mongo provider)
 - Testing: Karma, Mocha, Supertest, Expect
 
