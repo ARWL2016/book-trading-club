@@ -20,7 +20,7 @@ webpackEmptyAsyncContext.id = "../../../../../src/$$_gendir lazy recursive";
 /***/ "../../../../../src/app/add-books/add-books.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"btc-instruction-panel\">\r\n  <h5>Search Google Books</h5>\r\n  <p>On this page, you can search Google Books for titles to add to your collection. Other users\r\n  will be able to see the books you add and send you borrow requests.</p>\r\n</div>\r\n\r\n<!-- Search Form -->\r\n\r\n<div class=\"row\">\r\n  <form materialize class=\"col s12\" #form=\"ngForm\" (submit)=\"searchBooksAPI()\">\r\n    <div class=\"row\">\r\n      <div class=\"input-field col s6\">\r\n        <!-- <i class=\"material-icons prefix\">search</i> -->\r\n        <input\r\n          [(ngModel)]=\"titleQuery\"\r\n          type=\"text\"\r\n          name=\"titleQuery\"\r\n          id=\"titleQuery\">\r\n          <label for=\"titleQuery\">Title</label>\r\n      </div>\r\n      <div class=\"input-field col s6\">\r\n        <!-- <i class=\"material-icons prefix\">search</i> -->\r\n        <input\r\n          [(ngModel)]=\"authorQuery\"\r\n          type=\"text\"\r\n          name=\"authorQuery\"\r\n          id=\"authorQuery\">\r\n        <label for=\"authorQuery\">Author (optional)</label>\r\n      </div>\r\n    </div>\r\n    <div class=\"row\">\r\n      <button class=\"btn waves-effect waves-light btc-btn\" type=\"submit\" [disabled]=\"!titleQuery\">Search\r\n          <i class=\"material-icons right\">search</i>\r\n      </button>\r\n    </div>\r\n  </form>\r\n</div>\r\n\r\n<!-- Results -->\r\n<p *ngIf=\"nullResultError\" class=\"btc-search-error\">{{nullResultError}}</p>\r\n<p *ngIf=\"error\" class=\"btc-search-error\">{{error}}</p>\r\n\r\n<div class=\"row\">\r\n  <div class=\"col s6 m4 l3 btc-book-preview\" *ngFor=\"let book of bookData\" (click)=\"openModal(book)\">\r\n    <div class=\"btc-book-preview-image-container\">\r\n      <img class=\"btc-book-preview-image\" src=\"{{book.imageLinks.thumbnail}}\" >\r\n    </div>\r\n\r\n    <p class=\"btc-book-preview-title\">{{book.title}}</p>\r\n    <p class=\"btc-book-preview-author\">{{book.authors[0]}}</p>\r\n\r\n  </div>\r\n\r\n</div>\r\n\r\n\r\n<!-- Modal Structure -->\r\n<div id=\"modal1\" class=\"modal\" materialize=\"modal\" [materializeParams]=\"[{dismissible: false}]\" [materializeActions]=\"modalActions\">\r\n  <div *ngIf=\"modalProgressBar\" class=\"progress btc-modal-progress-bar\">\r\n    <div class=\"indeterminate\"></div>\r\n  </div>\r\n  <div *ngIf=\"selectedBook\" class=\"modal-content\">\r\n\r\n      <div class=\"btc-modal-img-wrapper\">\r\n        <img src=\"{{selectedBook.imageLinks.thumbnail}}\" />\r\n      </div>\r\n\r\n      <div class=\"btc-modal-text\">\r\n        <h4 class=\"btc-modal-title\">{{selectedBook.title}}</h4>\r\n        <p *ngIf=\"selectedBook.subtitle\" class=\"btc-modal-subtitle\">{{selectedBook.subtitle}}</p>\r\n        <div>By&nbsp;\r\n          <span *ngFor=\"let author of selectedBook.authors\" class=\"btc-modal-author\">{{author}}&nbsp;&nbsp;</span>\r\n        </div>\r\n        <span *ngIf=\"selectedBook.publisher\">Published by {{selectedBook.publisher}} </span>\r\n        <span *ngIf=\"selectedBook.publishedDate\">({{selectedBook.publishedDate}})</span>\r\n\r\n        <p *ngIf=\"selectedBook.pageCount\" class=\"btc-modal-pageCount\">{{selectedBook.pageCount}} pages</p>\r\n        <p *ngIf=\"!username\" class=\"anon-user-message\">To add books to your collection, please\r\n          <a class=\"modal-link\" (click)=\"linkToAuthPage($event)\">register</a> or <a class=\"modal-link\" (click)=\"linkToAuthPage($event)\">log in</a>.</p>\r\n      </div>\r\n\r\n\r\n\r\n    </div>\r\n    <div class=\"modal-footer btc-modal-footer\">\r\n      <a *ngIf=\"username\" class=\"modal-action modal-close waves-effect waves-green btn-flat\" (click)=\"addBook()\">Add to Collection<i class=\"material-icons right\">add_circle</i></a>\r\n      <a class=\"waves-effect waves-green btn-flat\" (click)=\"closeModal()\">Close<i class=\"material-icons right\">cancel</i></a>\r\n    </div>\r\n   </div>\r\n\r\n\r\n\r\n\r\n\r\n"
+module.exports = "<div class=\"btc-instruction-panel\">\r\n  <h5>Search Google Books</h5>\r\n  <p>On this page, you can search Google Books for titles to add to your collection. Other users\r\n  will be able to see the books you add and send you borrow requests.</p>\r\n</div>\r\n\r\n<!-- Search Form -->\r\n<div class=\"row\">\r\n  <form materialize class=\"col s12\" #form=\"ngForm\" (submit)=\"searchBooksAPI(form)\">\r\n    <div class=\"row\">\r\n      <div class=\"input-field col s6\">\r\n        <!-- <i class=\"material-icons prefix\">search</i> -->\r\n        <input\r\n          [(ngModel)]=\"titleQuery\"\r\n          type=\"text\"\r\n          name=\"titleQuery\"\r\n          id=\"titleQuery\"\r\n          required>\r\n          <label for=\"titleQuery\">Title</label>\r\n      </div>\r\n      <div class=\"input-field col s6\">\r\n        <!-- <i class=\"material-icons prefix\">search</i> -->\r\n        <input\r\n          [(ngModel)]=\"authorQuery\"\r\n          type=\"text\"\r\n          name=\"authorQuery\"\r\n          id=\"authorQuery\">\r\n        <label for=\"authorQuery\">Author (optional)</label>\r\n      </div>\r\n    </div>\r\n    <div class=\"row\">\r\n      <button class=\"btn waves-effect waves-light btc-btn\" type=\"submit\" [disabled]=\"!titleQuery\">Search\r\n          <i class=\"material-icons right\">search</i>\r\n      </button>\r\n    </div>\r\n  </form>\r\n</div>\r\n\r\n<!-- Results -->\r\n<!-- <p *ngIf=\"nullResultError\" class=\"btc-search-error\">{{nullResultError}}</p> -->\r\n<p *ngIf=\"helpMessage\" class=\"btc-search-error\">{{helpMessage}}</p>\r\n\r\n<div class=\"row\">\r\n  <div class=\"col s6 m4 l3 btc-book-preview\" *ngFor=\"let book of bookData\" (click)=\"openModal(book)\">\r\n    <div class=\"btc-book-preview-image-container\">\r\n      <img class=\"btc-book-preview-image\" src=\"{{book.imageLinks.thumbnail}}\" >\r\n    </div>\r\n\r\n    <p class=\"btc-book-preview-title\">{{book.title}}</p>\r\n    <p class=\"btc-book-preview-author\">{{book.authors[0]}}</p>\r\n  </div>\r\n</div>\r\n\r\n\r\n<!-- Modal Structure -->\r\n<div id=\"modal1\" class=\"modal\" materialize=\"modal\" [materializeParams]=\"[{dismissible: false}]\" [materializeActions]=\"modalActions\">\r\n  <div *ngIf=\"modalProgressBar\" class=\"progress btc-modal-progress-bar\">\r\n    <div class=\"indeterminate\"></div>\r\n  </div>\r\n  <div *ngIf=\"selectedBook\" class=\"modal-content\">\r\n\r\n      <div class=\"btc-modal-img-wrapper\">\r\n        <img src=\"{{selectedBook.imageLinks.thumbnail}}\" />\r\n      </div>\r\n\r\n      <div class=\"btc-modal-text\">\r\n        <h4 class=\"btc-modal-title\">{{selectedBook.title}}</h4>\r\n        <p *ngIf=\"selectedBook.subtitle\" class=\"btc-modal-subtitle\">{{selectedBook.subtitle}}</p>\r\n        <div>By&nbsp;\r\n          <span *ngFor=\"let author of selectedBook.authors\" class=\"btc-modal-author\">{{author}}&nbsp;&nbsp;</span>\r\n        </div>\r\n        <span *ngIf=\"selectedBook.publisher\">Published by {{selectedBook.publisher}} </span>\r\n        <span *ngIf=\"selectedBook.publishedDate\">({{selectedBook.publishedDate}})</span>\r\n\r\n        <p *ngIf=\"selectedBook.pageCount\" class=\"btc-modal-pageCount\">{{selectedBook.pageCount}} pages</p>\r\n        <p *ngIf=\"!username\" class=\"anon-user-message\">To add books to your collection, please\r\n          <a class=\"modal-link\" (click)=\"linkToAuthPage($event)\">register</a> or <a class=\"modal-link\" (click)=\"linkToAuthPage($event)\">log in</a>.</p>\r\n      </div>\r\n\r\n    </div>\r\n    <div class=\"modal-footer btc-modal-footer\">\r\n      <a *ngIf=\"username\" class=\"modal-action modal-close waves-effect waves-green btn-flat\" (click)=\"addBook()\">Add to Collection<i class=\"material-icons right\">add_circle</i></a>\r\n      <a class=\"waves-effect waves-green btn-flat\" (click)=\"closeModal()\">Close<i class=\"material-icons right\">cancel</i></a>\r\n    </div>\r\n   </div>\r\n\r\n\r\n\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -72,58 +72,52 @@ var AddBooksComponent = (function () {
         this.router = router;
         this.notify = notify;
         this.pBarService = pBarService;
+        // UI props
         this.modalActions = new core_1.EventEmitter();
         this.modalProgressBar = false;
     }
-    AddBooksComponent.prototype.ngOnInit = function () {
-        this.username = this.authService.isValidated();
-    };
-    AddBooksComponent.prototype.searchBooksAPI = function () {
+    Object.defineProperty(AddBooksComponent.prototype, "username", {
+        get: function () {
+            return this.authService.isValidated();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    AddBooksComponent.prototype.searchBooksAPI = function (form) {
         var _this = this;
-        this.error = '';
-        if (!this.titleQuery) {
-            return this.error = 'enter a title or keyword';
-        }
-        this.nullResultError = '';
         this.bookData = [];
         this.pBarService.showProgressBar();
-        var query = {
-            titleQuery: this.titleQuery,
-            authorQuery: this.authorQuery
-        };
-        console.log({ titleQuery: this.titleQuery, authorQuery: this.authorQuery });
-        this.gBooksApiService.searchBooks(this.titleQuery, this.authorQuery)
+        this.gBooksApiService
+            .searchBooks(form.value)
             .then(function (data) {
-            if (data) {
-                _this.bookData = data;
-                console.log(_this.bookData);
-                _this.pBarService.hideProgressBar();
-            }
-            else {
-                _this.nullResultError = 'The search returned no results';
-                _this.pBarService.hideProgressBar();
-            }
+            _this.bookData = data;
+            _this.pBarService.hideProgressBar();
+        })
+            .catch(function (e) {
+            _this.helpMessage = 'The search returned no results';
+            _this.pBarService.hideProgressBar();
         });
     };
     AddBooksComponent.prototype.openModal = function (book) {
         this.selectedBook = book;
-        this.modalActions.emit({ action: "modal", params: ['open'] });
+        this.modalActions.emit({ action: 'modal', params: ['open'] });
     };
     AddBooksComponent.prototype.closeModal = function () {
-        this.modalActions.emit({ action: "modal", params: ['close'] });
+        this.modalActions.emit({ action: 'modal', params: ['close'] });
     };
     AddBooksComponent.prototype.linkToAuthPage = function (e) {
         this.closeModal();
         if (e.target.firstChild.data === 'register') {
-            return this.router.navigate(['/register']);
+            this.router.navigate(['/register']);
+            return;
         }
         this.router.navigate(['/login']);
     };
     AddBooksComponent.prototype.addBook = function () {
         var _this = this;
         this.modalProgressBar = true;
-        var book = this.selectedBook;
-        this.bookService.addBookToCollection(book)
+        this.bookService
+            .addBookToCollection(this.selectedBook)
             .subscribe(function (res) {
             console.log(res);
             _this.closeModal();
@@ -133,7 +127,6 @@ var AddBooksComponent = (function () {
             console.log(err);
             _this.modalProgressBar = false;
         });
-        // need some error handling here
     };
     return AddBooksComponent;
 }());
@@ -213,6 +206,7 @@ var AppComponent = (function () {
         };
     }
     AppComponent.prototype.ngOnInit = function () {
+        console.clear();
         this.username = this.auth.isValidated();
     };
     AppComponent.prototype.ngDoCheck = function () {
@@ -1058,38 +1052,46 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../../../core/@angular/core.es5.js");
 var http_1 = __webpack_require__("../../../http/@angular/http.es5.js");
 __webpack_require__("../../../../rxjs/_esm5/add/operator/toPromise.js");
+__webpack_require__("../../../../rxjs/_esm5/add/operator/map.js");
+__webpack_require__("../../../../rxjs/_esm5/add/operator/do.js");
 var GoogleBooksApiService = (function () {
     function GoogleBooksApiService(http) {
         this.http = http;
     }
-    GoogleBooksApiService.prototype.searchBooks = function (title, author) {
+    GoogleBooksApiService.prototype.searchBooks = function (_a) {
+        var titleQuery = _a.titleQuery, authorQuery = _a.authorQuery;
         var baseUrl = "https://www.googleapis.com/books/v1/volumes?q=";
-        var encodedTitle = encodeURI(title);
+        var encodedTitle = encodeURI(titleQuery);
         var url = "" + baseUrl + encodedTitle;
-        if (author) {
-            var encodedAuthor = encodeURI(author);
+        if (authorQuery) {
+            var encodedAuthor = encodeURI(authorQuery);
             url = url.concat("+inauthor:" + encodedAuthor);
         }
         return this.http.get(url)
             .map(function (res) { return res.json(); })
-            .map(function (data) {
+            .toPromise()
+            .then(function (data) {
+            console.log({ data: data }, typeof data);
             if (!data.totalItems) {
-                return undefined;
+                return Promise.reject('no data');
             }
             var filteredArray = [];
             data.items.forEach(function (item) {
-                if (item.volumeInfo.language === 'en' && item.volumeInfo.title &&
-                    item.volumeInfo.authors && item.volumeInfo.imageLinks.smallThumbnail) {
-                    var _a = item.volumeInfo, title_1 = _a.title, subtitle = _a.subtitle, authors = _a.authors, publisher = _a.publisher, publishedDate = _a.publishedDate, pageCount = _a.pageCount, imageLinks = _a.imageLinks, description = _a.description;
-                    filteredArray.push({ title: title_1, subtitle: subtitle, authors: authors, publisher: publisher, publishedDate: publishedDate, pageCount: pageCount, imageLinks: imageLinks, description: description });
+                if (item.volumeInfo.language === 'en' && item.volumeInfo.title && item.volumeInfo.authors
+                    && item.volumeInfo.imageLinks.smallThumbnail) {
+                    var _a = item.volumeInfo, title = _a.title, subtitle = _a.subtitle, authors = _a.authors, publisher = _a.publisher, publishedDate = _a.publishedDate, pageCount = _a.pageCount, imageLinks = _a.imageLinks, description = _a.description;
+                    filteredArray.push({ title: title, subtitle: subtitle, authors: authors, publisher: publisher, publishedDate: publishedDate, pageCount: pageCount, imageLinks: imageLinks, description: description });
                 }
             });
             if (filteredArray.length === 0) {
-                return undefined;
+                return Promise.reject('no data');
             }
             return filteredArray;
         })
-            .toPromise();
+            .catch(function (e) {
+            console.log(e);
+            return Promise.reject(e);
+        });
     };
     return GoogleBooksApiService;
 }());

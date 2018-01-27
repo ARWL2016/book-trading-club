@@ -10,44 +10,56 @@ import { Http } from '@angular/http';
 import { Book } from '../models/Book';
 
 import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/do';
 
 @Injectable()
 export class GoogleBooksApiService {
 
-  constructor(
-    private http: Http
-  ) { }
+  constructor(private http: Http) { }
 
-  searchBooks(title: string, author?: string): Promise<Book[] | undefined> {
+  searchBooks({titleQuery, authorQuery}): Promise<any> {
     const baseUrl = `https://www.googleapis.com/books/v1/volumes?q=`;
-    const encodedTitle = encodeURI(title);
+    const encodedTitle = encodeURI(titleQuery);
     let url = `${baseUrl}${encodedTitle}`;
 
-    if (author) {
-      const encodedAuthor = encodeURI(author);
+    if (authorQuery) {
+      const encodedAuthor = encodeURI(authorQuery);
       url = url.concat(`+inauthor:${encodedAuthor}`);
     }
 
     return this.http.get(url)
       .map(res => res.json())
-      .map(data => {
-        if (!data.totalItems) {
-          return undefined;
-        }
-        const filteredArray = [];
-        data.items.forEach(item => {
-          if (item.volumeInfo.language === 'en' && item.volumeInfo.title &&
-            item.volumeInfo.authors && item.volumeInfo.imageLinks.smallThumbnail) {
-            const { title, subtitle, authors, publisher, publishedDate, pageCount, imageLinks, description } = item.volumeInfo;
-            filteredArray.push({ title, subtitle, authors, publisher, publishedDate, pageCount, imageLinks, description });
+      .toPromise()
+        .then(data => {
+          console.log({data}, typeof data);
+
+          if (!data.totalItems) {
+            return Promise.reject('no data');
           }
+          const filteredArray: Book[] = [];
+          data.items.forEach(item => {
+            if (item.volumeInfo.language === 'en' && item.volumeInfo.title && item.volumeInfo.authors
+                && item.volumeInfo.imageLinks.smallThumbnail) {
+                  const { title, subtitle, authors, publisher, publishedDate, pageCount, imageLinks, description } = item.volumeInfo;
+                  filteredArray.push({ title, subtitle, authors, publisher, publishedDate, pageCount, imageLinks, description });
+            }
+          });
+          if (filteredArray.length === 0) {
+            return Promise.reject('no data');
+          }
+          return filteredArray;
+        })
+        .catch(e => {
+          console.log(e);
+          return Promise.reject(e);
         });
-        if (filteredArray.length === 0) {
-          return undefined;
-        }
-        return filteredArray;
-      })
-      .toPromise();
+
+
+
+
+
+
   }
 
 }

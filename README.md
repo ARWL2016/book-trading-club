@@ -44,6 +44,7 @@ Enhancements
 Todo 
 - front end checklist
 - update CLI
+- create modal as separate component
 
 
 

@@ -35,6 +35,7 @@ export class AppComponent implements OnInit, DoCheck {
   };
 
   ngOnInit(): void {
+    console.clear();
     this.username = this.auth.isValidated();
   }
 

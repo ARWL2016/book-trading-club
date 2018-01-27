@@ -11,7 +11,7 @@ export interface Book {
   requested?: boolean;
   subtitle?: string;
   title?: string;
-  userId: string;
-  username: string;
+  userId?: string;
+  username?: string;
   _id?: string;
 }
