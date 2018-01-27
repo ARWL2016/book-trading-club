@@ -1,6 +1,6 @@
-const { Book } = require('../db');
-const { User } = require('../db');
-const { Request } = require('../db');
+const { Book } = require('../books/book.model');
+const { User } = require('../auth/user.model');
+const { Request } = require('./request.model');
 
 module.exports = {
 
