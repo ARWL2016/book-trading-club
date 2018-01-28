@@ -11,7 +11,7 @@
     "build": "ng build",
     "build:watch": "ng build --watch --sourcemaps",
     "build:prod": "ng build --no-aot --prod",
-    "dev": "SET \"NODE_ENV=development\" && npm-run-all --parallel server build:watch eslint:watc",
+    "dev": "SET \"NODE_ENV=development\" && npm-run-all --parallel server build:watch eslint:watch",
     "test": "ng test",
     "mocha": "SET \"NODE_ENV=test\" && mocha",
     "tslint": "ng lint --fix",

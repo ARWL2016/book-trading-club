@@ -1,49 +1,47 @@
-<div class>
-    <div class="btc-form-wrapper">
-      <div class="btc-form-header">
-        <h2 class="btc-form-heading">Login</h2>
-      </div>
-    <form materialize #form="ngForm" (submit)="submitForm()" novalidate>
-
-      <div class="btc-input-wrapper">
-
-          <div class="input-field">
-            <input
-              [(ngModel)]="username"
-              #inp1="ngModel"
-              name="username"
-              id="username"
-              type="text"
-              required
-              minlength="3">
-            <label for="username">Username</label>
-          </div>
-
-          <div class="input-field">
-            <input
-              [(ngModel)]="password"
-              #inp2="ngModel"
-              name="password"
-              id="password"
-              type="text"
-              required
-              minlength="3">
-            <label  for="password">Password</label>
-          </div>
-
-      </div>
-      <div *ngIf="this.error" class="btc-error">
-        {{error}}
-      </div>
-
-      <div class="btc-form-button-wrapper">
-        <button class="btn waves-effect waves-light btc-btn" type="submit" [disabled]="form.invalid">Login
-            <i class="material-icons right">check</i>
-        </button>
-      </div>
-    </form>
-    </div>
+<section class="btc-form-wrapper">
+  <div class="btc-form-header">
+    <h2 class="btc-form-heading">Login</h2>
   </div>
-  <br>
+
+  <form materialize #form="ngForm" (submit)="submitForm()" novalidate>
+    <div class="btc-input-wrapper">
+      <div class="input-field">
+        <input
+          [(ngModel)]="user.username"
+          #inp1="ngModel"
+          name="username"
+          id="username"
+          type="text"
+          required
+          minlength="3">
+        <label for="username">Username</label>
+      </div>
+      <div class="input-field">
+        <input
+          [(ngModel)]="user.password"
+          #inp2="ngModel"
+          name="password"
+          id="password"
+          type="text"
+          required
+          minlength="3">
+        <label  for="password">Password</label>
+      </div>
+    </div>
+
+    <div *ngIf="this.error" class="btc-error">
+      {{error}}
+    </div>
+
+    <div class="btc-form-button-wrapper">
+      <button class="btn waves-effect waves-light btc-btn" type="submit" [disabled]="form.invalid">Login
+        <i class="material-icons right">check</i>
+      </button>
+    </div>
+  </form>
+
+</section>
+
+
 
 

@@ -20,7 +20,7 @@ webpackEmptyAsyncContext.id = "../../../../../src/$$_gendir lazy recursive";
 /***/ "../../../../../src/app/add-books/add-books.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"btc-instruction-panel\">\r\n  <h5>Search Google Books</h5>\r\n  <p>On this page, you can search Google Books for titles to add to your collection. Other users\r\n  will be able to see the books you add and send you borrow requests.</p>\r\n</div>\r\n\r\n<!-- Search Form -->\r\n<div class=\"row\">\r\n  <form materialize class=\"col s12\" #form=\"ngForm\" (submit)=\"searchBooksAPI(form)\">\r\n    <div class=\"row\">\r\n      <div class=\"input-field col s6\">\r\n        <!-- <i class=\"material-icons prefix\">search</i> -->\r\n        <input\r\n          [(ngModel)]=\"titleQuery\"\r\n          type=\"text\"\r\n          name=\"titleQuery\"\r\n          id=\"titleQuery\"\r\n          required>\r\n          <label for=\"titleQuery\">Title</label>\r\n      </div>\r\n      <div class=\"input-field col s6\">\r\n        <!-- <i class=\"material-icons prefix\">search</i> -->\r\n        <input\r\n          [(ngModel)]=\"authorQuery\"\r\n          type=\"text\"\r\n          name=\"authorQuery\"\r\n          id=\"authorQuery\">\r\n        <label for=\"authorQuery\">Author (optional)</label>\r\n      </div>\r\n    </div>\r\n    <div class=\"row\">\r\n      <button class=\"btn waves-effect waves-light btc-btn\" type=\"submit\" [disabled]=\"!titleQuery\">Search\r\n          <i class=\"material-icons right\">search</i>\r\n      </button>\r\n    </div>\r\n  </form>\r\n</div>\r\n\r\n<!-- Results -->\r\n<!-- <p *ngIf=\"nullResultError\" class=\"btc-search-error\">{{nullResultError}}</p> -->\r\n<p *ngIf=\"helpMessage\" class=\"btc-search-error\">{{helpMessage}}</p>\r\n\r\n<div class=\"row\">\r\n  <div class=\"col s6 m4 l3 btc-book-preview\" *ngFor=\"let book of bookData\" (click)=\"openModal(book)\">\r\n    <div class=\"btc-book-preview-image-container\">\r\n      <img class=\"btc-book-preview-image\" src=\"{{book.imageLinks.thumbnail}}\" >\r\n    </div>\r\n\r\n    <p class=\"btc-book-preview-title\">{{book.title}}</p>\r\n    <p class=\"btc-book-preview-author\">{{book.authors[0]}}</p>\r\n  </div>\r\n</div>\r\n\r\n\r\n<!-- Modal Structure -->\r\n<div id=\"modal1\" class=\"modal\" materialize=\"modal\" [materializeParams]=\"[{dismissible: false}]\" [materializeActions]=\"modalActions\">\r\n  <div *ngIf=\"modalProgressBar\" class=\"progress btc-modal-progress-bar\">\r\n    <div class=\"indeterminate\"></div>\r\n  </div>\r\n  <div *ngIf=\"selectedBook\" class=\"modal-content\">\r\n\r\n      <div class=\"btc-modal-img-wrapper\">\r\n        <img src=\"{{selectedBook.imageLinks.thumbnail}}\" />\r\n      </div>\r\n\r\n      <div class=\"btc-modal-text\">\r\n        <h4 class=\"btc-modal-title\">{{selectedBook.title}}</h4>\r\n        <p *ngIf=\"selectedBook.subtitle\" class=\"btc-modal-subtitle\">{{selectedBook.subtitle}}</p>\r\n        <div>By&nbsp;\r\n          <span *ngFor=\"let author of selectedBook.authors\" class=\"btc-modal-author\">{{author}}&nbsp;&nbsp;</span>\r\n        </div>\r\n        <span *ngIf=\"selectedBook.publisher\">Published by {{selectedBook.publisher}} </span>\r\n        <span *ngIf=\"selectedBook.publishedDate\">({{selectedBook.publishedDate}})</span>\r\n\r\n        <p *ngIf=\"selectedBook.pageCount\" class=\"btc-modal-pageCount\">{{selectedBook.pageCount}} pages</p>\r\n        <p *ngIf=\"!username\" class=\"anon-user-message\">To add books to your collection, please\r\n          <a class=\"modal-link\" (click)=\"linkToAuthPage($event)\">register</a> or <a class=\"modal-link\" (click)=\"linkToAuthPage($event)\">log in</a>.</p>\r\n      </div>\r\n\r\n    </div>\r\n    <div class=\"modal-footer btc-modal-footer\">\r\n      <a *ngIf=\"username\" class=\"modal-action modal-close waves-effect waves-green btn-flat\" (click)=\"addBook()\">Add to Collection<i class=\"material-icons right\">add_circle</i></a>\r\n      <a class=\"waves-effect waves-green btn-flat\" (click)=\"closeModal()\">Close<i class=\"material-icons right\">cancel</i></a>\r\n    </div>\r\n   </div>\r\n\r\n\r\n\r\n\r\n\r\n"
+module.exports = "<section class=\"btc-instruction-panel\">\r\n  <h5>Search Google Books</h5>\r\n  <p>On this page, you can search Google Books for titles to add to your collection. Other users\r\n  will be able to see the books you add and send you borrow requests.</p>\r\n</section>\r\n\r\n<!-- SEARCH FORM -->\r\n<section class=\"row\">\r\n  <form materialize class=\"col s12\" #form=\"ngForm\" (submit)=\"searchBooksAPI(form)\">\r\n    <div class=\"row\">\r\n      <div class=\"input-field col s6\">\r\n        <input\r\n          [(ngModel)]=\"titleQuery\"\r\n          type=\"text\"\r\n          name=\"titleQuery\"\r\n          id=\"titleQuery\"\r\n          required>\r\n          <label for=\"titleQuery\">Title</label>\r\n      </div>\r\n      <div class=\"input-field col s6\">\r\n        <input\r\n          [(ngModel)]=\"authorQuery\"\r\n          type=\"text\"\r\n          name=\"authorQuery\"\r\n          id=\"authorQuery\">\r\n        <label for=\"authorQuery\">Author (optional)</label>\r\n      </div>\r\n    </div>\r\n    <div class=\"row\">\r\n      <button class=\"btn waves-effect waves-light btc-btn\" type=\"submit\" [disabled]=\"!titleQuery\">Search\r\n        <i class=\"material-icons right\">search</i>\r\n      </button>\r\n    </div>\r\n  </form>\r\n</section>\r\n\r\n<p *ngIf=\"helpMessage\" class=\"btc-search-error\">{{helpMessage}}</p>\r\n\r\n<!-- RESULTS SECTION -->\r\n<section class=\"row\">\r\n  <div class=\"col s6 m4 l3 btc-book-preview\" *ngFor=\"let book of bookData\" (click)=\"openModal(book)\">\r\n    <div class=\"btc-book-preview-image-container\">\r\n      <img class=\"btc-book-preview-image\" src=\"{{book.imageLinks.thumbnail}}\" >\r\n    </div>\r\n\r\n    <p class=\"btc-book-preview-title\">{{book.title}}</p>\r\n    <p class=\"btc-book-preview-author\">{{book.authors[0]}}</p>\r\n  </div>\r\n</section>\r\n\r\n<!-- MODAL -->\r\n<section id=\"modal1\" class=\"modal\" materialize=\"modal\" [materializeParams]=\"[{dismissible: false}]\" [materializeActions]=\"modalActions\">\r\n  <div *ngIf=\"modalProgressBar\" class=\"progress btc-modal-progress-bar\">\r\n    <div class=\"indeterminate\"></div>\r\n  </div>\r\n\r\n  <div *ngIf=\"selectedBook\" class=\"modal-content\">\r\n\r\n    <div class=\"btc-modal-img-wrapper\">\r\n      <img src=\"{{selectedBook.imageLinks.thumbnail}}\" />\r\n    </div>\r\n\r\n    <div class=\"btc-modal-text\">\r\n      <h4 class=\"btc-modal-title\">{{selectedBook.title}}</h4>\r\n      <p *ngIf=\"selectedBook.subtitle\" class=\"btc-modal-subtitle\">{{selectedBook.subtitle}}</p>\r\n      <div>By&nbsp;\r\n        <span *ngFor=\"let author of selectedBook.authors\" class=\"btc-modal-author\">{{author}}&nbsp;&nbsp;</span>\r\n      </div>\r\n      <span *ngIf=\"selectedBook.publisher\">Published by {{selectedBook.publisher}} </span>\r\n      <span *ngIf=\"selectedBook.publishedDate\">({{selectedBook.publishedDate}})</span>\r\n\r\n      <p *ngIf=\"selectedBook.pageCount\" class=\"btc-modal-pageCount\">{{selectedBook.pageCount}} pages</p>\r\n      <p *ngIf=\"!username\" class=\"anon-user-message\">To add books to your collection, please\r\n        <a class=\"modal-link\" (click)=\"linkToAuthPage($event)\">register</a> or <a class=\"modal-link\" (click)=\"linkToAuthPage($event)\">log in</a>.</p>\r\n    </div>\r\n  </div>\r\n\r\n  <div class=\"modal-footer btc-modal-footer\">\r\n    <a *ngIf=\"username\" class=\"modal-action modal-close waves-effect waves-green btn-flat\" (click)=\"addBook()\">Add to Collection<i class=\"material-icons right\">add_circle</i></a>\r\n    <a class=\"waves-effect waves-green btn-flat\" (click)=\"closeModal()\">Close<i class=\"material-icons right\">cancel</i></a>\r\n  </div>\r\n\r\n</section>\r\n\r\n\r\n\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -339,25 +339,7 @@ exports.AppModule = AppModule;
 /***/ "../../../../../src/app/auth/login/login.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class>\r\n    <div class=\"btc-form-wrapper\">\r\n      <div class=\"btc-form-header\">\r\n        <h2 class=\"btc-form-heading\">Login</h2>\r\n      </div>\r\n    <form materialize #form=\"ngForm\" (submit)=\"submitForm()\" novalidate>\r\n\r\n      <div class=\"btc-input-wrapper\">\r\n\r\n          <div class=\"input-field\">\r\n            <input\r\n              [(ngModel)]=\"username\"\r\n              #inp1=\"ngModel\"\r\n              name=\"username\"\r\n              id=\"username\"\r\n              type=\"text\"\r\n              required\r\n              minlength=\"3\">\r\n            <label for=\"username\">Username</label>\r\n          </div>\r\n\r\n          <div class=\"input-field\">\r\n            <input\r\n              [(ngModel)]=\"password\"\r\n              #inp2=\"ngModel\"\r\n              name=\"password\"\r\n              id=\"password\"\r\n              type=\"text\"\r\n              required\r\n              minlength=\"3\">\r\n            <label  for=\"password\">Password</label>\r\n          </div>\r\n\r\n      </div>\r\n      <div *ngIf=\"this.error\" class=\"btc-error\">\r\n        {{error}}\r\n      </div>\r\n\r\n      <div class=\"btc-form-button-wrapper\">\r\n        <button class=\"btn waves-effect waves-light btc-btn\" type=\"submit\" [disabled]=\"form.invalid\">Login\r\n            <i class=\"material-icons right\">check</i>\r\n        </button>\r\n      </div>\r\n    </form>\r\n    </div>\r\n  </div>\r\n  <br>\r\n\r\n\r\n"
-
-/***/ }),
-
-/***/ "../../../../../src/app/auth/login/login.component.scss":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, ".btc-form-wrapper {\n  border: 2px solid #5d4037;\n  padding: 0;\n  margin: 0 auto;\n  margin-top: 50px;\n  width: 320px; }\n\n.btc-form-header {\n  height: 92px;\n  background-color: #5d4037; }\n\n.btc-form-heading {\n  color: white;\n  text-align: center;\n  padding: 30px 0 30px 0;\n  margin: 0;\n  font-size: 2em; }\n\n.btc-input-wrapper {\n  padding-top: 20px;\n  width: 80%;\n  margin: 0 auto; }\n\n.btc-check-icon {\n  color: #37395d;\n  font-size: 30px; }\n\n.btc-form-button-wrapper {\n  width: 80%;\n  margin: 0 auto;\n  margin-top: 20px;\n  margin-bottom: 30px; }\n\n.btc-btn {\n  width: 100%;\n  background-color: #37395d; }\n\n.btc-error {\n  width: 80%;\n  color: #BA3525;\n  font-weight: bold;\n  padding: 5px;\n  margin: 0 auto;\n  text-align: center; }\n\n/* label color */\n\n.input-field label {\n  color: #1f1f1f; }\n\n/* label focus color */\n\n.input-field input[type=text]:focus + label,\n.input-field input[type=password]:focus + label {\n  color: #1f1f1f; }\n\n/* label underline focus color */\n\n.input-field input[type=text]:focus,\n.input-field input[type=password]:focus {\n  border-bottom: 1px solid #1f1f1f;\n  -webkit-box-shadow: 0 1px 0 0 #1f1f1f;\n          box-shadow: 0 1px 0 0 #1f1f1f; }\n\n.input-field .prefix.active {\n  color: #5d4037; }\n", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
+module.exports = "<section class=\"btc-form-wrapper\">\r\n  <div class=\"btc-form-header\">\r\n    <h2 class=\"btc-form-heading\">Login</h2>\r\n  </div>\r\n\r\n  <form materialize #form=\"ngForm\" (submit)=\"submitForm()\" novalidate>\r\n    <div class=\"btc-input-wrapper\">\r\n      <div class=\"input-field\">\r\n        <input\r\n          [(ngModel)]=\"user.username\"\r\n          #inp1=\"ngModel\"\r\n          name=\"username\"\r\n          id=\"username\"\r\n          type=\"text\"\r\n          required\r\n          minlength=\"3\">\r\n        <label for=\"username\">Username</label>\r\n      </div>\r\n      <div class=\"input-field\">\r\n        <input\r\n          [(ngModel)]=\"user.password\"\r\n          #inp2=\"ngModel\"\r\n          name=\"password\"\r\n          id=\"password\"\r\n          type=\"text\"\r\n          required\r\n          minlength=\"3\">\r\n        <label  for=\"password\">Password</label>\r\n      </div>\r\n    </div>\r\n\r\n    <div *ngIf=\"this.error\" class=\"btc-error\">\r\n      {{error}}\r\n    </div>\r\n\r\n    <div class=\"btc-form-button-wrapper\">\r\n      <button class=\"btn waves-effect waves-light btc-btn\" type=\"submit\" [disabled]=\"form.invalid\">Login\r\n        <i class=\"material-icons right\">check</i>\r\n      </button>\r\n    </div>\r\n  </form>\r\n\r\n</section>\r\n\r\n\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -365,6 +347,9 @@ module.exports = module.exports.toString();
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+/**
+ *  This component submits User credentials to the server. If login is successful, it navigates to Browse-Books.
+ */
 
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -377,8 +362,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../../../core/@angular/core.es5.js");
-var auth_service_1 = __webpack_require__("../../../../../src/app/services/auth.service.ts");
 var router_1 = __webpack_require__("../../../router/@angular/router.es5.js");
+var auth_service_1 = __webpack_require__("../../../../../src/app/services/auth.service.ts");
 var angular2_notifications_1 = __webpack_require__("../../../../angular2-notifications/dist/index.js");
 var progress_bar_service_1 = __webpack_require__("../../../../../src/app/services/progress-bar.service.ts");
 var LoginComponent = (function () {
@@ -387,28 +372,23 @@ var LoginComponent = (function () {
         this.progressBarService = progressBarService;
         this.router = router;
         this.notify = notify;
+        this.user = { username: '', password: '' };
     }
-    LoginComponent.prototype.ngOnInit = function () {
-    };
     LoginComponent.prototype.submitForm = function () {
         var _this = this;
-        if (this.username && this.password) {
-            this.error = '';
-            this.progressBarService.showProgressBar();
-            this.user = { username: this.username, password: this.password };
-            this.auth.login(this.user)
-                .then(function (res) {
-                console.log(res);
-                _this.router.navigate(['/browse']);
-                _this.notify.success(_this.user.username, 'You have been logged in');
-                _this.progressBarService.hideProgressBar();
-            })
-                .catch(function (e) {
-                console.log(e);
-                _this.error = 'Your login details were incorrect.';
-                _this.progressBarService.hideProgressBar();
-            });
-        }
+        this.error = '';
+        this.progressBarService.showProgressBar();
+        this.auth.login(this.user)
+            .then(function () {
+            _this.router.navigate(['/browse']);
+            _this.notify.success(_this.user.username, 'You have been logged in');
+            _this.progressBarService.hideProgressBar();
+        })
+            .catch(function () {
+            // TODO: handle 500 errors
+            _this.error = 'Your login details were incorrect.';
+            _this.progressBarService.hideProgressBar();
+        });
     };
     return LoginComponent;
 }());
@@ -416,7 +396,7 @@ LoginComponent = __decorate([
     core_1.Component({
         selector: 'btc-login',
         template: __webpack_require__("../../../../../src/app/auth/login/login.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/auth/login/login.component.scss")]
+        styles: [__webpack_require__("../../../../../src/app/styles/auth-styles.scss"), __webpack_require__("../../../../../src/app/styles/form-styles.scss")]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof auth_service_1.AuthService !== "undefined" && auth_service_1.AuthService) === "function" && _a || Object, typeof (_b = typeof progress_bar_service_1.ProgressBarService !== "undefined" && progress_bar_service_1.ProgressBarService) === "function" && _b || Object, typeof (_c = typeof router_1.Router !== "undefined" && router_1.Router) === "function" && _c || Object, typeof (_d = typeof angular2_notifications_1.NotificationsService !== "undefined" && angular2_notifications_1.NotificationsService) === "function" && _d || Object])
 ], LoginComponent);
@@ -429,25 +409,7 @@ var _a, _b, _c, _d;
 /***/ "../../../../../src/app/auth/register/register.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class>\r\n  <div class=\" btc-form-wrapper\">\r\n    <div class=\"btc-form-header\">\r\n      <h2 class=\"btc-form-heading\">Register</h2>\r\n    </div>\r\n  <form materialize #form=\"ngForm\" (submit)=\"submitForm()\" novalidate>\r\n\r\n    <div class=\"btc-input-wrapper\">\r\n\r\n        <div class=\"input-field btc-input-field\">\r\n            <i *ngIf=\"usernameValid\" class=\"material-icons prefix btc-check-icon\">check_circle</i>\r\n            <i *ngIf=\"!usernameValid\" class=\"material-icons prefix btc-person-icon brown-text text-darken-2\">person</i>\r\n          <input\r\n            class=\"\"\r\n            [(ngModel)]=\"username\"\r\n            (blur)=\"checkUsername()\"\r\n            (focus)=\"clearUsernameCheck()\"\r\n            name=\"username\"\r\n            id=\"username\"\r\n            type=\"text\"\r\n            required\r\n            minlength=\"3\"\r\n            maxlength=\"8\">\r\n          <label for=\"username\" class=\"brown-text text-darken-2\">Username</label>\r\n        </div>\r\n\r\n        <div class=\"input-field\">\r\n          <i *ngIf=\"!passwordMatch\" class=\"material-icons prefix btc-lock-icon brown-text text-darken-2\">lock_outline</i>\r\n          <i *ngIf=\"passwordMatch\" class=\"material-icons prefix btc-check-icon\">check_circle</i>\r\n          <input\r\n            [(ngModel)]=\"password\"\r\n            (keyup)=\"checkMatch()\"\r\n            name=\"password\"\r\n            id=\"password\"\r\n            type=\"password\"\r\n            required\r\n            minlength=\"3\"\r\n            maxlength=\"12\">\r\n          <label  for=\"password\" class=\"brown-text text-darken-2\">Password</label>\r\n        </div>\r\n\r\n        <div class=\"input-field\">\r\n          <i *ngIf=\"!passwordMatch\" class=\"material-icons prefix btc-lock-icon brown-text text-darken-2\">lock_outline</i>\r\n          <i *ngIf=\"passwordMatch\" class=\"material-icons prefix btc-check-icon\">check_circle</i>\r\n          <input\r\n            [(ngModel)]=\"confirmation\"\r\n            (keyup)=\"checkMatch()\"\r\n            name=\"confirmation\"\r\n            id=\"password\"\r\n            type=\"password\"\r\n            required\r\n            minlength=\"3\"\r\n            maxlength=\"12\">\r\n          <label  for=\"password\" class=\"brown-text text-darken-2\">Confirm Password</label>\r\n        </div>\r\n\r\n    </div>\r\n    <div *ngIf=\"error\" class=\"btc-error\">\r\n      {{error}}\r\n    </div>\r\n\r\n    <div class=\"btc-form-button-wrapper\">\r\n      <button class=\"btn waves-effect waves-light btc-btn\" type=\"submit\" [disabled]=\"form.invalid || !usernameValid\">Register\r\n          <i class=\"material-icons right\">check</i>\r\n      </button>\r\n    </div>\r\n\r\n  </form>\r\n  </div>\r\n</div>\r\n\r\n<br>\r\n\r\n"
-
-/***/ }),
-
-/***/ "../../../../../src/app/auth/register/register.component.scss":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, ".btc-form-wrapper {\n  border: 2px solid #5d4037;\n  padding: 0;\n  margin: 0 auto;\n  margin-top: 50px;\n  width: 320px; }\n\n.btc-form-header {\n  height: 92px;\n  background-color: #5d4037; }\n\n.btc-form-heading {\n  color: white;\n  text-align: center;\n  padding: 30px 0 30px 0;\n  margin: 0;\n  font-size: 2em; }\n\n.btc-input-wrapper {\n  padding-top: 20px;\n  width: 80%;\n  margin: 0 auto; }\n\n.btc-check-icon {\n  color: #37395d;\n  font-size: 30px; }\n\n.btc-form-button-wrapper {\n  width: 80%;\n  margin: 0 auto;\n  margin-top: 20px;\n  margin-bottom: 30px; }\n\n.btc-btn {\n  width: 100%;\n  background-color: #37395d; }\n\n.btc-error {\n  width: 80%;\n  color: #BA3525;\n  font-weight: bold;\n  padding: 5px;\n  margin: 0 auto;\n  text-align: center; }\n\n/* label color */\n\n.input-field label {\n  color: #1f1f1f; }\n\n/* label focus color */\n\n.input-field input[type=text]:focus + label,\n.input-field input[type=password]:focus + label {\n  color: #1f1f1f; }\n\n/* label underline focus color */\n\n.input-field input[type=text]:focus,\n.input-field input[type=password]:focus {\n  border-bottom: 1px solid #1f1f1f;\n  -webkit-box-shadow: 0 1px 0 0 #1f1f1f;\n          box-shadow: 0 1px 0 0 #1f1f1f; }\n\n.input-field .prefix.active {\n  color: #5d4037; }\n", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
+module.exports = "<section class=\"btc-form-wrapper\">\r\n  <div class=\"btc-form-header\">\r\n    <h2 class=\"btc-form-heading\">Register</h2>\r\n  </div>\r\n\r\n  <form materialize #form=\"ngForm\" (submit)=\"submitForm()\" novalidate>\r\n    <div class=\"btc-input-wrapper\">\r\n\r\n      <!-- USERNAME FIELD -->\r\n      <div class=\"input-field btc-input-field\">\r\n          <i *ngIf=\"usernameValid\" class=\"material-icons prefix btc-check-icon\">check_circle</i>\r\n          <i *ngIf=\"!usernameValid\" class=\"material-icons prefix btc-person-icon brown-text text-darken-2\">person</i>\r\n        <input\r\n          [(ngModel)]=\"user.username\"\r\n          (blur)=\"checkUsername()\"\r\n          (focus)=\"resetUsernameCheck()\"\r\n          name=\"username\"\r\n          id=\"username\"\r\n          type=\"text\"\r\n          required\r\n          minlength=\"3\"\r\n          maxlength=\"8\">\r\n        <label for=\"username\" class=\"brown-text text-darken-2\">Username</label>\r\n      </div>\r\n\r\n      <!-- PASSWORD FIELD -->\r\n      <div class=\"input-field\">\r\n        <i *ngIf=\"!passwordMatch\" class=\"material-icons prefix btc-lock-icon brown-text text-darken-2\">lock_outline</i>\r\n        <i *ngIf=\"passwordMatch\" class=\"material-icons prefix btc-check-icon\">check_circle</i>\r\n        <input\r\n          [(ngModel)]=\"user.password\"\r\n          (blur)=\"validatePassword()\"\r\n          (keyup)=\"checkMatch()\"\r\n          name=\"password\"\r\n          id=\"password\"\r\n          type=\"password\"\r\n          required\r\n          minlength=\"3\"\r\n          maxlength=\"12\">\r\n        <label for=\"password\" class=\"brown-text text-darken-2\">Password</label>\r\n      </div>\r\n\r\n      <!-- PASSWORD CONFIRM FIELD -->\r\n      <div class=\"input-field\">\r\n        <i *ngIf=\"!passwordMatch\" class=\"material-icons prefix btc-lock-icon brown-text text-darken-2\">lock_outline</i>\r\n        <i *ngIf=\"passwordMatch\" class=\"material-icons prefix btc-check-icon\">check_circle</i>\r\n        <input\r\n          [(ngModel)]=\"confirmation\"\r\n          (keyup)=\"checkMatch()\"\r\n          name=\"confirmation\"\r\n          id=\"confirmation\"\r\n          type=\"password\"\r\n          required\r\n          minlength=\"3\"\r\n          maxlength=\"12\">\r\n        <label for=\"confirmation\" class=\"brown-text text-darken-2\">Confirm Password</label>\r\n      </div>\r\n\r\n    </div>\r\n    <div *ngIf=\"error\" class=\"btc-error\">\r\n      {{error}}\r\n    </div>\r\n\r\n    <!-- SUBMIT BUTTON -->\r\n    <div class=\"btc-form-button-wrapper\">\r\n      <button class=\"btn waves-effect waves-light btc-btn\" type=\"submit\" [disabled]=\"form.invalid || !usernameValid\">Register\r\n          <i class=\"material-icons right\">check</i>\r\n      </button>\r\n    </div>\r\n\r\n  </form>\r\n</section>\r\n\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -455,6 +417,11 @@ module.exports = module.exports.toString();
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+/**
+ *  @prop usernameChecked - true if username has been checked against database
+ *  @prop usernameValid - true if username is not already on database
+ *  @prop passwordMatch - true of password and confirmation fields match
+ */
 
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -467,47 +434,57 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../../../core/@angular/core.es5.js");
-var auth_service_1 = __webpack_require__("../../../../../src/app/services/auth.service.ts");
 var router_1 = __webpack_require__("../../../router/@angular/router.es5.js");
-var progress_bar_service_1 = __webpack_require__("../../../../../src/app/services/progress-bar.service.ts");
+var auth_service_1 = __webpack_require__("../../../../../src/app/services/auth.service.ts");
 var angular2_notifications_1 = __webpack_require__("../../../../angular2-notifications/dist/index.js");
+var progress_bar_service_1 = __webpack_require__("../../../../../src/app/services/progress-bar.service.ts");
 var RegisterComponent = (function () {
     function RegisterComponent(auth, progress, notify, router) {
         this.auth = auth;
         this.progress = progress;
         this.notify = notify;
         this.router = router;
+        // form model
+        this.user = { username: '', password: '' };
+        // validation properties
         this.usernameChecked = false;
         this.usernameValid = false;
     }
-    RegisterComponent.prototype.ngOnInit = function () {
-    };
+    // validate locally and then check database
     RegisterComponent.prototype.checkUsername = function () {
         var _this = this;
-        if (!this.username) {
+        if (!this.user.username) {
             return this.error = 'enter a username';
         }
-        if (this.username.length < 3) {
+        if (this.user.username.length < 3) {
             return this.error = 'username must be minimum 3 characters';
         }
-        this.auth.checkUsername(this.username)
-            .subscribe(function (res) {
+        this.auth.checkUsername(this.user.username)
+            .subscribe(function () {
             _this.usernameChecked = true;
             _this.usernameValid = true;
-        }, function (err) {
+        }, function () {
             _this.error = 'username already exists';
             _this.usernameChecked = true;
-            _this.usernameValid = false;
         });
     };
-    RegisterComponent.prototype.clearUsernameCheck = function () {
+    RegisterComponent.prototype.resetUsernameCheck = function () {
         this.error = '';
         this.usernameChecked = false;
         this.usernameValid = false;
     };
+    RegisterComponent.prototype.validatePassword = function () {
+        if (this.user.password.length < 3) {
+            this.error = 'Password should be at least 3 characters.';
+            return false;
+        }
+        this.error = '';
+        return true;
+    };
     RegisterComponent.prototype.checkMatch = function () {
-        if (this.password && this.confirmation) {
-            if (this.password.length > 2 && this.confirmation.length > 0 && this.password === this.confirmation) {
+        this.passwordMatch = false;
+        if (this.validatePassword() && this.confirmation) {
+            if (this.user.password === this.confirmation) {
                 this.passwordMatch = true;
                 this.error = '';
             }
@@ -518,26 +495,24 @@ var RegisterComponent = (function () {
     };
     RegisterComponent.prototype.submitForm = function () {
         var _this = this;
-        if (this.password !== this.confirmation) {
+        if (this.user.password !== this.confirmation) {
             this.error = 'passwords do not match.';
             return;
         }
-        if (this.username && this.password) {
+        if (this.user.username && this.user.password) {
             this.error = '';
             this.progress.showProgressBar();
-            this.user = {
-                username: this.username,
-                password: this.password
-            };
+            // this.user = {
+            //   username: this.user.username,
+            //   password: this.user.password
+            // };
             this.auth.register(this.user)
                 .then(function (res) {
-                console.log('user created', res);
                 _this.router.navigate(['/browse']);
-                _this.notify.success(_this.username, 'You have been registered and logged in');
+                _this.notify.success(_this.user.username, 'You have been registered and logged in');
                 _this.progress.hideProgressBar();
             })
                 .catch(function (err) {
-                console.log(err);
                 if (err.status === 409) {
                     _this.error = 'Username not available.';
                     _this.progress.hideProgressBar();
@@ -554,7 +529,7 @@ RegisterComponent = __decorate([
     core_1.Component({
         selector: 'btc-register',
         template: __webpack_require__("../../../../../src/app/auth/register/register.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/auth/register/register.component.scss")]
+        styles: [__webpack_require__("../../../../../src/app/styles/auth-styles.scss"), __webpack_require__("../../../../../src/app/styles/form-styles.scss")]
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof auth_service_1.AuthService !== "undefined" && auth_service_1.AuthService) === "function" && _a || Object, typeof (_b = typeof progress_bar_service_1.ProgressBarService !== "undefined" && progress_bar_service_1.ProgressBarService) === "function" && _b || Object, typeof (_c = typeof angular2_notifications_1.NotificationsService !== "undefined" && angular2_notifications_1.NotificationsService) === "function" && _c || Object, typeof (_d = typeof router_1.Router !== "undefined" && router_1.Router) === "function" && _d || Object])
 ], RegisterComponent);
@@ -1287,6 +1262,42 @@ RequestService = __decorate([
 exports.RequestService = RequestService;
 var _a, _b, _c;
 //# sourceMappingURL=request.service.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/styles/auth-styles.scss":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".btc-form-wrapper {\n  border: 2px solid #5d4037;\n  padding: 0;\n  margin: 0 auto;\n  margin-top: 50px;\n  width: 320px; }\n\n.btc-form-header {\n  height: 92px;\n  background-color: #5d4037; }\n\n.btc-form-heading {\n  color: white;\n  text-align: center;\n  padding: 30px 0 30px 0;\n  margin: 0;\n  font-size: 2em; }\n\n.btc-input-wrapper {\n  padding-top: 20px;\n  width: 80%;\n  margin: 0 auto; }\n\n.btc-check-icon {\n  color: #37395d;\n  font-size: 30px; }\n\n.btc-form-button-wrapper {\n  width: 80%;\n  margin: 0 auto;\n  margin-top: 20px;\n  margin-bottom: 30px; }\n\n.btc-btn {\n  width: 100%;\n  background-color: #37395d; }\n\n.btc-error {\n  width: 80%;\n  color: #BA3525;\n  font-weight: bold;\n  padding: 5px;\n  margin: 0 auto;\n  text-align: center; }\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/styles/form-styles.scss":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "/* label color */\n.input-field label {\n  color: #1f1f1f; }\n/* label focus color */\n.input-field input[type=text]:focus + label,\n.input-field input[type=password]:focus + label {\n  color: #1f1f1f; }\n/* label underline focus color */\n.input-field input[type=text]:focus,\n.input-field input[type=password]:focus {\n  border-bottom: 1px solid #1f1f1f;\n  -webkit-box-shadow: 0 1px 0 0 #1f1f1f;\n          box-shadow: 0 1px 0 0 #1f1f1f; }\n.input-field .prefix.active {\n  color: #5d4037; }\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
 
 /***/ }),
 

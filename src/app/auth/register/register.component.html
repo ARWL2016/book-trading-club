@@ -1,64 +1,67 @@
-<div class>
-  <div class=" btc-form-wrapper">
-    <div class="btc-form-header">
-      <h2 class="btc-form-heading">Register</h2>
-    </div>
-  <form materialize #form="ngForm" (submit)="submitForm()" novalidate>
+<section class="btc-form-wrapper">
+  <div class="btc-form-header">
+    <h2 class="btc-form-heading">Register</h2>
+  </div>
 
+  <form materialize #form="ngForm" (submit)="submitForm()" novalidate>
     <div class="btc-input-wrapper">
 
-        <div class="input-field btc-input-field">
-            <i *ngIf="usernameValid" class="material-icons prefix btc-check-icon">check_circle</i>
-            <i *ngIf="!usernameValid" class="material-icons prefix btc-person-icon brown-text text-darken-2">person</i>
-          <input
-            class=""
-            [(ngModel)]="username"
-            (blur)="checkUsername()"
-            (focus)="clearUsernameCheck()"
-            name="username"
-            id="username"
-            type="text"
-            required
-            minlength="3"
-            maxlength="8">
-          <label for="username" class="brown-text text-darken-2">Username</label>
-        </div>
+      <!-- USERNAME FIELD -->
+      <div class="input-field btc-input-field">
+          <i *ngIf="usernameValid" class="material-icons prefix btc-check-icon">check_circle</i>
+          <i *ngIf="!usernameValid" class="material-icons prefix btc-person-icon brown-text text-darken-2">person</i>
+        <input
+          [(ngModel)]="user.username"
+          (blur)="checkUsername()"
+          (focus)="resetUsernameCheck()"
+          name="username"
+          id="username"
+          type="text"
+          required
+          minlength="3"
+          maxlength="8">
+        <label for="username" class="brown-text text-darken-2">Username</label>
+      </div>
 
-        <div class="input-field">
-          <i *ngIf="!passwordMatch" class="material-icons prefix btc-lock-icon brown-text text-darken-2">lock_outline</i>
-          <i *ngIf="passwordMatch" class="material-icons prefix btc-check-icon">check_circle</i>
-          <input
-            [(ngModel)]="password"
-            (keyup)="checkMatch()"
-            name="password"
-            id="password"
-            type="password"
-            required
-            minlength="3"
-            maxlength="12">
-          <label  for="password" class="brown-text text-darken-2">Password</label>
-        </div>
+      <!-- PASSWORD FIELD -->
+      <div class="input-field">
+        <i *ngIf="!passwordMatch" class="material-icons prefix btc-lock-icon brown-text text-darken-2">lock_outline</i>
+        <i *ngIf="passwordMatch" class="material-icons prefix btc-check-icon">check_circle</i>
+        <input
+          [(ngModel)]="user.password"
+          (blur)="validatePassword()"
+          (keyup)="checkMatch()"
+          name="password"
+          id="password"
+          type="password"
+          required
+          minlength="3"
+          maxlength="12">
+        <label for="password" class="brown-text text-darken-2">Password</label>
+      </div>
 
-        <div class="input-field">
-          <i *ngIf="!passwordMatch" class="material-icons prefix btc-lock-icon brown-text text-darken-2">lock_outline</i>
-          <i *ngIf="passwordMatch" class="material-icons prefix btc-check-icon">check_circle</i>
-          <input
-            [(ngModel)]="confirmation"
-            (keyup)="checkMatch()"
-            name="confirmation"
-            id="password"
-            type="password"
-            required
-            minlength="3"
-            maxlength="12">
-          <label  for="password" class="brown-text text-darken-2">Confirm Password</label>
-        </div>
+      <!-- PASSWORD CONFIRM FIELD -->
+      <div class="input-field">
+        <i *ngIf="!passwordMatch" class="material-icons prefix btc-lock-icon brown-text text-darken-2">lock_outline</i>
+        <i *ngIf="passwordMatch" class="material-icons prefix btc-check-icon">check_circle</i>
+        <input
+          [(ngModel)]="confirmation"
+          (keyup)="checkMatch()"
+          name="confirmation"
+          id="confirmation"
+          type="password"
+          required
+          minlength="3"
+          maxlength="12">
+        <label for="confirmation" class="brown-text text-darken-2">Confirm Password</label>
+      </div>
 
     </div>
     <div *ngIf="error" class="btc-error">
       {{error}}
     </div>
 
+    <!-- SUBMIT BUTTON -->
     <div class="btc-form-button-wrapper">
       <button class="btn waves-effect waves-light btc-btn" type="submit" [disabled]="form.invalid || !usernameValid">Register
           <i class="material-icons right">check</i>
@@ -66,8 +69,7 @@
     </div>
 
   </form>
-  </div>
-</div>
+</section>
 
-<br>
+
 
