@@ -29,21 +29,23 @@ Production
 - add fuller test coverage for API
 
 Bugs: 
+- cancel request not cancelling the correct request
 - binding of click on bbs fails by one
 - signout appears to work even when wrong db connected - but username not removed
 
 Enhancements
+- implement delete modal on profile page
 - prevent duplicate entries? - or warn
 - add footer
+- add paging
 - add mobile menu
 - remove description from bookData
 - add dismissable tips
 - add a messaging component
-- restructure server by feature
+- add proper front end error handling
 
 Todo 
 - front end checklist
-- update CLI
 - create modal as separate component
 
 

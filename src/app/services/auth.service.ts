@@ -1,56 +1,53 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, RequestOptions, Headers } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
-
 import { User } from '../models/user';
 import { HelperService } from './helper.service';
 
 @Injectable()
 
 export class AuthService {
-  currentUser: User;
+  public currentUser: User;
 
-  constructor(
-    private _http: Http,
-    private _helper: HelperService
-    ) {}
+  constructor(private http: Http, private helper: HelperService) {}
 
-  register(user: User): Promise<void> {
+  public checkUsername(username): Observable<Response> {
+    const url = `/api/auth/check/${username}`;
+    return this.http.get(url);
+  }
+
+  public register(user: User): Promise<any> {
     const url = `/api/auth/register`;
-    return this._http.post(url, user)
-      .do (response => {
-        const token = this._helper.getAuthTokenFromHeader(response);
+    return this.http.post(url, user)
+      .do(response => {
+        const token = this.helper.getAuthTokenFromHeader(response);
         window.localStorage.setItem('token', token);
       })
       .map(response => response.json())
-      .do((json) => this.updateCurrentUser(json))
+      .do(json => this.updateCurrentUser(json))
       .toPromise();
   }
 
-  checkUsername(username) {
-    const url = `/api/auth/check/${username}`;
-    return this._http.get(url);
-  }
-
-  login(user: User): Promise<boolean> {
+  public login(user: User): Promise<any> {
     const url = `/api/auth/login`;
-    return this._http.post(url, user)
-      .do(response => {
-        const token = this._helper.getAuthTokenFromHeader(response);
+    return this.http.post(url, user)
+      .do(res => {
+        const token = this.helper.getAuthTokenFromHeader(res);
         window.localStorage.setItem('token', token);
       })
-      .map(response => response.json())
+      .map(res => res.json())
       .do(authorizedUser => this.updateCurrentUser(authorizedUser))
       .toPromise();
   }
 
-  logout(): Promise<void> {
-    const options = this._helper.addAuthTokenToHeader();
+  public logout(): Promise<any> {
+    const options = this.helper.addAuthTokenToHeader();
     const url = `/api/auth/logout`;
 
-    return this._http.delete(url, options)
+    return this.http.delete(url, options)
       .toPromise()
       .then(() => {
         this.currentUser = undefined;
@@ -61,14 +58,14 @@ export class AuthService {
       .catch(e => console.log(e));
   }
 
-  updateCurrentUser(user: User) {
+  private updateCurrentUser(user: User): void {
     const { username, _id } = user;
     this.currentUser = user;
     window.localStorage.setItem('username', username);
     window.localStorage.setItem('_id', _id);
   }
 
-  isValidated(): string {
+  public isValidated(): string | null {
     const token = window.localStorage.getItem('token');
     const username = window.localStorage.getItem('username');
     const _id = window.localStorage.getItem('_id');
@@ -78,17 +75,6 @@ export class AuthService {
       return username;
     }
     return null;
-  }
-
-  getCurrentUserId() {
-    if (this.currentUser) {
-      return this.currentUser._id;
-    }
-    return null;
-  }
-
-  getCurrentUser() {
-    return this.currentUser;
   }
 
 }

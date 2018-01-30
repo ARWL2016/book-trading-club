@@ -742,8 +742,6 @@ var ProfileComponent = (function () {
         // UI properties
         this.modalActions = new core_1.EventEmitter();
         this.activeTab = 'Collection';
-        // linkClassCollection = 'active';
-        // linkClassRequests: String;
         this.linkClass = {
             collection: 'active',
             requests: ''
@@ -751,13 +749,12 @@ var ProfileComponent = (function () {
     }
     Object.defineProperty(ProfileComponent.prototype, "currentUser", {
         get: function () {
-            return this.auth.getCurrentUser();
+            return this.auth.currentUser;
         },
         enumerable: true,
         configurable: true
     });
     ProfileComponent.prototype.ngOnInit = function () {
-        // this.currentUser = this.auth.getCurrentUser();
         this.getMyBooks();
         this.getMyRequests();
     };
@@ -772,7 +769,8 @@ var ProfileComponent = (function () {
     };
     ProfileComponent.prototype.getMyRequests = function () {
         var _this = this;
-        this.requestService.getMyRequests(this.currentUser._id)
+        this.requestService
+            .getMyRequests(this.currentUser._id)
             .subscribe(function (data) {
             _this.myRequests = data;
         }, function (err) {
@@ -787,8 +785,9 @@ var ProfileComponent = (function () {
     ProfileComponent.prototype.deleteBook = function (book) {
         var _this = this;
         this.pBarService.showProgressBar();
-        this.bookService.deleteBookById(book._id).subscribe(function (res) {
-            console.log(res);
+        this.bookService
+            .deleteBookById(book._id)
+            .subscribe(function (res) {
             if (res.status === 200) {
                 _this.pBarService.hideProgressBar();
                 _this.ngOnInit();
@@ -799,17 +798,17 @@ var ProfileComponent = (function () {
     ProfileComponent.prototype.cancelRequest = function (request) {
         var _this = this;
         this.pBarService.showProgressBar();
-        console.log(request);
-        this.requestService.deleteRequestById(request._id)
-            .subscribe(function (resp) {
-            console.log(resp);
-            if (resp.status === 200) {
+        this.requestService
+            .deleteRequestById(request._id)
+            .subscribe(function (res) {
+            if (res.status === 200) {
                 _this.pBarService.hideProgressBar();
                 _this.ngOnInit();
                 _this.notify.success(request.ownerName, "Your request to " + request.ownerName + " was cancelled");
             }
         });
     };
+    // not in use
     ProfileComponent.prototype.openModal = function () {
         this.modalActions.emit({ action: 'modal', params: ['open'] });
     };
@@ -854,43 +853,43 @@ __webpack_require__("../../../../rxjs/_esm5/add/operator/map.js");
 __webpack_require__("../../../../rxjs/_esm5/add/operator/do.js");
 var helper_service_1 = __webpack_require__("../../../../../src/app/services/helper.service.ts");
 var AuthService = (function () {
-    function AuthService(_http, _helper) {
-        this._http = _http;
-        this._helper = _helper;
+    function AuthService(http, helper) {
+        this.http = http;
+        this.helper = helper;
     }
+    AuthService.prototype.checkUsername = function (username) {
+        var url = "/api/auth/check/" + username;
+        return this.http.get(url);
+    };
     AuthService.prototype.register = function (user) {
         var _this = this;
         var url = "/api/auth/register";
-        return this._http.post(url, user)
+        return this.http.post(url, user)
             .do(function (response) {
-            var token = _this._helper.getAuthTokenFromHeader(response);
+            var token = _this.helper.getAuthTokenFromHeader(response);
             window.localStorage.setItem('token', token);
         })
             .map(function (response) { return response.json(); })
             .do(function (json) { return _this.updateCurrentUser(json); })
             .toPromise();
     };
-    AuthService.prototype.checkUsername = function (username) {
-        var url = "/api/auth/check/" + username;
-        return this._http.get(url);
-    };
     AuthService.prototype.login = function (user) {
         var _this = this;
         var url = "/api/auth/login";
-        return this._http.post(url, user)
-            .do(function (response) {
-            var token = _this._helper.getAuthTokenFromHeader(response);
+        return this.http.post(url, user)
+            .do(function (res) {
+            var token = _this.helper.getAuthTokenFromHeader(res);
             window.localStorage.setItem('token', token);
         })
-            .map(function (response) { return response.json(); })
+            .map(function (res) { return res.json(); })
             .do(function (authorizedUser) { return _this.updateCurrentUser(authorizedUser); })
             .toPromise();
     };
     AuthService.prototype.logout = function () {
         var _this = this;
-        var options = this._helper.addAuthTokenToHeader();
+        var options = this.helper.addAuthTokenToHeader();
         var url = "/api/auth/logout";
-        return this._http.delete(url, options)
+        return this.http.delete(url, options)
             .toPromise()
             .then(function () {
             _this.currentUser = undefined;
@@ -915,15 +914,6 @@ var AuthService = (function () {
             return username;
         }
         return null;
-    };
-    AuthService.prototype.getCurrentUserId = function () {
-        if (this.currentUser) {
-            return this.currentUser._id;
-        }
-        return null;
-    };
-    AuthService.prototype.getCurrentUser = function () {
-        return this.currentUser;
     };
     return AuthService;
 }());
@@ -979,7 +969,7 @@ var BookService = (function () {
             .map(function (res) { return res.json(); });
     };
     BookService.prototype.addBookToCollection = function (bookToAdd) {
-        var user = this.authService.getCurrentUser();
+        var user = this.authService.currentUser;
         var url = '/api/book/addBook';
         var body = { user: user, bookToAdd: bookToAdd };
         var options = this.helperService.addAuthTokenToHeader();
@@ -1044,7 +1034,6 @@ var GoogleBooksApiService = (function () {
             .map(function (res) { return res.json(); })
             .toPromise()
             .then(function (data) {
-            console.log({ data: data }, typeof data);
             if (!data.totalItems) {
                 return Promise.reject('no data');
             }
@@ -1103,9 +1092,7 @@ var HelperService = (function () {
         if (headers['X-Auth']) {
             return headers['X-Auth'][0];
         }
-        else {
-            return headers['x-auth'][0];
-        }
+        return headers['x-auth'][0];
     };
     HelperService.prototype.addAuthTokenToHeader = function () {
         var token = window.localStorage.getItem('token');
@@ -1142,11 +1129,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../../../core/@angular/core.es5.js");
 var auth_service_1 = __webpack_require__("../../../../../src/app/services/auth.service.ts");
 var IsValidatedGuard = (function () {
-    function IsValidatedGuard(_auth) {
-        this._auth = _auth;
+    function IsValidatedGuard(auth) {
+        this.auth = auth;
     }
     IsValidatedGuard.prototype.canActivate = function () {
-        if (this._auth.isValidated()) {
+        if (this.auth.isValidated()) {
             return true;
         }
         return false;
@@ -1226,7 +1213,7 @@ var RequestService = (function () {
         this.http = http;
     }
     RequestService.prototype.requestBook = function (user, book) {
-        var requesterId = this.auth.getCurrentUserId();
+        var requesterId = this.auth.currentUser._id;
         var timestamp = new Date().toString();
         var request = {
             requesterId: requesterId,

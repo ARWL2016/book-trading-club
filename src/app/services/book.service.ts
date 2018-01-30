@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { Book } from '../models/book';
@@ -14,34 +14,34 @@ export class BookService {
     private authService: AuthService,
     private helperService: HelperService) { }
 
-  getAllBooks(): Observable<Book[]> {
+  public getAllBooks(): Observable<Book[]> {
     const url = '/api/book/getBooks';
 
     return this.http.get(url)
       .map(res => res.json());
   }
 
-  getMyBooks(id) {
+  public getMyBooks(id): Observable<Book[]> {
     const url = `/api/book/getCurrentUsersBooks?id=${id}`;
     return this.http.get(url)
       .map(res => res.json());
   }
 
-  searchBooks(title: string, author?: string) {
+  public searchBooks(title: string, author?: string): Observable<Book[]> {
     const url = `/api/book/searchBooks/${title}`;
     return this.http.get(url)
       .map(res => res.json());
   }
 
-  addBookToCollection(bookToAdd: Book) {
-    const user = this.authService.getCurrentUser();
+  public addBookToCollection(bookToAdd: Book): Observable<Response> {
+    const user = this.authService.currentUser;
     const url = '/api/book/addBook';
     const body = {user, bookToAdd};
     const options = this.helperService.addAuthTokenToHeader();
     return this.http.post(url, body, options);
   }
 
-  deleteBookById(id) {
+  public deleteBookById(id: string): Observable<Response> {
     const url = `/api/book/delete/${id}`;
     return this.http.delete(url);
   }

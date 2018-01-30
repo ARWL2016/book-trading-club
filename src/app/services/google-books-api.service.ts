@@ -18,7 +18,7 @@ export class GoogleBooksApiService {
 
   constructor(private http: Http) { }
 
-  searchBooks({titleQuery, authorQuery}): Promise<any> {
+  public searchBooks({titleQuery, authorQuery}): Promise<any> {
     const baseUrl = `https://www.googleapis.com/books/v1/volumes?q=`;
     const encodedTitle = encodeURI(titleQuery);
     let url = `${baseUrl}${encodedTitle}`;
@@ -32,8 +32,6 @@ export class GoogleBooksApiService {
       .map(res => res.json())
       .toPromise()
         .then(data => {
-          console.log({data}, typeof data);
-
           if (!data.totalItems) {
             return Promise.reject('no data');
           }
@@ -55,11 +53,5 @@ export class GoogleBooksApiService {
           return Promise.reject(e);
         });
 
-
-
-
-
-
   }
-
 }

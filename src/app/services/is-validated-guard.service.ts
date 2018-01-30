@@ -6,10 +6,10 @@ import { AuthService } from 'app/services/auth.service';
 @Injectable()
 export class IsValidatedGuard implements CanActivate {
 
-  constructor(private _auth: AuthService) {}
+  constructor(private auth: AuthService) {}
 
   canActivate(): boolean {
-    if (this._auth.isValidated()) {
+    if (this.auth.isValidated()) {
       return true;
     }
     return false;

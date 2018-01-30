@@ -24,18 +24,16 @@ export class ProfileComponent implements OnInit {
   myRequests: [{Book, Request}];
 
   get currentUser() {
-    return this.auth.getCurrentUser()
+    return this.auth.currentUser;
   }
 
   // UI properties
   modalActions = new EventEmitter<string|MaterializeAction>();
   activeTab = 'Collection';
-  // linkClassCollection = 'active';
-  // linkClassRequests: String;
   linkClass = {
     collection: 'active',
     requests: ''
-  }
+  };
   message: string;
 
   constructor(
@@ -47,7 +45,6 @@ export class ProfileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // this.currentUser = this.auth.getCurrentUser();
     this.getMyBooks();
     this.getMyRequests();
   }
@@ -62,8 +59,9 @@ export class ProfileComponent implements OnInit {
   }
 
   private getMyRequests(): void {
-    this.requestService.getMyRequests(this.currentUser._id)
-      .subscribe(data => {
+    this.requestService
+      .getMyRequests(this.currentUser._id)
+      .subscribe((data: [{ Book, Request }]) => {
         this.myRequests = data;
       }, err => {
         this.message = 'user data currently unavailable';
@@ -72,30 +70,29 @@ export class ProfileComponent implements OnInit {
 
   public showContent(link): void {
     this.activeTab = link;
-
     this.linkClass.collection = link === 'Collection' ? 'active' : '';
     this.linkClass.requests = link === 'Requests' ? 'active' : '';
   }
 
-  deleteBook(book) {
+  public deleteBook(book): void {
     this.pBarService.showProgressBar();
-    this.bookService.deleteBookById(book._id).subscribe(res => {
-      console.log(res);
-      if (res.status === 200) {
-        this.pBarService.hideProgressBar();
-        this.ngOnInit();
-        this.notify.success(book.title, 'This book was removed from your collection');
-      }
+    this.bookService
+      .deleteBookById(book._id)
+      .subscribe(res => {
+        if (res.status === 200) {
+          this.pBarService.hideProgressBar();
+          this.ngOnInit();
+          this.notify.success(book.title, 'This book was removed from your collection');
+        }
     });
   }
 
-  cancelRequest(request) {
+  public cancelRequest(request): void {
     this.pBarService.showProgressBar();
-    console.log(request);
-    this.requestService.deleteRequestById(request._id)
-      .subscribe(resp => {
-        console.log(resp);
-        if (resp.status === 200) {
+    this.requestService
+      .deleteRequestById(request._id)
+      .subscribe(res => {
+        if (res.status === 200) {
           this.pBarService.hideProgressBar();
           this.ngOnInit();
           this.notify.success(request.ownerName, `Your request to ${request.ownerName} was cancelled`);
@@ -103,11 +100,12 @@ export class ProfileComponent implements OnInit {
       });
   }
 
+  // not in use
   openModal() {
     this.modalActions.emit({action: 'modal', params: ['open']});
   }
 
-  closeModal() {
+  public closeModal(): void {
     this.modalActions.emit({action: 'modal', params: ['close']});
   }
 
