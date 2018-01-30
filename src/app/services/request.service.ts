@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 
-import { BorrowRequest } from 'app/models/Borrow-Request';
+import { BorrowRequest } from 'app/models/borrow-request';
 import { HelperService } from 'app/services/helper.service';
 import { AuthService } from 'app/services/auth.service';
 
-import { Book } from '../models/Book';
-import { User } from 'app/models/User';
+import { Book } from '../models/book';
+import { User } from 'app/models/user';
 
 @Injectable()
 export class RequestService {

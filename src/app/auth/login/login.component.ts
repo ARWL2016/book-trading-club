@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'app/services/auth.service';
 import { NotificationsService } from 'angular2-notifications';
 import { ProgressBarService } from 'app/services/progress-bar.service';
-import { User } from 'app/models/User';
+import { User } from 'app/models/user';
 
 @Component({
   selector: 'btc-login',

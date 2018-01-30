@@ -2,27 +2,34 @@ import { Component, OnInit, EventEmitter } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MaterializeAction } from 'angular2-materialize';
-import { AuthService } from 'app/services/auth.service';
 import { NotificationsService } from 'angular2-notifications';
+import { AuthService } from 'app/services/auth.service';
 import { BookService } from 'app/services/book.service';
+import { ProgressBarService } from 'app/services/progress-bar.service';
 import { RequestService } from 'app/services/request.service';
 import { Book } from '../models/book';
-import { ProgressBarService } from 'app/services/progress-bar.service';
 
 @Component({
   selector: 'btc-browse-books',
   templateUrl: './browse-books.component.html',
-  styleUrls: ['./browse-books.component.scss']
+  styleUrls: ['../styles/book-styles.scss', '../styles/form-styles.scss']
 })
 export class BrowseBooksComponent implements OnInit {
+
+  // form model
   titleQuery: string;
-  // authorQuery: string;
+
+  // data
   bookData: Book[];
-  modalActions = new EventEmitter<string|MaterializeAction>();
   selectedBook: Book;
-  username: string;
-  nullResult: string;
+  get username() {
+    return this.authService.isValidated();
+  }
+
+  // UI properties
+  helpMessage: string;
   modalProgressBar = false;
+  modalActions = new EventEmitter<string|MaterializeAction>();
 
   constructor(
     private authService: AuthService,
@@ -33,75 +40,69 @@ export class BrowseBooksComponent implements OnInit {
     private pBarService: ProgressBarService
   ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.pBarService.showProgressBar();
-    this.username = this.authService.isValidated();
+    // this.username = this.authService.isValidated();
     this.getAllBooks();
   }
 
-  getAllBooks() {
-    this.bookService.getAllBooks()
-    .subscribe(data => {
-      // const filteredData = this.removeCurrentUsersBooks(data);
-      const flaggedData = this.addAlreadyRequestedFlag(data);
-      console.log(flaggedData);
-      this.bookData = flaggedData;
-      this.pBarService.hideProgressBar();
-    });
-  }
 
-  searchBooks() {
-    this.pBarService.showProgressBar();
-    this.nullResult = undefined;
-    this.bookData = undefined;
-    const query = {
-      titleQuery: this.titleQuery,
-      // authorQuery: this.authorQuery
-    };
-    this.bookService.searchBooks(this.titleQuery)
+  // DATA METHODS
+
+  public getAllBooks(): void {
+    this.helpMessage = '';
+    this.bookService.getAllBooks()
       .subscribe(data => {
-        if (data.length > 0) {
-          console.log(data);
-          this.bookData = data;
-        } else {
-          this.nullResult = 'Nothing to see here...';
-        }
+        // const filteredData = this.removeCurrentUsersBooks(data);
+        this.bookData = this.addAlreadyRequestedFlag(data);
+        this.pBarService.hideProgressBar();
+      }, err => {
+        this.notify.error('Error', 'Unable to fetch data.')
         this.pBarService.hideProgressBar();
       });
   }
 
-  requestBook() {
-    // the book owner ID is on the book object
-    // the requester is the current user
-    this.modalProgressBar = true;
-    const user = {username: this.username };
-    const book = this.selectedBook;
-    this.requestService.requestBook(user, book).subscribe(res => {
-      this.notify.success(book.title, 'This book was requested.');
-      this.modalProgressBar = false;
-
-      this.bookData.forEach(item => {
-        if (item._id === book._id) {
-          item.requested = true;
+  public searchBooks(): void {
+    this.pBarService.showProgressBar();
+    this.helpMessage = '';
+    this.bookData = [];
+    this.bookService
+      .searchBooks(this.titleQuery)
+      .subscribe(data => {
+        if (data.length > 0) {
+          this.bookData = data;
+        } else {
+          this.helpMessage = 'Nothing to see here...';
         }
+        this.pBarService.hideProgressBar();
+      }, err => {
+        this.helpMessage = 'unable to fetch data';
+        this.pBarService.hideProgressBar();
       });
+  }
 
-    }, err => {
-      console.log(err);
-      this.modalProgressBar = false;
-    });
+  public requestBook(): void {
+    this.modalProgressBar = true;
+    const book = this.selectedBook;
+    this.requestService
+      .requestBook({ username: this.username }, book)
+      .subscribe(res => {
+        this.notify.success(book.title, 'This book was requested.');
+        this.modalProgressBar = false;
+        this.bookData.forEach(item => {
+          if (item._id === book._id) {
+            // add requested flag to book in array
+            item.requested = true;
+          }
+        });
+      }, err => {
+        this.notify.error(book.title, 'Sorry, this book cannot be requested right now.');
+        this.modalProgressBar = false;
+      });
     this.closeModal();
   }
 
-  // removeCurrentUsersBooks(bookData) {
-  //   const currentUserId = this.authService.getCurrentUserId();
-  //   const filteredData = bookData.filter(book => {
-  //     return book.userId !== currentUserId;
-  //   });
-  //   return filteredData;
-  // }
-
-  addAlreadyRequestedFlag(bookData) {
+  private addAlreadyRequestedFlag(bookData): Book[] {
     bookData.forEach(book => {
       book.requested = false;
       book.usersRequesting.forEach(username => {
@@ -113,23 +114,20 @@ export class BrowseBooksComponent implements OnInit {
     return bookData;
   }
 
-  openModal(book) {
+
+  // UI METHODS
+
+  public openModal(book): void {
     this.selectedBook = book;
-    console.log(this.selectedBook);
     this.modalActions.emit({action: 'modal', params: ['open']});
   }
 
-  closeModal() {
+  public closeModal(): void {
     this.modalActions.emit({action: 'modal', params: ['close']});
   }
 
-  authenticate(e) {
+  public authenticate(path): void {
     this.closeModal();
-    if (e.target.firstChild.data === 'register') {
-      return this.router.navigate(['/register']);
-    }
-    this.router.navigate(['/login']);
+    this.router.navigate([path]);
   }
-
-
 }

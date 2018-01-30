@@ -4,7 +4,7 @@ import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 
-import { User } from '../models/User';
+import { User } from '../models/user';
 import { HelperService } from './helper.service';
 
 @Injectable()

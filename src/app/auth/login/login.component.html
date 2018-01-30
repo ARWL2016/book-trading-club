@@ -5,6 +5,8 @@
 
   <form materialize #form="ngForm" (submit)="submitForm()" novalidate>
     <div class="btc-input-wrapper">
+
+      <!-- USERNAME FIELD -->
       <div class="input-field">
         <input
           [(ngModel)]="user.username"
@@ -16,6 +18,8 @@
           minlength="3">
         <label for="username">Username</label>
       </div>
+
+      <!-- PASSWORD FIELD -->
       <div class="input-field">
         <input
           [(ngModel)]="user.password"

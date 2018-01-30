@@ -7,7 +7,7 @@
 
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { Book } from '../models/Book';
+import { Book } from '../models/book';
 
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-import { Book } from '../models/Book';
+import { Book } from '../models/book';
 import { AuthService } from 'app/services/auth.service';
 import { HelperService } from 'app/services/helper.service';
 

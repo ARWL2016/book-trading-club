@@ -1,4 +1,5 @@
-<div class="btc-instruction-panel">
+<!-- BANNER SECTION -->
+<section class="btc-instruction-panel">
   <h4>Welcome to Book Exchange</h4>
   <p>On this page, you can browse books available from our users, and search books by topic or title.
     Click on a book to see more details or make a borrow request.</p>
@@ -10,9 +11,10 @@
       <a [routerLink]="['/profile']" class="btc-panel-link">profile page</a>
       to view your collection and requests.
     </p>
-</div>
+</section>
 
-<div class="row">
+<!-- SEARCH FORM SECTION -->
+<section class="row">
   <form materialize class="col s12" #form="ngForm" (submit)="searchBooks()">
     <div class="row">
       <div class="input-field col s12">
@@ -21,26 +23,22 @@
           type="text"
           name="titleQuery"
           id="titleQuery">
-          <label for="titleQuery">Title or Keyword</label>
+        <label for="titleQuery">Title or Keyword</label>
       </div>
-
     </div>
-    <!-- inputs row end -->
-
     <div class="row">
       <button class="btn waves-effect waves-light btc-btn" type="submit">Search
-          <i class="material-icons right">search</i>
+        <i class="material-icons right">search</i>
       </button>
       <button class="btn waves-effect waves-light btc-btn btc-get-all-btn" (click)="getAllBooks()">Recently Added
-          <i class="material-icons right">autorenew</i>
+        <i class="material-icons right">autorenew</i>
       </button>
     </div>
-
   </form>
-</div>
+</section>
 
-<!-- Results -->
-<div class="row">
+<!-- RESULTS SECTION -->
+<section class="row">
   <div class="col s6 m4 l3 btc-book-preview" *ngFor="let book of bookData" (click)="openModal(book)">
     <div class="btc-book-preview-image-container">
       <img class="btc-book-preview-image" src="{{book.imageLinks.thumbnail}}" >
@@ -49,43 +47,46 @@
     <p class="btc-book-preview-title">{{book.title}}</p>
     <p class="btc-book-preview-author">{{book.authors[0]}}</p>
   </div>
-</div>
+</section>
 
-<p *ngIf="nullResult" class="btc-null-result-message">{{nullResult}}</p>
+<p *ngIf="helpMessage" class="btc-null-result-message">{{helpMessage}}</p>
 
 
-<!-- Modal Structure -->
-<div *ngIf="selectedBook" id="modal1" class="modal" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalActions">
+<!-- MODAL -->
+<section *ngIf="selectedBook" id="modal1" class="modal" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalActions">
   <div *ngIf="modalProgressBar" class="progress btc-modal-progress-bar">
     <div class="indeterminate"></div>
   </div>
-  <div  class="modal-content">
+  <div class="modal-content">
 
-      <div class="btc-modal-img-wrapper">
-        <img src="{{selectedBook.imageLinks.thumbnail}}" />
-        <div class="chip btc-modal-chip" *ngIf="selectedBook.requested">Requested</div>
-        <div class="chip btc-modal-chip" *ngIf="selectedBook.username === username">Owned</div>
-      </div>
-
-      <div class="btc-modal-text">
-        <h4 class="btc-modal-title">{{selectedBook.title}}</h4>
-        <p *ngIf="selectedBook.subtitle" class="btc-modal-subtitle">{{selectedBook.subtitle}}</p>
-        <div>By&nbsp;
-          <span *ngFor="let author of selectedBook.authors" class="btc-modal-author">{{author}}&nbsp;&nbsp;</span>
-        </div>
-        <span *ngIf="selectedBook.publisher">Published by {{selectedBook.publisher}} </span>
-        <span *ngIf="selectedBook.publishedDate">({{selectedBook.publishedDate}})</span>
-
-        <p *ngIf="selectedBook.pageCount" class="btc-modal-pageCount">{{selectedBook.pageCount}} pages</p>
-        <p class="btc-modal-user">added by:<b> {{selectedBook.username}}</b></p>
-        <p *ngIf="!username" class="anon-user-message">To request books from other users, please
-          <a class="modal-link" (click)="authenticate($event)">register</a> or <a class="modal-link" (click)="authenticate($event)">log in</a>.</p>
-      </div>
-
+    <!-- MODAL IMAGE -->
+    <div class="btc-modal-img-wrapper">
+      <img src="{{selectedBook.imageLinks.thumbnail}}" />
+      <div class="chip btc-modal-chip" *ngIf="selectedBook.requested">Requested</div>
+      <div class="chip btc-modal-chip" *ngIf="selectedBook.username === username">Owned</div>
     </div>
-    <div class="modal-footer btc-modal-footer">
-      <a *ngIf="username && !selectedBook.requested  && selectedBook.username !== username" class="modal-action modal-close waves-effect waves-green btn-flat" (click)="requestBook()">Request<i class="material-icons right">add_circle</i></a>
-      <a class="waves-effect waves-green btn-flat" (click)="closeModal()">Close<i class="material-icons right">cancel</i></a>
+
+    <!-- MODAL TEXT -->
+    <div class="btc-modal-text">
+      <h4 class="btc-modal-title">{{selectedBook.title}}</h4>
+      <p *ngIf="selectedBook.subtitle" class="btc-modal-subtitle">{{selectedBook.subtitle}}</p>
+      <div>By&nbsp;
+        <span *ngFor="let author of selectedBook.authors" class="btc-modal-author">{{author}}&nbsp;&nbsp;</span>
+      </div>
+      <span *ngIf="selectedBook.publisher">Published by {{selectedBook.publisher}} </span>
+      <span *ngIf="selectedBook.publishedDate">({{selectedBook.publishedDate}})</span>
+
+      <p *ngIf="selectedBook.pageCount" class="btc-modal-pageCount">{{selectedBook.pageCount}} pages</p>
+      <p class="btc-modal-user">added by:<b> {{selectedBook.username}}</b></p>
+      <p *ngIf="!username" class="anon-user-message">To request books from other users, please
+        <a class="modal-link" (click)="authenticate('/register')">register</a> or <a class="modal-link" (click)="authenticate('/login')">log in</a>.</p>
     </div>
-   </div>
+  </div>
+
+  <!-- MODAL FOOTER -->
+  <div class="modal-footer btc-modal-footer">
+    <a *ngIf="username && !selectedBook.requested  && selectedBook.username !== username" class="modal-action modal-close waves-effect waves-green btn-flat" (click)="requestBook()">Request<i class="material-icons right">add_circle</i></a>
+    <a class="waves-effect waves-green btn-flat" (click)="closeModal()">Close<i class="material-icons right">cancel</i></a>
+  </div>
+</section>
 

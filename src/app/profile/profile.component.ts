@@ -1,32 +1,42 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from 'app/services/auth.service';
-import { User } from 'app/models/User';
-import { Book } from 'app/models/Book';
 import { MaterializeAction } from 'angular2-materialize';
 import { NotificationsService } from 'angular2-notifications';
-import { BorrowRequest } from 'app/models/Borrow-Request';
-import { RequestView } from 'app/models/request-view';
+import { AuthService } from 'app/services/auth.service';
 import { BookService } from 'app/services/book.service';
-import {RequestService} from 'app/services/request.service';
-import {ProgressBarService} from 'app/services/progress-bar.service';
+import { RequestService } from 'app/services/request.service';
+import { ProgressBarService } from 'app/services/progress-bar.service';
+import { BorrowRequest } from 'app/models/borrow-request';
+import { RequestView } from 'app/models/request-view';
+import { User } from 'app/models/user';
+import { Book } from 'app/models/book';
 
 @Component({
   selector: 'btc-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  styleUrls: ['../styles/book-styles.scss', './profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
 
-  currentUser: User;
+  // data
   myBooks: Book[];
   selectedBook: Book;
   myRequests: [{Book, Request}];
+
+  get currentUser() {
+    return this.auth.getCurrentUser()
+  }
+
+  // UI properties
   modalActions = new EventEmitter<string|MaterializeAction>();
   activeTab = 'Collection';
-  linkClassCollection = 'active';
-  linkClassRequests: String;
-
+  // linkClassCollection = 'active';
+  // linkClassRequests: String;
+  linkClass = {
+    collection: 'active',
+    requests: ''
+  }
+  message: string;
 
   constructor(
     private auth: AuthService,
@@ -37,28 +47,34 @@ export class ProfileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.currentUser = this.auth.getCurrentUser();
+    // this.currentUser = this.auth.getCurrentUser();
+    this.getMyBooks();
+    this.getMyRequests();
+  }
+
+  private getMyBooks(): void {
     this.bookService.getMyBooks(this.currentUser._id)
       .subscribe(data => {
         this.myBooks = data;
-        console.log(data);
-      });
-    this.requestService.getMyRequests(this.currentUser._id)
-      .subscribe(data => {
-        this.myRequests = data;
+      }, err => {
+        this.message = 'user data currently unavailable';
       });
   }
 
-  showContent(e) {
-    if (e.target.innerHTML === 'Collection') {
-      this.activeTab = 'Collection';
-      this.linkClassCollection = 'active';
-      this.linkClassRequests = '';
-    } else if (e.target.innerHTML === 'Requests') {
-      this.activeTab = 'Requests';
-      this.linkClassCollection = '';
-      this.linkClassRequests = 'active';
-    }
+  private getMyRequests(): void {
+    this.requestService.getMyRequests(this.currentUser._id)
+      .subscribe(data => {
+        this.myRequests = data;
+      }, err => {
+        this.message = 'user data currently unavailable';
+      });
+  }
+
+  public showContent(link): void {
+    this.activeTab = link;
+
+    this.linkClass.collection = link === 'Collection' ? 'active' : '';
+    this.linkClass.requests = link === 'Requests' ? 'active' : '';
   }
 
   deleteBook(book) {

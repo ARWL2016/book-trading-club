@@ -1,6 +1,6 @@
 import { Component, OnInit, DoCheck } from '@angular/core';
 import { AuthService } from 'app/services/auth.service';
-import { User } from 'app/models/User';
+import { User } from 'app/models/user';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NotificationsService } from 'angular2-notifications';
 import { ProgressBarService } from 'app/services/progress-bar.service';
