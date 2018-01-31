@@ -1,10 +1,9 @@
-import { Component, OnInit, DoCheck } from '@angular/core';
-import { AuthService } from 'app/services/auth.service';
-import { User } from 'app/models/user';
+import { Component, DoCheck } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NotificationsService } from 'angular2-notifications';
+import { AuthService } from 'app/services/auth.service';
 import { ProgressBarService } from 'app/services/progress-bar.service';
-// import { pageTransition } from './animations';
+import { User } from 'app/models/user';
 
 @Component({
   selector: 'app-root',
@@ -13,40 +12,29 @@ import { ProgressBarService } from 'app/services/progress-bar.service';
   // tslint:disable-next-line:use-host-property-decorator
   host: {
     '(click)': 'removeDropdown($event)'
- }
-
+  }
 })
-export class AppComponent implements OnInit, DoCheck {
-  username: string;
+export class AppComponent implements DoCheck {
+  get username () {
+    return this.auth.isValidated();
+  }
 
-  linkClassBrowse: string;
-  linkClassAdd: string;
-  linkClassRegister: string;
-  linkClassLogin: String;
-
+  // UI properties
+  activeLink = '';
   dropdownVisible = false;
   progressBar = true;
 
+  // angular notifications config
   public options = {
-    timeOut: 3000,
+    timeOut: 3500,
     lastOnBottom: true,
-    showProgressBar: false,
+    showProgressBar: true,
     pauseOnHover: true
   };
 
-  ngOnInit(): void {
-    console.clear();
-    this.username = this.auth.isValidated();
-  }
-
-  ngDoCheck() {
-    this.username = this.auth.isValidated();
+  ngDoCheck(): void {
     this.progressBar = this.progressBarService.status;
-
-    this.linkClassBrowse = this.router.url === '/browse' ? 'active' : '';
-    this.linkClassAdd = this.router.url === '/add' ? 'active' : '';
-    this.linkClassLogin = this.router.url === '/login' ? 'active' : '';
-    this.linkClassRegister = this.router.url === '/register' ? 'active' : '';
+    this.activeLink = this.router.url;
   }
 
   constructor(
@@ -56,24 +44,24 @@ export class AppComponent implements OnInit, DoCheck {
     private notify: NotificationsService
   ) { }
 
-  toggleDropdown() {
-    console.log('show DD');
-    this.dropdownVisible = this.dropdownVisible === false ? true : false;
-    console.log(this.dropdownVisible);
+  public routerLink(link): void {
+    this.router.navigate([link]);
+    this.activeLink = link;
   }
 
-  removeDropdown(e) {
+  public toggleDropdown(): void {
+    this.dropdownVisible = !this.dropdownVisible;
+  }
+
+  public removeDropdown(e): void {
     if (e.target.id !== 'dropdownIcon') {
       this.dropdownVisible = false;
     }
   }
 
-  signOut() {
-    console.log('Signing out ', this.username);
+  public signOut(): void {
     this.auth.logout();
     this.router.navigate(['/login']);
     this.notify.info(this.username, 'You have been logged out');
-    this.username = null;
   }
-
 }

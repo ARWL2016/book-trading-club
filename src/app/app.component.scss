@@ -1,10 +1,24 @@
 .btc-logo {
   font-weight: bold;
+  font-size: 1.5em;
+}
+
+.btc-logo:before {
+  content: 'Book Exchange'
 }
 
 .btc-logo-icon {
   font-size: 35px;
   margin-right: 10px !important;
+}
+
+// dynamically add labels to navigation links
+.btc-nav-links > li:nth-child(1) > a:before {
+  content: 'Browse Books'
+}
+
+.btc-nav-links > li:nth-child(2) > a:before {
+  content: 'Add Books'
 }
 
 .btc-progress-bar {
@@ -18,6 +32,32 @@
 .btc-dropdown-content {
   display: block;
   opacity: 100;
+}
+
+@media screen and (max-width: 700px) {
+  .btc-logo:before {
+    content: 'BookEx'
+  }
+
+  .btc-nav-links > li:nth-child(1) > a:before {
+    content: 'Browse'
+  }
+
+  .btc-nav-links > li:nth-child(2) > a:before {
+    content: 'Add'
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .btc-logo:before {
+    content: ''
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .btc-logo {
+    display: none;
+  }
 }
 
 

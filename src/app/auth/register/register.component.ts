@@ -79,7 +79,7 @@ export class RegisterComponent {
     }
   }
 
-  submitForm() {
+  public submitForm(): void {
     if (this.user.password !== this.confirmation) {
       this.error = 'passwords do not match.';
       return;
@@ -87,10 +87,6 @@ export class RegisterComponent {
     if (this.user.username && this.user.password) {
       this.error = '';
       this.progress.showProgressBar();
-      // this.user = {
-      //   username: this.user.username,
-      //   password: this.user.password
-      // };
       this.auth.register(this.user)
         .then(res => {
           this.router.navigate(['/browse']);

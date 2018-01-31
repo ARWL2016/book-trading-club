@@ -1,38 +1,41 @@
-
+<!-- ANGULAR NOTIFICATIONS COMPONENT -->
 <simple-notifications [options]="options"></simple-notifications>
-  <nav class="brown darken-2" role="navigation">
-    <div class="nav-wrapper container">
-      <a [routerLink]="['/browse']" class="brand-logo btc-logo">
-        <i class="material-icons left btc-logo-icon">bookmark_border</i>
-        BookExchange</a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li [className]="linkClassBrowse"><a [routerLink]="['/browse']" >Browse Books</a></li>
-        <li [className]="linkClassAdd"><a [routerLink]="['/add']">Add Books</a></li>
-        <li [className]="linkClassRegister" *ngIf="!username"><a [routerLink]="['/register']">Register</a></li>
-        <li [className]="linkClassLogin" *ngIf="!username"><a [routerLink]="['/login']">Login</a></li>
 
-        <!-- materialize dropdown not functioning reliably so toggleDropdown method substituted -->
-        <li *ngIf="username"><a> <i (click)="toggleDropdown()" id="dropdownIcon" class="material-icons btc-account-icon">account_circle</i></a>
+<!-- NAVIGATION SECTION -->
+<nav class="brown darken-2" role="navigation">
+  <div class="nav-wrapper container">
+    <a [routerLink]="['/browse']" class="btc-logo">
+      <i class="material-icons left btc-logo-icon">bookmark_border</i>
+    </a>
 
+    <!-- NAV LINKS -->
+    <ul id="nav-mobile" class="right btc-nav-links">
+      <li [ngClass]="{'active': activeLink==='/browse'}"><a (click)="routerLink('/browse')"></a></li>
+      <li [ngClass]="{'active': activeLink==='/add'}"><a (click)="routerLink('/add')"></a></li>
+      <li [ngClass]="{'active': activeLink==='/register'}" *ngIf="!username"><a (click)="routerLink('/register')">Register</a></li>
+      <li [ngClass]="{'active': activeLink==='/login'}" *ngIf="!username"><a (click)="routerLink('/login')">Login</a></li>
 
-          <ul *ngIf="dropdownVisible" (click)="toggleDropdown()" class="dropdown-content btc-dropdown-content">
-              <!-- <ul *ngIf="dropdownVisible" materialize="dropdown" id="dropdown1" class="dropdown-content"> -->
-                <li><a [routerLink]="['/profile']">Profile</a></li>
-                <li class="divider"></li>
-                <li><a (click)="signOut()">Sign Out</a></li>
-              </ul>
-        </li>
-      </ul>
-    </div>
-  </nav>
-  <div *ngIf="progressBar" class="progress btc-progress-bar">
-    <div class="indeterminate"></div>
+      <!-- DROPDOWN FOR LOGGED IN STATE -->
+      <li *ngIf="username">
+        <a><i (click)="toggleDropdown()" id="dropdownIcon" class="material-icons btc-account-icon">account_circle</i></a>
+        <ul *ngIf="dropdownVisible" (click)="toggleDropdown()" class="dropdown-content btc-dropdown-content">
+          <li><a [routerLink]="['/profile']">Profile</a></li>
+          <li class="divider"></li>
+          <li><a (click)="signOut()">Sign Out</a></li>
+        </ul>
+      </li>
+    </ul>
   </div>
+</nav>
 
+<!-- PROGRESS BAR -->
+<div *ngIf="progressBar" class="progress btc-progress-bar">
+  <div class="indeterminate"></div>
+</div>
 
-  <div class="container">
-    <router-outlet></router-outlet>
-  </div>
+<main class="container">
+  <router-outlet></router-outlet>
+</main>
 
 
 

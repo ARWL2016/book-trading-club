@@ -147,7 +147,7 @@ var _a, _b, _c, _d, _e, _f;
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\r\n<simple-notifications [options]=\"options\"></simple-notifications>\r\n  <nav class=\"brown darken-2\" role=\"navigation\">\r\n    <div class=\"nav-wrapper container\">\r\n      <a [routerLink]=\"['/browse']\" class=\"brand-logo btc-logo\">\r\n        <i class=\"material-icons left btc-logo-icon\">bookmark_border</i>\r\n        BookExchange</a>\r\n      <ul id=\"nav-mobile\" class=\"right hide-on-med-and-down\">\r\n        <li [className]=\"linkClassBrowse\"><a [routerLink]=\"['/browse']\" >Browse Books</a></li>\r\n        <li [className]=\"linkClassAdd\"><a [routerLink]=\"['/add']\">Add Books</a></li>\r\n        <li [className]=\"linkClassRegister\" *ngIf=\"!username\"><a [routerLink]=\"['/register']\">Register</a></li>\r\n        <li [className]=\"linkClassLogin\" *ngIf=\"!username\"><a [routerLink]=\"['/login']\">Login</a></li>\r\n\r\n        <!-- materialize dropdown not functioning reliably so toggleDropdown method substituted -->\r\n        <li *ngIf=\"username\"><a> <i (click)=\"toggleDropdown()\" id=\"dropdownIcon\" class=\"material-icons btc-account-icon\">account_circle</i></a>\r\n\r\n\r\n          <ul *ngIf=\"dropdownVisible\" (click)=\"toggleDropdown()\" class=\"dropdown-content btc-dropdown-content\">\r\n              <!-- <ul *ngIf=\"dropdownVisible\" materialize=\"dropdown\" id=\"dropdown1\" class=\"dropdown-content\"> -->\r\n                <li><a [routerLink]=\"['/profile']\">Profile</a></li>\r\n                <li class=\"divider\"></li>\r\n                <li><a (click)=\"signOut()\">Sign Out</a></li>\r\n              </ul>\r\n        </li>\r\n      </ul>\r\n    </div>\r\n  </nav>\r\n  <div *ngIf=\"progressBar\" class=\"progress btc-progress-bar\">\r\n    <div class=\"indeterminate\"></div>\r\n  </div>\r\n\r\n\r\n  <div class=\"container\">\r\n    <router-outlet></router-outlet>\r\n  </div>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n"
+module.exports = "<!-- ANGULAR NOTIFICATIONS COMPONENT -->\r\n<simple-notifications [options]=\"options\"></simple-notifications>\r\n\r\n<!-- NAVIGATION SECTION -->\r\n<nav class=\"brown darken-2\" role=\"navigation\">\r\n  <div class=\"nav-wrapper container\">\r\n    <a [routerLink]=\"['/browse']\" class=\"btc-logo\">\r\n      <i class=\"material-icons left btc-logo-icon\">bookmark_border</i>\r\n    </a>\r\n\r\n    <!-- NAV LINKS -->\r\n    <ul id=\"nav-mobile\" class=\"right btc-nav-links\">\r\n      <li [ngClass]=\"{'active': activeLink==='/browse'}\"><a (click)=\"routerLink('/browse')\"></a></li>\r\n      <li [ngClass]=\"{'active': activeLink==='/add'}\"><a (click)=\"routerLink('/add')\"></a></li>\r\n      <li [ngClass]=\"{'active': activeLink==='/register'}\" *ngIf=\"!username\"><a (click)=\"routerLink('/register')\">Register</a></li>\r\n      <li [ngClass]=\"{'active': activeLink==='/login'}\" *ngIf=\"!username\"><a (click)=\"routerLink('/login')\">Login</a></li>\r\n\r\n      <!-- DROPDOWN FOR LOGGED IN STATE -->\r\n      <li *ngIf=\"username\">\r\n        <a><i (click)=\"toggleDropdown()\" id=\"dropdownIcon\" class=\"material-icons btc-account-icon\">account_circle</i></a>\r\n        <ul *ngIf=\"dropdownVisible\" (click)=\"toggleDropdown()\" class=\"dropdown-content btc-dropdown-content\">\r\n          <li><a [routerLink]=\"['/profile']\">Profile</a></li>\r\n          <li class=\"divider\"></li>\r\n          <li><a (click)=\"signOut()\">Sign Out</a></li>\r\n        </ul>\r\n      </li>\r\n    </ul>\r\n  </div>\r\n</nav>\r\n\r\n<!-- PROGRESS BAR -->\r\n<div *ngIf=\"progressBar\" class=\"progress btc-progress-bar\">\r\n  <div class=\"indeterminate\"></div>\r\n</div>\r\n\r\n<main class=\"container\">\r\n  <router-outlet></router-outlet>\r\n</main>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -159,7 +159,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".btc-logo {\n  font-weight: bold; }\n\n.btc-logo-icon {\n  font-size: 35px;\n  margin-right: 10px !important; }\n\n.btc-progress-bar {\n  margin-top: 0; }\n\n.btc-account-icon {\n  font-size: 30px; }\n\n.btc-dropdown-content {\n  display: block;\n  opacity: 100; }\n", ""]);
+exports.push([module.i, ".btc-logo {\n  font-weight: bold;\n  font-size: 1.5em; }\n\n.btc-logo:before {\n  content: 'Book Exchange'; }\n\n.btc-logo-icon {\n  font-size: 35px;\n  margin-right: 10px !important; }\n\n.btc-nav-links > li:nth-child(1) > a:before {\n  content: 'Browse Books'; }\n\n.btc-nav-links > li:nth-child(2) > a:before {\n  content: 'Add Books'; }\n\n.btc-progress-bar {\n  margin-top: 0; }\n\n.btc-account-icon {\n  font-size: 30px; }\n\n.btc-dropdown-content {\n  display: block;\n  opacity: 100; }\n\n@media screen and (max-width: 700px) {\n  .btc-logo:before {\n    content: 'BookEx'; }\n  .btc-nav-links > li:nth-child(1) > a:before {\n    content: 'Browse'; }\n  .btc-nav-links > li:nth-child(2) > a:before {\n    content: 'Add'; } }\n\n@media screen and (max-width: 450px) {\n  .btc-logo:before {\n    content: ''; } }\n\n@media screen and (max-width: 350px) {\n  .btc-logo {\n    display: none; } }\n", ""]);
 
 // exports
 
@@ -185,42 +185,45 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../../../core/@angular/core.es5.js");
-var auth_service_1 = __webpack_require__("../../../../../src/app/services/auth.service.ts");
 var router_1 = __webpack_require__("../../../router/@angular/router.es5.js");
 var angular2_notifications_1 = __webpack_require__("../../../../angular2-notifications/dist/index.js");
+var auth_service_1 = __webpack_require__("../../../../../src/app/services/auth.service.ts");
 var progress_bar_service_1 = __webpack_require__("../../../../../src/app/services/progress-bar.service.ts");
-// import { pageTransition } from './animations';
 var AppComponent = (function () {
     function AppComponent(auth, progressBarService, router, notify) {
         this.auth = auth;
         this.progressBarService = progressBarService;
         this.router = router;
         this.notify = notify;
+        // UI properties
+        this.activeLink = '';
         this.dropdownVisible = false;
         this.progressBar = true;
+        // angular notifications config
         this.options = {
-            timeOut: 3000,
+            timeOut: 3500,
             lastOnBottom: true,
-            showProgressBar: false,
+            showProgressBar: true,
             pauseOnHover: true
         };
     }
-    AppComponent.prototype.ngOnInit = function () {
-        console.clear();
-        this.username = this.auth.isValidated();
-    };
+    Object.defineProperty(AppComponent.prototype, "username", {
+        get: function () {
+            return this.auth.isValidated();
+        },
+        enumerable: true,
+        configurable: true
+    });
     AppComponent.prototype.ngDoCheck = function () {
-        this.username = this.auth.isValidated();
         this.progressBar = this.progressBarService.status;
-        this.linkClassBrowse = this.router.url === '/browse' ? 'active' : '';
-        this.linkClassAdd = this.router.url === '/add' ? 'active' : '';
-        this.linkClassLogin = this.router.url === '/login' ? 'active' : '';
-        this.linkClassRegister = this.router.url === '/register' ? 'active' : '';
+        this.activeLink = this.router.url;
+    };
+    AppComponent.prototype.routerLink = function (link) {
+        this.router.navigate([link]);
+        this.activeLink = link;
     };
     AppComponent.prototype.toggleDropdown = function () {
-        console.log('show DD');
-        this.dropdownVisible = this.dropdownVisible === false ? true : false;
-        console.log(this.dropdownVisible);
+        this.dropdownVisible = !this.dropdownVisible;
     };
     AppComponent.prototype.removeDropdown = function (e) {
         if (e.target.id !== 'dropdownIcon') {
@@ -228,11 +231,9 @@ var AppComponent = (function () {
         }
     };
     AppComponent.prototype.signOut = function () {
-        console.log('Signing out ', this.username);
         this.auth.logout();
         this.router.navigate(['/login']);
         this.notify.info(this.username, 'You have been logged out');
-        this.username = null;
     };
     return AppComponent;
 }());
@@ -502,10 +503,6 @@ var RegisterComponent = (function () {
         if (this.user.username && this.user.password) {
             this.error = '';
             this.progress.showProgressBar();
-            // this.user = {
-            //   username: this.user.username,
-            //   password: this.user.password
-            // };
             this.auth.register(this.user)
                 .then(function (res) {
                 _this.router.navigate(['/browse']);

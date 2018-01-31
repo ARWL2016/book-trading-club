@@ -21,7 +21,7 @@ https://arwl-book-exchange.herokuapp.com
 https://github.com/ARWL2016/book-trading-club 
 https://developers.google.com/books/docs/v1/using#WorkingVolumes  
 https://stackoverflow.com/questions/43869961/node-js-express-redirect-all-to-angular-2-page  
-
+http://materializecss.com/ 
 
 Production
 - add server side logging
@@ -31,7 +31,7 @@ Production
 Bugs: 
 - cancel request not cancelling the correct request
 - binding of click on bbs fails by one
-- signout appears to work even when wrong db connected - but username not removed
+- password validation is getting called on input focus
 
 Enhancements
 - implement delete modal on profile page
@@ -47,6 +47,7 @@ Enhancements
 Todo 
 - front end checklist
 - create modal as separate component
+- responsive design
 
 
 
