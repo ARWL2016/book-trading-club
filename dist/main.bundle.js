@@ -793,17 +793,20 @@ var ProfileComponent = (function () {
         });
     };
     ProfileComponent.prototype.cancelRequest = function (request) {
+        var _this = this;
         console.log({ request: request });
-        // this.pBarService.showProgressBar();
-        // this.requestService
-        //   .deleteRequestById(request._id)
-        //   .subscribe(res => {
-        //     if (res.status === 200) {
-        //       this.pBarService.hideProgressBar();
-        //       this.ngOnInit();
-        //       this.notify.success(request.ownerName, `Your request to ${request.ownerName} was cancelled`);
-        //     }
-        //   });
+        this.pBarService.showProgressBar();
+        this.requestService
+            .deleteRequestById(request._id)
+            .subscribe(function (res) {
+            if (res.status === 200) {
+                _this.pBarService.hideProgressBar();
+                _this.ngOnInit();
+                _this.notify.success(request.ownerName, "Your request to " + request.ownerName + " was cancelled");
+            }
+        }, function (err) {
+            _this.notify.error(request.ownerName, "Your request to " + request.ownerName + " could not be cancelled");
+        });
     };
     // not in use
     ProfileComponent.prototype.openModal = function () {

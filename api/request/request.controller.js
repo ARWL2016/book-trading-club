@@ -1,29 +1,54 @@
 const { Book } = require('../books/book.model');
 const { User } = require('../auth/user.model');
 const { Request } = require('./request.model');
+const ObjectId = require('mongodb').ObjectID;
 
 module.exports = {
 
+  // createRequest(req, res) {
+  //   const { request } = req.body;
+
+  //   Request.create(request)
+  //     .then(requestData => {
+  //       const { _id, bookId, requesterName, requesterId } = requestData;
+
+  //       Book.findByIdAndUpdate(bookId, { $push: {requestsReceived: _id, usersRequesting: requesterName } })
+  //         .then((book) => {
+
+  //           User.findByIdAndUpdate(requesterId, { $push: { requestsMade: _id } })
+  //             .then(() => {
+  //               res.status(200).send('Request added');
+  //             })
+  //         });
+
+  //   }).catch(e => console.log(e));
+  // },
+
   createRequest(req, res) {
     const { request } = req.body;
+    const { bookId, requesterName, requesterId } = request;
+    let _id = new ObjectId();
 
     Request
       .create(request)
       .then(requestData => {
-        const { _id, bookId, requesterName, requesterId } = requestData;
-
-        Book
-          .findByIdAndUpdate(bookId, { $push: {
-            requestsReceived: _id,
-            usersRequesting: requesterName
-          } })
-          .then(() => {
-              User.findByIdAndUpdate(requesterId,
-                  { $push: { requestsMade: _id } });
-            });
-          })
-      .then(() => res.status(200).send('Request added'));
+        _id = requestData._id;
+        return Book.findByIdAndUpdate(bookId, { $push: {requestsReceived: _id, usersRequesting: requesterName } });
+      })
+      .then(() => {
+        return User.findByIdAndUpdate(requesterId, { $push: { requestsMade: _id } });
+      })
+      .then(() => {
+        res.status(200).send('Request added');
+      })
+      .catch(e => {
+        console.log(e)
+        res.status(500).send('Request not added');
+      });
   },
+
+
+
 
   deleteRequest(req, res) {
     const id = req.params.id;
@@ -32,7 +57,7 @@ module.exports = {
       .findByIdAndRemove(id)
       .then(request => {
         const { bookId, _id, requesterName, requesterId } = request;
-        console.log({request});
+        console.log({ request });
         Book
           .findByIdAndUpdate(bookId, { $pull: {
             requestsReceived: _id,

@@ -1,5 +1,5 @@
 {
   "JWT_SECRET": "secret",
-  "MONGODB_URI": "localhost:27017",
+  "MONGODB_URI": "localhost:27017/test",
   "PORT": "3010"
 }
