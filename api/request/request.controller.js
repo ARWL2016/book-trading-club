@@ -32,6 +32,7 @@ module.exports = {
       .findByIdAndRemove(id)
       .then(request => {
         const { bookId, _id, requesterName, requesterId } = request;
+        console.log({request});
         Book
           .findByIdAndUpdate(bookId, { $pull: {
             requestsReceived: _id,

@@ -88,16 +88,18 @@ export class ProfileComponent implements OnInit {
   }
 
   public cancelRequest(request): void {
-    this.pBarService.showProgressBar();
-    this.requestService
-      .deleteRequestById(request._id)
-      .subscribe(res => {
-        if (res.status === 200) {
-          this.pBarService.hideProgressBar();
-          this.ngOnInit();
-          this.notify.success(request.ownerName, `Your request to ${request.ownerName} was cancelled`);
-        }
-      });
+    console.log({request});
+    // this.pBarService.showProgressBar();
+    // this.requestService
+
+    //   .deleteRequestById(request._id)
+    //   .subscribe(res => {
+    //     if (res.status === 200) {
+    //       this.pBarService.hideProgressBar();
+    //       this.ngOnInit();
+    //       this.notify.success(request.ownerName, `Your request to ${request.ownerName} was cancelled`);
+    //     }
+    //   });
   }
 
   // not in use

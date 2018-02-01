@@ -43,11 +43,16 @@ Enhancements
 - add dismissable tips
 - add a messaging component
 - add proper front end error handling
+- extract modal as separate component
 
 Todo 
 - front end checklist
-- create modal as separate component
-- responsive design
+
+
+Notes 
+- Users BookIDs array is not being used
+
+
 
 
 
