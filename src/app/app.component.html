@@ -16,7 +16,7 @@
       <li [ngClass]="{'active': activeLink==='/login'}" *ngIf="!username"><a (click)="routerLink('/login')">Login</a></li>
 
       <!-- DROPDOWN FOR LOGGED IN STATE -->
-      <li *ngIf="username">
+      <li *ngIf="username" class="btc-dropdown-list-item">
         <a><i (click)="toggleDropdown()" id="dropdownIcon" class="material-icons btc-account-icon">account_circle</i></a>
         <ul *ngIf="dropdownVisible" (click)="toggleDropdown()" class="dropdown-content btc-dropdown-content">
           <li><a [routerLink]="['/profile']">Profile</a></li>

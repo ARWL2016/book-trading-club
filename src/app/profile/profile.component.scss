@@ -41,3 +41,10 @@
   padding-bottom: 3px;
 }
 
+@media screen and (max-width: 400px) {
+  .btc-table-row > th:first-child,
+  .btc-table-row > td:first-child {
+    display: none;
+  }
+}
+

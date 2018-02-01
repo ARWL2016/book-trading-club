@@ -39,7 +39,7 @@
 
 <!-- RESULTS SECTION -->
 <section class="row">
-  <div class="col s6 m4 l3 btc-book-preview" *ngFor="let book of bookData" (click)="openModal(book)">
+  <div class="col s12 m4 l3 xl2 btc-book-preview" *ngFor="let book of bookData" (click)="openModal(book)">
     <div class="btc-book-preview-image-container">
       <img class="btc-book-preview-image" src="{{book.imageLinks.thumbnail}}" >
     </div>
@@ -57,7 +57,7 @@
   <div *ngIf="modalProgressBar" class="progress btc-modal-progress-bar">
     <div class="indeterminate"></div>
   </div>
-  <div class="modal-content">
+  <div class="modal-content btc-modal-content">
 
     <!-- MODAL IMAGE -->
     <div class="btc-modal-img-wrapper">
@@ -68,7 +68,7 @@
 
     <!-- MODAL TEXT -->
     <div class="btc-modal-text">
-      <h4 class="btc-modal-title">{{selectedBook.title}}</h4>
+      <h1 class="btc-modal-title">{{selectedBook.title}}</h1>
       <p *ngIf="selectedBook.subtitle" class="btc-modal-subtitle">{{selectedBook.subtitle}}</p>
       <div>By&nbsp;
         <span *ngFor="let author of selectedBook.authors" class="btc-modal-author">{{author}}&nbsp;&nbsp;</span>

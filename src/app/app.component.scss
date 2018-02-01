@@ -21,6 +21,10 @@
   content: 'Add Books'
 }
 
+.btc-dropdown-list-item {
+  margin-right: 50px;
+}
+
 .btc-progress-bar {
   margin-top: 0;
 }
@@ -36,7 +40,7 @@
 
 @media screen and (max-width: 700px) {
   .btc-logo:before {
-    content: 'BookEx'
+    content: 'BEX'
   }
 
   .btc-nav-links > li:nth-child(1) > a:before {
@@ -48,13 +52,13 @@
   }
 }
 
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 460px) {
   .btc-logo:before {
     content: ''
   }
 }
 
-@media screen and (max-width: 350px) {
+@media screen and (max-width: 420px) {
   .btc-logo {
     display: none;
   }

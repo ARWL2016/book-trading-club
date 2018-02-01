@@ -1,9 +1,6 @@
 @import './settings';
 
 .btc-instruction-panel {
-  // background-color: $nav-colour;
-  // color: #FFF;
-  // box-shadow: 1px 1px 1px #777;
   border: 2px solid $nav-colour;
   padding: 15px 40px 15px 40px;
   width: 100%;
@@ -16,10 +13,7 @@
 }
 
 .btc-panel-link {
-  // color: #FFF;
   font-weight: bold;
-  // background-color: $nav-colour;
-  // padding: 3px 5px 3px 5px;
 }
 
 .btc-btn {
@@ -27,7 +21,7 @@
 }
 
 .btc-get-all-btn {
-  float: right;
+  margin-left: 5px;
 }
 
 // PREVIEW SECTION
@@ -98,6 +92,7 @@
 
 .btc-modal-title {
   font-weight: bold;
+  font-size: 2.5em;
 }
 
 .btc-modal-subtitle {
@@ -118,5 +113,38 @@
 .modal-link {
   &:hover {
     cursor: pointer;
+  }
+}
+
+// MEDIA QUERIES
+
+@media screen and (max-width: 600px) {
+  h1.btc-modal-title {
+    font-size: 1.8em;
+    margin: 4px 0;
+  }
+
+  .btc-modal-content {
+    padding: 16px;
+  }
+
+  .btc-modal-img-wrapper {
+    float: none;
+  }
+
+  .btc-modal-text {
+    max-width: 100%;
+  }
+
+  .btc-modal-img-wrapper img {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  button.btc-btn {
+    display: block;
+    width: 80%;
+    margin: 10px auto;
   }
 }
