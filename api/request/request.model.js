@@ -21,6 +21,10 @@ const RequestSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  bookTitle: {
+    type: String,
+    required: true
+  },
   dateRequested: {
     type: String,
     required: true

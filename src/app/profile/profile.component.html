@@ -56,7 +56,6 @@
   <table>
     <thead>
       <tr class="btc-table-row">
-        <th></th>
         <th class="btc-title-column">Title</th>
         <th class="btc-centered">Owner</th>
         <th class="btc-centered">Message</th>
@@ -65,11 +64,11 @@
     </thead>
     <tbody>
       <tr *ngFor="let request of myRequests" class="btc-table-row">
-        <td class="btc-image-column btc-centered"><img class="btc-table-image" src="{{request.book.imageLinks.thumbnail}}" ></td>
-        <td class="btc-title-column">{{request.book.title}}</td>
-        <td class="btc-owner-column btc-centered">{{request.book.username | uppercase}} </td>
+        <!-- <td class="btc-image-column btc-centered"></td> -->
+        <td class="btc-title-column">{{request.bookTitle}}</td>
+        <td class="btc-owner-column btc-centered">{{request.ownerName | uppercase}} </td>
         <td class="btc-message-column btc-centered"><i (click)="openMessageModal(request)" class="material-icons btc-message-icon">message</i></td>
-        <td class="btc-cancel-column btc-centered"><i class="material-icons btc-icon" (click)="cancelRequest(request.request)">cancel</i></td>
+        <td class="btc-cancel-column btc-centered"><i class="material-icons btc-icon" (click)="cancelRequest(request)">cancel</i></td>
       </tr>
     </tbody>
   </table>

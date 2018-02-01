@@ -5,28 +5,9 @@ const ObjectId = require('mongodb').ObjectID;
 
 module.exports = {
 
-  // createRequest(req, res) {
-  //   const { request } = req.body;
-
-  //   Request.create(request)
-  //     .then(requestData => {
-  //       const { _id, bookId, requesterName, requesterId } = requestData;
-
-  //       Book.findByIdAndUpdate(bookId, { $push: {requestsReceived: _id, usersRequesting: requesterName } })
-  //         .then((book) => {
-
-  //           User.findByIdAndUpdate(requesterId, { $push: { requestsMade: _id } })
-  //             .then(() => {
-  //               res.status(200).send('Request added');
-  //             })
-  //         });
-
-  //   }).catch(e => console.log(e));
-  // },
-
   createRequest(req, res) {
     const { request } = req.body;
-    const { bookId, requesterName, requesterId } = request;
+    const { bookId, bookTitle, requesterName, requesterId } = request;
     let _id = new ObjectId();
 
     Request
@@ -47,55 +28,42 @@ module.exports = {
       });
   },
 
-
-
-
   deleteRequest(req, res) {
-    const id = req.params.id;
-
+    const _id = req.params.id;
+    let bookId,  requesterName, requesterId;
+    console.log(_id);
     Request
-      .findByIdAndRemove(id)
+      .findByIdAndRemove(_id)
       .then(request => {
-        const { bookId, _id, requesterName, requesterId } = request;
+        bookId = request.bookId;
+        requesterName = request.requesterName;
+        requesterId = request.requesterId;
         console.log({ request });
-        Book
-          .findByIdAndUpdate(bookId, { $pull: {
-            requestsReceived: _id,
-            usersRequesting: requesterName
-          } })
-          .then(() => {
-            User.findByIdAndUpdate(requesterId,
-                  { $pull: { requestsMade: _id } });
-          });
+
+        return Book.findByIdAndUpdate(bookId, { $pull: {requestsReceived: _id, usersRequesting: requesterName} });
       })
-      .then(() => res.status(200).send('Request deleted'))
-      .catch(e => res.status(400).send());
+      .then((book) => {
+        console.log({book});
+        return User.findByIdAndUpdate(requesterId,{ $pull: { requestsMade: _id } });
+      })
+      .then((user) => {
+        console.log({user});
+        res.status(200).send('Request deleted');
+      })
+      .catch(e => res.status(400).send('Request could not be deleted'));
   },
 
   getRequestsByUser(req, res) {
     const id = req.query.id;
 
     Request.find({ requesterId: id })
-
       .then(requests => {
-        let results = [];
-
-        const bookIds = requests.map(request => {
-          return request.bookId;
-        });
-
-        Book.find({ '_id': { $in: bookIds } })
-          .then(books => {
-            books.forEach((book, index) => {
-              results.push({
-                book: book,
-                request: requests[index]
-              });
-            });
-            res.status(200).send(results);
-          });
+        res.status(200).send(requests);
       })
-      .catch(e => res.status(400).send(e));
-  }
+      .catch(e => {
+        console.log(e)
+        res.status(500).send('Could not fetch requests');
+      });
+    }
 
 };

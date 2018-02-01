@@ -27,6 +27,7 @@ export class RequestService {
       ownerId: book.userId,
       ownerName: book.username,
       bookId: book._id,
+      bookTitle: book.title,
       dateRequested: timestamp,
       status: 'new'
     };
@@ -37,7 +38,7 @@ export class RequestService {
     return this.http.post(url, body, options);
   }
 
-  public getMyRequests(id: string): Observable<[{ Book, Request }]> {
+  public getMyRequests(id: string): Observable<[{ Request }]> {
     const url = `/api/request/getCurrentUsersRequests?id=${id}`;
     return this.http.get(url)
       .map((res: Response) => res.json());

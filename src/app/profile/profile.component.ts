@@ -7,7 +7,7 @@ import { BookService } from 'app/services/book.service';
 import { RequestService } from 'app/services/request.service';
 import { ProgressBarService } from 'app/services/progress-bar.service';
 import { BorrowRequest } from 'app/models/borrow-request';
-import { RequestView } from 'app/models/request-view';
+// import { RequestView } from 'app/models/request-view';
 import { User } from 'app/models/user';
 import { Book } from 'app/models/book';
 
@@ -21,7 +21,7 @@ export class ProfileComponent implements OnInit {
   // data
   myBooks: Book[];
   selectedBook: Book;
-  myRequests: [{Book, Request}];
+  myRequests: [{ Request }];
 
   get currentUser() {
     return this.auth.currentUser;
@@ -61,8 +61,9 @@ export class ProfileComponent implements OnInit {
   private getMyRequests(): void {
     this.requestService
       .getMyRequests(this.currentUser._id)
-      .subscribe((data: [{ Book, Request }]) => {
+      .subscribe((data: [{ Request }]) => {
         this.myRequests = data;
+        console.log(this.myRequests);
       }, err => {
         this.message = 'user data currently unavailable';
       });

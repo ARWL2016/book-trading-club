@@ -21,7 +21,10 @@ module.exports = {
       .sort({ _id: -1 })
       .then(data => {
         res.status(200).send(data);
-      });
+      })
+      .catch(e => {
+        res.send(500).send('Could not fetch books for current user');
+      })
   },
 
   searchBooksByTitle(req, res) {
