@@ -32,7 +32,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".btc-instruction-panel {\n  border: 2px solid #5d4037;\n  padding: 15px 40px 15px 40px;\n  width: 100%;\n  margin: 0 auto;\n  margin-top: 30px;\n  margin-bottom: 30px;\n  border-radius: 5px;\n  line-height: 1.8em;\n  letter-spacing: 1px; }\n\n.btc-panel-link {\n  font-weight: bold; }\n\n.btc-btn {\n  background-color: #37395d; }\n\n.btc-get-all-btn {\n  margin-left: 5px; }\n\n.btc-book-preview {\n  height: 360px; }\n\n.btc-book-preview-image-container {\n  background: #555;\n  height: 240px;\n  overflow: hidden;\n  position: relative; }\n\n.btc-book-preview-image-container:hover {\n    cursor: pointer; }\n\n.btc-book-preview-image {\n  min-width: 100%;\n  min-height: 100%;\n  position: absolute;\n  top: 50%;\n  -webkit-transform: translate(0, -50%);\n          transform: translate(0, -50%); }\n\n.btc-book-preview-image:hover {\n    opacity: 0.4; }\n\n.btc-book-preview-title {\n  font-weight: bold;\n  margin-bottom: 0; }\n\n.btc-book-preview-author {\n  margin: 3px 0 0 0;\n  font-size: 0.9em;\n  color: #444; }\n\n.btc-modal-progress-bar {\n  margin-top: 0; }\n\n.btc-modal-text {\n  float: left;\n  max-width: 60%; }\n\n.btc-modal-img-wrapper {\n  float: left;\n  margin-right: 20px; }\n\n.btc-modal-chip {\n  display: block;\n  margin-top: 10px;\n  background-color: #37395d;\n  text-align: center;\n  color: white; }\n\n.btc-modal-footer {\n  clear: both; }\n\n.btc-modal-title {\n  font-weight: bold;\n  font-size: 2.5em; }\n\n.btc-modal-subtitle {\n  font-weight: bold;\n  font-size: 1.2em; }\n\n.btc-modal-author {\n  font-size: 1.1em; }\n\n.btc-modal-pageCount {\n  font-style: italic;\n  font-size: 0.9em;\n  color: #444; }\n\n.modal-link:hover {\n  cursor: pointer; }\n\n@media screen and (max-width: 600px) {\n  h1.btc-modal-title {\n    font-size: 1.8em;\n    margin: 4px 0; }\n  .btc-modal-content {\n    padding: 16px; }\n  .btc-modal-img-wrapper {\n    float: none; }\n  .btc-modal-text {\n    max-width: 100%; }\n  .btc-modal-img-wrapper img {\n    display: none; } }\n\n@media screen and (max-width: 380px) {\n  button.btc-btn {\n    display: block;\n    width: 80%;\n    margin: 10px auto; } }\n\n/* label color */\n\n.input-field label {\n  color: #1f1f1f; }\n\n/* label focus color */\n\n.input-field input[type=text]:focus + label,\n.input-field input[type=password]:focus + label {\n  color: #1f1f1f; }\n\n/* label underline focus color */\n\n.input-field input[type=text]:focus,\n.input-field input[type=password]:focus {\n  border-bottom: 1px solid #1f1f1f;\n  -webkit-box-shadow: 0 1px 0 0 #1f1f1f;\n          box-shadow: 0 1px 0 0 #1f1f1f; }\n\n.input-field .prefix.active {\n  color: #5d4037; }\n", ""]);
+exports.push([module.i, ".btc-instruction-panel {\n  border: 2px solid #5d4037;\n  padding: 15px 40px 15px 40px;\n  width: 100%;\n  margin: 0 auto;\n  margin-top: 30px;\n  margin-bottom: 30px;\n  border-radius: 5px;\n  line-height: 1.8em;\n  letter-spacing: 1px; }\n\n.btc-panel-link {\n  font-weight: bold; }\n\n.btc-btn {\n  background-color: #37395d; }\n\n.btc-get-all-btn {\n  margin-left: 5px; }\n\n.btc-books-count {\n  font-size: 1em;\n  font-style: italic;\n  padding: 10px 10px;\n  color: #333;\n  float: right; }\n\n.btc-book-preview {\n  height: 360px; }\n\n.btc-book-preview-image-container {\n  background: #555;\n  height: 240px;\n  overflow: hidden;\n  position: relative; }\n\n.btc-book-preview-image-container:hover {\n    cursor: pointer; }\n\n.btc-book-preview-image {\n  min-width: 100%;\n  min-height: 100%;\n  position: absolute;\n  top: 50%;\n  -webkit-transform: translate(0, -50%);\n          transform: translate(0, -50%); }\n\n.btc-book-preview-image:hover {\n    opacity: 0.4; }\n\n.btc-book-preview-title {\n  font-weight: bold;\n  margin-bottom: 0; }\n\n.btc-book-preview-author {\n  margin: 3px 0 0 0;\n  font-size: 0.9em;\n  color: #444; }\n\n.btc-modal-progress-bar {\n  margin-top: 0; }\n\n.btc-modal-text {\n  float: left;\n  max-width: 60%; }\n\n.btc-modal-img-wrapper {\n  float: left;\n  margin-right: 20px; }\n\n.btc-modal-chip {\n  display: block;\n  margin-top: 10px;\n  background-color: #37395d;\n  text-align: center;\n  color: white; }\n\n.btc-modal-footer {\n  clear: both; }\n\n.btc-modal-title {\n  font-weight: bold;\n  font-size: 2.5em; }\n\n.btc-modal-subtitle {\n  font-weight: bold;\n  font-size: 1.2em; }\n\n.btc-modal-author {\n  font-size: 1.1em; }\n\n.btc-modal-pageCount {\n  font-style: italic;\n  font-size: 0.9em;\n  color: #444; }\n\n.modal-link:hover {\n  cursor: pointer; }\n\n.btc-paging-section {\n  margin: 0 auto;\n  margin-bottom: 50px;\n  padding: 5px;\n  text-align: center; }\n\n@media screen and (max-width: 600px) {\n  h1.btc-modal-title {\n    font-size: 1.8em;\n    margin: 4px 0; }\n  .btc-modal-content {\n    padding: 16px; }\n  .btc-modal-img-wrapper {\n    float: none; }\n  .btc-modal-text {\n    max-width: 100%; }\n  .btc-modal-img-wrapper img {\n    display: none; } }\n\n@media screen and (max-width: 400px) {\n  button.btc-btn {\n    display: block;\n    width: 80%;\n    margin: 10px auto; } }\n\n/* label color */\n\n.input-field label {\n  color: #1f1f1f; }\n\n/* label focus color */\n\n.input-field input[type=text]:focus + label,\n.input-field input[type=password]:focus + label {\n  color: #1f1f1f; }\n\n/* label underline focus color */\n\n.input-field input[type=text]:focus,\n.input-field input[type=password]:focus {\n  border-bottom: 1px solid #1f1f1f;\n  -webkit-box-shadow: 0 1px 0 0 #1f1f1f;\n          box-shadow: 0 1px 0 0 #1f1f1f; }\n\n.input-field .prefix.active {\n  color: #5d4037; }\n", ""]);
 
 // exports
 
@@ -460,6 +460,9 @@ var RegisterComponent = (function () {
         if (this.user.username.length < 3) {
             return this.error = 'username must be minimum 3 characters';
         }
+        if (this.usernameChecked) {
+            return;
+        }
         this.auth.checkUsername(this.user.username)
             .subscribe(function () {
             _this.usernameChecked = true;
@@ -484,7 +487,7 @@ var RegisterComponent = (function () {
     };
     RegisterComponent.prototype.checkMatch = function () {
         this.passwordMatch = false;
-        if (this.validatePassword() && this.confirmation) {
+        if (this.confirmation) {
             if (this.user.password === this.confirmation) {
                 this.passwordMatch = true;
                 this.error = '';
@@ -539,7 +542,7 @@ var _a, _b, _c, _d;
 /***/ "../../../../../src/app/browse-books/browse-books.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!-- BANNER SECTION -->\r\n<section class=\"btc-instruction-panel\">\r\n  <h4>Welcome to Book Exchange</h4>\r\n  <p>On this page, you can browse books available from our users, and search books by topic or title.\r\n    Click on a book to see more details or make a borrow request.</p>\r\n    <p *ngIf=\"!username\">To borrow books and list your own collection,\r\n      <a [routerLink]=\"['/login']\" class=\"btc-panel-link\">login</a> or\r\n      <a [routerLink]=\"['/register']\" class=\"btc-panel-link\">register</a>\r\n    </p>\r\n    <p *ngIf=\"username\" >Go to the\r\n      <a [routerLink]=\"['/profile']\" class=\"btc-panel-link\">profile page</a>\r\n      to view your collection and requests.\r\n    </p>\r\n</section>\r\n\r\n<!-- SEARCH FORM SECTION -->\r\n<section class=\"row\">\r\n  <form materialize class=\"col s12\" #form=\"ngForm\" (submit)=\"searchBooks()\">\r\n    <div class=\"row\">\r\n      <div class=\"input-field col s12\">\r\n        <input\r\n          [(ngModel)]=\"titleQuery\"\r\n          type=\"text\"\r\n          name=\"titleQuery\"\r\n          id=\"titleQuery\">\r\n        <label for=\"titleQuery\">Title or Keyword</label>\r\n      </div>\r\n    </div>\r\n    <div class=\"row\">\r\n      <button class=\"btn waves-effect waves-light btc-btn\" type=\"submit\">Search\r\n        <i class=\"material-icons right\">search</i>\r\n      </button>\r\n      <button class=\"btn waves-effect waves-light btc-btn btc-get-all-btn\" (click)=\"getAllBooks()\">Recently Added\r\n        <i class=\"material-icons right\">autorenew</i>\r\n      </button>\r\n    </div>\r\n  </form>\r\n</section>\r\n\r\n<!-- RESULTS SECTION -->\r\n<section class=\"row\">\r\n  <div class=\"col s12 m4 l3 xl2 btc-book-preview\" *ngFor=\"let book of bookData\" (click)=\"openModal(book)\">\r\n    <div class=\"btc-book-preview-image-container\">\r\n      <img class=\"btc-book-preview-image\" src=\"{{book.imageLinks.thumbnail}}\" >\r\n    </div>\r\n\r\n    <p class=\"btc-book-preview-title\">{{book.title}}</p>\r\n    <p class=\"btc-book-preview-author\">{{book.authors[0]}}</p>\r\n  </div>\r\n</section>\r\n\r\n<p *ngIf=\"helpMessage\" class=\"btc-null-result-message\">{{helpMessage}}</p>\r\n\r\n\r\n<!-- MODAL -->\r\n<section *ngIf=\"selectedBook\" id=\"modal1\" class=\"modal\" materialize=\"modal\" [materializeParams]=\"[{dismissible: false}]\" [materializeActions]=\"modalActions\">\r\n  <div *ngIf=\"modalProgressBar\" class=\"progress btc-modal-progress-bar\">\r\n    <div class=\"indeterminate\"></div>\r\n  </div>\r\n  <div class=\"modal-content btc-modal-content\">\r\n\r\n    <!-- MODAL IMAGE -->\r\n    <div class=\"btc-modal-img-wrapper\">\r\n      <img src=\"{{selectedBook.imageLinks.thumbnail}}\" />\r\n      <div class=\"chip btc-modal-chip\" *ngIf=\"selectedBook.requested\">Requested</div>\r\n      <div class=\"chip btc-modal-chip\" *ngIf=\"selectedBook.username === username\">Owned</div>\r\n    </div>\r\n\r\n    <!-- MODAL TEXT -->\r\n    <div class=\"btc-modal-text\">\r\n      <h1 class=\"btc-modal-title\">{{selectedBook.title}}</h1>\r\n      <p *ngIf=\"selectedBook.subtitle\" class=\"btc-modal-subtitle\">{{selectedBook.subtitle}}</p>\r\n      <div>By&nbsp;\r\n        <span *ngFor=\"let author of selectedBook.authors\" class=\"btc-modal-author\">{{author}}&nbsp;&nbsp;</span>\r\n      </div>\r\n      <span *ngIf=\"selectedBook.publisher\">Published by {{selectedBook.publisher}} </span>\r\n      <span *ngIf=\"selectedBook.publishedDate\">({{selectedBook.publishedDate}})</span>\r\n\r\n      <p *ngIf=\"selectedBook.pageCount\" class=\"btc-modal-pageCount\">{{selectedBook.pageCount}} pages</p>\r\n      <p class=\"btc-modal-user\">added by:<b> {{selectedBook.username}}</b></p>\r\n      <p *ngIf=\"!username\" class=\"anon-user-message\">To request books from other users, please\r\n        <a class=\"modal-link\" (click)=\"authenticate('/register')\">register</a> or <a class=\"modal-link\" (click)=\"authenticate('/login')\">log in</a>.</p>\r\n    </div>\r\n  </div>\r\n\r\n  <!-- MODAL FOOTER -->\r\n  <div class=\"modal-footer btc-modal-footer\">\r\n    <a *ngIf=\"username && !selectedBook.requested  && selectedBook.username !== username\" class=\"modal-action modal-close waves-effect waves-green btn-flat\" (click)=\"requestBook()\">Request<i class=\"material-icons right\">add_circle</i></a>\r\n    <a class=\"waves-effect waves-green btn-flat\" (click)=\"closeModal()\">Close<i class=\"material-icons right\">cancel</i></a>\r\n  </div>\r\n</section>\r\n\r\n"
+module.exports = "<!-- BANNER SECTION -->\r\n<section class=\"btc-instruction-panel\">\r\n  <h4>Welcome to Book Exchange</h4>\r\n  <p>On this page, you can browse books available from our users, and search books by topic or title.\r\n    Click on a book to see more details or make a borrow request.</p>\r\n    <p *ngIf=\"!username\">To borrow books and list your own collection,\r\n      <a [routerLink]=\"['/login']\" class=\"btc-panel-link\">login</a> or\r\n      <a [routerLink]=\"['/register']\" class=\"btc-panel-link\">register</a>\r\n    </p>\r\n    <p *ngIf=\"username\" >Go to the\r\n      <a [routerLink]=\"['/profile']\" class=\"btc-panel-link\">profile page</a>\r\n      to view your collection and requests.\r\n    </p>\r\n</section>\r\n\r\n<!-- SEARCH FORM SECTION -->\r\n<section class=\"row\">\r\n  <form materialize class=\"col s12\" #form=\"ngForm\" (submit)=\"searchBooks()\">\r\n    <div class=\"row\">\r\n      <div class=\"input-field col s12\">\r\n        <input\r\n          [(ngModel)]=\"titleQuery\"\r\n          type=\"text\"\r\n          name=\"titleQuery\"\r\n          id=\"titleQuery\">\r\n        <label for=\"titleQuery\">Title or Keyword</label>\r\n      </div>\r\n    </div>\r\n    <div class=\"row\">\r\n      <button class=\"btn waves-effect waves-light btc-btn\" type=\"submit\">Search\r\n        <i class=\"material-icons right\">search</i>\r\n      </button>\r\n      <button class=\"btn waves-effect waves-light btc-btn btc-get-all-btn\" (click)=\"getAllBooks()\">Recently Added\r\n        <i class=\"material-icons right\">autorenew</i>\r\n      </button>\r\n      <span class=\"btc-books-count\">Showing {{ skip }} to {{ lastBook }} of {{ booksInCollection }} books in collection</span>\r\n    </div>\r\n  </form>\r\n</section>\r\n\r\n<!-- RESULTS SECTION -->\r\n<section class=\"row\" >\r\n  <div class=\"col s12 m4 l3 xl2 btc-book-preview\" *ngFor=\"let book of bookData\" href=\"#modal1\" (click)=\"openModal(book)\" >\r\n    <div class=\"btc-book-preview-image-container\" >\r\n      <img class=\"btc-book-preview-image\" src=\"{{book.imageLinks.thumbnail}}\"  >\r\n    </div>\r\n\r\n    <p class=\"btc-book-preview-title\">{{book.title}}</p>\r\n    <p class=\"btc-book-preview-author\">{{book.authors[0]}}</p>\r\n  </div>\r\n</section>\r\n\r\n<!-- PAGING BUTTONS -->\r\n<section class=\"btc-paging-section\">\r\n  <button class=\"btn waves-effect waves-light btc-btn\" (click)=\"getPrevious()\" [disabled]=\"skip===0\">\r\n    Previous\r\n    <i class=\"material-icons left\">fast_rewind</i>\r\n  </button>\r\n  <button class=\"btn waves-effect waves-light btc-btn\" (click)=\"getNext()\" [disabled]=\"lastBook===booksInCollection\">\r\n    Next\r\n    <i class=\"material-icons right\">fast_forward</i>\r\n  </button>\r\n</section>\r\n\r\n<p *ngIf=\"helpMessage\" class=\"btc-null-result-message\">{{helpMessage}}</p>\r\n\r\n<!-- MODAL -->\r\n<section id=\"modal1\" class=\"modal\" materialize=\"modal\" [materializeParams]=\"[{dismissible: true}]\" [materializeActions]=\"modalActions\">\r\n  <div *ngIf=\"modalProgressBar\" class=\"progress btc-modal-progress-bar\">\r\n    <div class=\"indeterminate\"></div>\r\n  </div>\r\n  <div class=\"modal-content btc-modal-content\">\r\n\r\n    <!-- MODAL IMAGE -->\r\n    <div class=\"btc-modal-img-wrapper\">\r\n      <img src=\"{{selectedBook?.imageLinks.thumbnail}}\" />\r\n      <div class=\"chip btc-modal-chip\" *ngIf=\"selectedBook?.requested\">Requested</div>\r\n      <div class=\"chip btc-modal-chip\" *ngIf=\"selectedBook?.username === username\">Owned</div>\r\n    </div>\r\n\r\n    <!-- MODAL TEXT -->\r\n    <div class=\"btc-modal-text\">\r\n      <h1 class=\"btc-modal-title\">{{selectedBook?.title}}</h1>\r\n      <p *ngIf=\"selectedBook?.subtitle\" class=\"btc-modal-subtitle\">{{selectedBook?.subtitle}}</p>\r\n      <div>By&nbsp;\r\n        <span *ngFor=\"let author of selectedBook?.authors\" class=\"btc-modal-author\">{{author}}&nbsp;&nbsp;</span>\r\n      </div>\r\n      <span *ngIf=\"selectedBook?.publisher\">Published by {{selectedBook?.publisher}} </span>\r\n      <span *ngIf=\"selectedBook?.publishedDate\">({{selectedBook?.publishedDate}})</span>\r\n\r\n      <p *ngIf=\"selectedBook?.pageCount\" class=\"btc-modal-pageCount\">{{selectedBook?.pageCount}} pages</p>\r\n      <p class=\"btc-modal-user\">added by:<b> {{selectedBook?.username}}</b></p>\r\n      <p *ngIf=\"!username\" class=\"anon-user-message\">To request books from other users, please\r\n        <a class=\"modal-link\" (click)=\"authenticate('/register')\">register</a> or <a class=\"modal-link\" (click)=\"authenticate('/login')\">log in</a>.</p>\r\n    </div>\r\n  </div>\r\n\r\n  <!-- MODAL FOOTER -->\r\n  <div class=\"modal-footer btc-modal-footer\">\r\n    <a *ngIf=\"username && !selectedBook?.requested  && selectedBook?.username !== username\" class=\"modal-action modal-close waves-effect waves-green btn-flat\" (click)=\"requestBook()\">Request<i class=\"material-icons right\">add_circle</i></a>\r\n    <a class=\"waves-effect waves-green btn-flat\" (click)=\"closeModal()\">Close<i class=\"material-icons right\">cancel</i></a>\r\n  </div>\r\n</section>\r\n\r\n"
 
 /***/ }),
 
@@ -575,6 +578,9 @@ var BrowseBooksComponent = (function () {
         this.pBarService = pBarService;
         this.modalProgressBar = false;
         this.modalActions = new core_1.EventEmitter();
+        // paging properties
+        this.skip = 0;
+        this.limit = 12;
     }
     Object.defineProperty(BrowseBooksComponent.prototype, "username", {
         get: function () {
@@ -583,18 +589,46 @@ var BrowseBooksComponent = (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(BrowseBooksComponent.prototype, "lastBook", {
+        get: function () {
+            var last = this.skip + this.limit;
+            return last > this.booksInCollection ? this.booksInCollection : last;
+        },
+        enumerable: true,
+        configurable: true
+    });
     BrowseBooksComponent.prototype.ngOnInit = function () {
         this.pBarService.showProgressBar();
-        // this.username = this.authService.isValidated();
-        this.getAllBooks();
+        this.getBookCount();
+        // this.getAllBooks();
+        this.getBooksByOffset(0, this.limit);
     };
     // DATA METHODS
-    BrowseBooksComponent.prototype.getAllBooks = function () {
+    BrowseBooksComponent.prototype.getBookCount = function () {
         var _this = this;
-        this.helpMessage = '';
-        this.bookService.getAllBooks()
+        this.bookService.getBookCount()
             .subscribe(function (data) {
-            // const filteredData = this.removeCurrentUsersBooks(data);
+            _this.booksInCollection = data.count;
+        }, function (err) {
+            console.log('Cannot return book count');
+        });
+    };
+    // public getAllBooks(): void {
+    //   this.helpMessage = '';
+    //   this.bookService.getAllBooks()
+    //     .subscribe(data => {
+    //       // const filteredData = this.removeCurrentUsersBooks(data);
+    //       this.bookData = this.addAlreadyRequestedFlag(data);
+    //       this.pBarService.hideProgressBar();
+    //     }, err => {
+    //       this.notify.error('Error', 'Unable to fetch data.')
+    //       this.pBarService.hideProgressBar();
+    //     });
+    // }
+    BrowseBooksComponent.prototype.getBooksByOffset = function (skip, limit) {
+        var _this = this;
+        this.bookService.getBooksByOffset(skip, limit)
+            .subscribe(function (data) {
             _this.bookData = _this.addAlreadyRequestedFlag(data);
             _this.pBarService.hideProgressBar();
         }, function (err) {
@@ -666,6 +700,19 @@ var BrowseBooksComponent = (function () {
     BrowseBooksComponent.prototype.authenticate = function (path) {
         this.closeModal();
         this.router.navigate([path]);
+    };
+    // PAGING METHODS
+    BrowseBooksComponent.prototype.getNext = function () {
+        if (this.skip + this.limit < this.booksInCollection) {
+            this.skip += this.limit;
+            this.getBooksByOffset(this.skip, this.limit);
+        }
+    };
+    BrowseBooksComponent.prototype.getPrevious = function () {
+        if (this.skip >= this.limit) {
+            this.skip -= this.limit;
+            this.getBooksByOffset(this.skip, this.limit);
+        }
     };
     return BrowseBooksComponent;
 }());
@@ -954,8 +1001,18 @@ var BookService = (function () {
         this.authService = authService;
         this.helperService = helperService;
     }
+    BookService.prototype.getBookCount = function () {
+        var url = '/api/book/getBookCount';
+        return this.http.get(url)
+            .map(function (res) { return res.json(); });
+    };
     BookService.prototype.getAllBooks = function () {
         var url = '/api/book/getBooks';
+        return this.http.get(url)
+            .map(function (res) { return res.json(); });
+    };
+    BookService.prototype.getBooksByOffset = function (skip, limit) {
+        var url = "/api/book/getBooksByOffset?skip=" + skip + "&limit=" + limit;
         return this.http.get(url)
             .map(function (res) { return res.json(); });
     };
@@ -1278,7 +1335,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".btc-instruction-panel {\n  border: 2px solid #5d4037;\n  padding: 15px 40px 15px 40px;\n  width: 100%;\n  margin: 0 auto;\n  margin-top: 30px;\n  margin-bottom: 30px;\n  border-radius: 5px;\n  line-height: 1.8em;\n  letter-spacing: 1px; }\n\n.btc-panel-link {\n  font-weight: bold; }\n\n.btc-btn {\n  background-color: #37395d; }\n\n.btc-get-all-btn {\n  margin-left: 5px; }\n\n.btc-book-preview {\n  height: 360px; }\n\n.btc-book-preview-image-container {\n  background: #555;\n  height: 240px;\n  overflow: hidden;\n  position: relative; }\n\n.btc-book-preview-image-container:hover {\n    cursor: pointer; }\n\n.btc-book-preview-image {\n  min-width: 100%;\n  min-height: 100%;\n  position: absolute;\n  top: 50%;\n  -webkit-transform: translate(0, -50%);\n          transform: translate(0, -50%); }\n\n.btc-book-preview-image:hover {\n    opacity: 0.4; }\n\n.btc-book-preview-title {\n  font-weight: bold;\n  margin-bottom: 0; }\n\n.btc-book-preview-author {\n  margin: 3px 0 0 0;\n  font-size: 0.9em;\n  color: #444; }\n\n.btc-modal-progress-bar {\n  margin-top: 0; }\n\n.btc-modal-text {\n  float: left;\n  max-width: 60%; }\n\n.btc-modal-img-wrapper {\n  float: left;\n  margin-right: 20px; }\n\n.btc-modal-chip {\n  display: block;\n  margin-top: 10px;\n  background-color: #37395d;\n  text-align: center;\n  color: white; }\n\n.btc-modal-footer {\n  clear: both; }\n\n.btc-modal-title {\n  font-weight: bold;\n  font-size: 2.5em; }\n\n.btc-modal-subtitle {\n  font-weight: bold;\n  font-size: 1.2em; }\n\n.btc-modal-author {\n  font-size: 1.1em; }\n\n.btc-modal-pageCount {\n  font-style: italic;\n  font-size: 0.9em;\n  color: #444; }\n\n.modal-link:hover {\n  cursor: pointer; }\n\n@media screen and (max-width: 600px) {\n  h1.btc-modal-title {\n    font-size: 1.8em;\n    margin: 4px 0; }\n  .btc-modal-content {\n    padding: 16px; }\n  .btc-modal-img-wrapper {\n    float: none; }\n  .btc-modal-text {\n    max-width: 100%; }\n  .btc-modal-img-wrapper img {\n    display: none; } }\n\n@media screen and (max-width: 380px) {\n  button.btc-btn {\n    display: block;\n    width: 80%;\n    margin: 10px auto; } }\n", ""]);
+exports.push([module.i, ".btc-instruction-panel {\n  border: 2px solid #5d4037;\n  padding: 15px 40px 15px 40px;\n  width: 100%;\n  margin: 0 auto;\n  margin-top: 30px;\n  margin-bottom: 30px;\n  border-radius: 5px;\n  line-height: 1.8em;\n  letter-spacing: 1px; }\n\n.btc-panel-link {\n  font-weight: bold; }\n\n.btc-btn {\n  background-color: #37395d; }\n\n.btc-get-all-btn {\n  margin-left: 5px; }\n\n.btc-books-count {\n  font-size: 1em;\n  font-style: italic;\n  padding: 10px 10px;\n  color: #333;\n  float: right; }\n\n.btc-book-preview {\n  height: 360px; }\n\n.btc-book-preview-image-container {\n  background: #555;\n  height: 240px;\n  overflow: hidden;\n  position: relative; }\n\n.btc-book-preview-image-container:hover {\n    cursor: pointer; }\n\n.btc-book-preview-image {\n  min-width: 100%;\n  min-height: 100%;\n  position: absolute;\n  top: 50%;\n  -webkit-transform: translate(0, -50%);\n          transform: translate(0, -50%); }\n\n.btc-book-preview-image:hover {\n    opacity: 0.4; }\n\n.btc-book-preview-title {\n  font-weight: bold;\n  margin-bottom: 0; }\n\n.btc-book-preview-author {\n  margin: 3px 0 0 0;\n  font-size: 0.9em;\n  color: #444; }\n\n.btc-modal-progress-bar {\n  margin-top: 0; }\n\n.btc-modal-text {\n  float: left;\n  max-width: 60%; }\n\n.btc-modal-img-wrapper {\n  float: left;\n  margin-right: 20px; }\n\n.btc-modal-chip {\n  display: block;\n  margin-top: 10px;\n  background-color: #37395d;\n  text-align: center;\n  color: white; }\n\n.btc-modal-footer {\n  clear: both; }\n\n.btc-modal-title {\n  font-weight: bold;\n  font-size: 2.5em; }\n\n.btc-modal-subtitle {\n  font-weight: bold;\n  font-size: 1.2em; }\n\n.btc-modal-author {\n  font-size: 1.1em; }\n\n.btc-modal-pageCount {\n  font-style: italic;\n  font-size: 0.9em;\n  color: #444; }\n\n.modal-link:hover {\n  cursor: pointer; }\n\n.btc-paging-section {\n  margin: 0 auto;\n  margin-bottom: 50px;\n  padding: 5px;\n  text-align: center; }\n\n@media screen and (max-width: 600px) {\n  h1.btc-modal-title {\n    font-size: 1.8em;\n    margin: 4px 0; }\n  .btc-modal-content {\n    padding: 16px; }\n  .btc-modal-img-wrapper {\n    float: none; }\n  .btc-modal-text {\n    max-width: 100%; }\n  .btc-modal-img-wrapper img {\n    display: none; } }\n\n@media screen and (max-width: 400px) {\n  button.btc-btn {\n    display: block;\n    width: 80%;\n    margin: 10px auto; } }\n", ""]);
 
 // exports
 

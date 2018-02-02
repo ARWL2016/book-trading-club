@@ -14,11 +14,24 @@ export class BookService {
     private authService: AuthService,
     private helperService: HelperService) { }
 
+  public getBookCount(): Observable<{count}> {
+    const url = '/api/book/getBookCount';
+
+    return this.http.get(url)
+      .map((res: Response) => res.json());
+  }
+
   public getAllBooks(): Observable<Book[]> {
     const url = '/api/book/getBooks';
 
     return this.http.get(url)
       .map(res => res.json());
+  }
+
+  public getBooksByOffset(skip, limit): Observable<Book[]> {
+    const url = `/api/book/getBooksByOffset?skip=${skip}&limit=${limit}`;
+    return this.http.get(url)
+      .map((res: Response) => res.json());
   }
 
   public getMyBooks(id): Observable<Book[]> {

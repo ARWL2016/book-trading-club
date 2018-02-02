@@ -14,6 +14,34 @@ module.exports = {
       });
   },
 
+  getBookCount(req, res) {
+    Book
+      .count()
+      .then(count => {
+        res.status(200).send({count});
+      })
+      .catch(e => {
+        console.log({e});
+        res.status(500).send('Cannot return book count');
+      })
+  },
+
+  getBooksByOffset(req, res) {
+    const {skip, limit} = req.query;
+
+    Book
+      .find()
+      .skip(+skip)
+      .limit(+limit)
+      .sort({ _id: -1 })
+      .then(bookData => {
+        res.status(200).send(bookData);
+      })
+      .catch(e => {
+        res.status(500).send('Server error');
+      })
+  },
+
   getBooksByUserId(req, res) {
     const id = req.query.id;
     Book

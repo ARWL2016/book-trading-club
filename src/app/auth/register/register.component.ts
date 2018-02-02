@@ -42,6 +42,10 @@ export class RegisterComponent {
     if (this.user.username.length < 3) {
       return this.error = 'username must be minimum 3 characters';
     }
+    if (this.usernameChecked) {
+      return;
+    }
+
     this.auth.checkUsername(this.user.username)
       .subscribe(() => {
         this.usernameChecked = true;
@@ -69,7 +73,7 @@ export class RegisterComponent {
 
   public checkMatch() {
     this.passwordMatch = false;
-    if (this.validatePassword() && this.confirmation) {
+    if (this.confirmation) {
       if (this.user.password === this.confirmation) {
         this.passwordMatch = true;
         this.error = '';

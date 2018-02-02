@@ -22,6 +22,7 @@ export class BrowseBooksComponent implements OnInit {
   // data
   bookData: Book[];
   selectedBook: Book;
+
   get username() {
     return this.authService.isValidated();
   }
@@ -30,6 +31,15 @@ export class BrowseBooksComponent implements OnInit {
   helpMessage: string;
   modalProgressBar = false;
   modalActions = new EventEmitter<string|MaterializeAction>();
+
+  // paging properties
+  skip = 0;
+  limit = 12;
+  booksInCollection: Number;
+  get lastBook() {
+    const last = this.skip + this.limit;
+    return last > this.booksInCollection ? this.booksInCollection : last;
+  }
 
   constructor(
     private authService: AuthService,
@@ -42,24 +52,44 @@ export class BrowseBooksComponent implements OnInit {
 
   ngOnInit(): void {
     this.pBarService.showProgressBar();
-    // this.username = this.authService.isValidated();
-    this.getAllBooks();
+    this.getBookCount();
+    // this.getAllBooks();
+    this.getBooksByOffset(0, this.limit);
   }
-
 
   // DATA METHODS
 
-  public getAllBooks(): void {
-    this.helpMessage = '';
-    this.bookService.getAllBooks()
+  public getBookCount(): void {
+    this.bookService.getBookCount()
       .subscribe(data => {
-        // const filteredData = this.removeCurrentUsersBooks(data);
-        this.bookData = this.addAlreadyRequestedFlag(data);
-        this.pBarService.hideProgressBar();
+        this.booksInCollection = data.count;
       }, err => {
-        this.notify.error('Error', 'Unable to fetch data.')
-        this.pBarService.hideProgressBar();
+        console.log('Cannot return book count');
       });
+  }
+
+  // public getAllBooks(): void {
+  //   this.helpMessage = '';
+  //   this.bookService.getAllBooks()
+  //     .subscribe(data => {
+  //       // const filteredData = this.removeCurrentUsersBooks(data);
+  //       this.bookData = this.addAlreadyRequestedFlag(data);
+  //       this.pBarService.hideProgressBar();
+  //     }, err => {
+  //       this.notify.error('Error', 'Unable to fetch data.')
+  //       this.pBarService.hideProgressBar();
+  //     });
+  // }
+
+  public getBooksByOffset(skip: number, limit: number): void {
+    this.bookService.getBooksByOffset(skip, limit)
+    .subscribe(data => {
+      this.bookData = this.addAlreadyRequestedFlag(data);
+      this.pBarService.hideProgressBar();
+    }, err => {
+      this.notify.error('Error', 'Unable to fetch data.');
+      this.pBarService.hideProgressBar();
+    });
   }
 
   public searchBooks(): void {
@@ -129,5 +159,21 @@ export class BrowseBooksComponent implements OnInit {
   public authenticate(path): void {
     this.closeModal();
     this.router.navigate([path]);
+  }
+
+
+  // PAGING METHODS
+  public getNext(): void {
+    if (this.skip + this.limit < this.booksInCollection) {
+      this.skip += this.limit;
+      this.getBooksByOffset(this.skip, this.limit);
+    }
+  }
+
+  public getPrevious(): void {
+    if (this.skip >= this.limit) {
+      this.skip -= this.limit;
+      this.getBooksByOffset(this.skip, this.limit);
+    }
   }
 }

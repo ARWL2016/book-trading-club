@@ -24,6 +24,14 @@
   margin-left: 5px;
 }
 
+.btc-books-count {
+  font-size: 1em;
+  font-style: italic;
+  padding: 10px 10px;
+  color: #333;
+  float: right;
+}
+
 // PREVIEW SECTION
 
 .btc-book-preview {
@@ -116,6 +124,21 @@
   }
 }
 
+// PAGING COMPONENT
+
+.btc-paging-section {
+  margin: 0 auto;
+  margin-bottom: 50px;
+  padding: 5px;
+  text-align: center;
+
+  button: {
+
+  }
+}
+
+
+
 // MEDIA QUERIES
 
 @media screen and (max-width: 600px) {
@@ -141,7 +164,7 @@
   }
 }
 
-@media screen and (max-width: 380px) {
+@media screen and (max-width: 400px) {
   button.btc-btn {
     display: block;
     width: 80%;

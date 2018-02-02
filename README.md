@@ -29,9 +29,7 @@ Production
 - add fuller test coverage for API
 
 Bugs: 
-- cancel request not cancelling the correct request
-- binding of click on bbs fails by one
-- password validation is getting called on input focus
+
 
 Enhancements
 - implement delete modal on profile page
