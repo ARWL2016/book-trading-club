@@ -1,5 +1,4 @@
 ### Book Trading App
-  
 
 This is a personal project, not a production grade application. It uses free dynos on Heroku and a sandbox database at MLab. It has not been subject to full cross browser testing. 
 
@@ -24,7 +23,7 @@ https://stackoverflow.com/questions/43869961/node-js-express-redirect-all-to-ang
 http://materializecss.com/ 
 
 Production
-- add server side logging
+- add server side error logging
 - authenticate routes consistently
 - add fuller test coverage for API
 
@@ -35,15 +34,13 @@ Enhancements
 - implement delete modal on profile page
 - prevent duplicate entries? - or warn
 - add footer
-- add paging
-- add mobile menu
 - remove description from bookData
-- add dismissable tips
 - add a messaging component
 - add proper front end error handling
 - extract modal as separate component
 
 Todo 
+- delete book method
 - front end checklist
 
 

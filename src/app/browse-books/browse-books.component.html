@@ -15,7 +15,7 @@
 
 <!-- SEARCH FORM SECTION -->
 <section class="row">
-  <form materialize class="col s12" #form="ngForm" (submit)="searchBooks()">
+  <form materialize class="col s12" #form="ngForm">
     <div class="row">
       <div class="input-field col s12">
         <input
@@ -23,17 +23,18 @@
           type="text"
           name="titleQuery"
           id="titleQuery">
-        <label for="titleQuery">Title or Keyword</label>
+        <label for="titleQuery">Title or Keyword Search</label>
       </div>
     </div>
     <div class="row">
-      <button class="btn waves-effect waves-light btc-btn" type="submit">Search
+      <button class="btn waves-effect waves-light btc-btn" (click)="searchBooks()">Search
         <i class="material-icons right">search</i>
       </button>
-      <button class="btn waves-effect waves-light btc-btn btc-get-all-btn" (click)="getAllBooks()">Recently Added
+      <button class="btn waves-effect waves-light btc-btn btc-get-all-btn" (click)="getBooksByOffset(skip, limit)">Recently Added
         <i class="material-icons right">autorenew</i>
       </button>
-      <span class="btc-books-count">Showing {{ skip }} to {{ lastBook }} of {{ booksInCollection }} books in collection</span>
+      <span *ngIf="!keywordSearch" class="btc-books-count">Showing {{ skip + 1 }} to {{ lastBook }} of {{ booksInCollection }} books in collection</span>
+      <span *ngIf="keywordSearch" class="btc-books-count">{{ bookData?.length }} results</span>
     </div>
   </form>
 </section>
@@ -51,7 +52,7 @@
 </section>
 
 <!-- PAGING BUTTONS -->
-<section class="btc-paging-section">
+<section class="btc-paging-section" *ngIf="!keywordSearch">
   <button class="btn waves-effect waves-light btc-btn" (click)="getPrevious()" [disabled]="skip===0">
     Previous
     <i class="material-icons left">fast_rewind</i>

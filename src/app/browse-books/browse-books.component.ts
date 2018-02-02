@@ -31,6 +31,7 @@ export class BrowseBooksComponent implements OnInit {
   helpMessage: string;
   modalProgressBar = false;
   modalActions = new EventEmitter<string|MaterializeAction>();
+  keywordSearch = false;
 
   // paging properties
   skip = 0;
@@ -82,6 +83,7 @@ export class BrowseBooksComponent implements OnInit {
   // }
 
   public getBooksByOffset(skip: number, limit: number): void {
+    this.keywordSearch = false;
     this.bookService.getBooksByOffset(skip, limit)
     .subscribe(data => {
       this.bookData = this.addAlreadyRequestedFlag(data);
@@ -93,6 +95,8 @@ export class BrowseBooksComponent implements OnInit {
   }
 
   public searchBooks(): void {
+    if (!this.titleQuery) {return;}
+    this.keywordSearch = true;
     this.pBarService.showProgressBar();
     this.helpMessage = '';
     this.bookData = [];
