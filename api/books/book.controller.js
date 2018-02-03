@@ -18,16 +18,16 @@ module.exports = {
     Book
       .count()
       .then(count => {
-        res.status(200).send({count});
+        res.status(200).send({ count });
       })
       .catch(e => {
-        console.log({e});
+        console.log({ e });
         res.status(500).send('Cannot return book count');
-      })
+      });
   },
 
   getBooksByOffset(req, res) {
-    const {skip, limit} = req.query;
+    const { skip, limit } = req.query;
 
     Book
       .find()
@@ -39,7 +39,7 @@ module.exports = {
       })
       .catch(e => {
         res.status(500).send('Server error');
-      })
+      });
   },
 
   getBooksByUserId(req, res) {
@@ -52,7 +52,7 @@ module.exports = {
       })
       .catch(e => {
         res.send(500).send('Could not fetch books for current user');
-      })
+      });
   },
 
   searchBooksByTitle(req, res) {

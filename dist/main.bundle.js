@@ -201,9 +201,9 @@ var AppComponent = (function () {
         this.progressBar = true;
         // angular notifications config
         this.options = {
-            timeOut: 3500,
+            timeOut: 3000,
             lastOnBottom: true,
-            showProgressBar: true,
+            showProgressBar: false,
             pauseOnHover: true
         };
     }

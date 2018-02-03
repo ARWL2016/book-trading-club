@@ -14,6 +14,18 @@ This is a personal project, not a production grade application. It uses free dyn
 - Auth: JSON Web Tokens, BCrypt
 - Hosting: Heroku / MLab (cloud Mongo provider)
 - Testing: Karma, Mocha, Supertest, Expect
+- Linting: ESLint, TSLint
+
+#### Features 
+- responsive design
+- data pagination
+- server side username validation
+- password encryption
+- progress bar and notifications for asynchronous features
+
+#### Browser Compatibility 
+- tested on Chrome, Opera, Edge, IE11
+- on IE11, when deleting a book from collection or removing a request, the profile page does not update (ok after F5). When adding a book, the Browse Books page does not update. Caching problem? 
 
 #### Useful Links
 https://arwl-book-exchange.herokuapp.com 

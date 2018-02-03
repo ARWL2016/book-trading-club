@@ -26,9 +26,9 @@ export class AppComponent implements DoCheck {
 
   // angular notifications config
   public options = {
-    timeOut: 3500,
+    timeOut: 3000,
     lastOnBottom: true,
-    showProgressBar: true,
+    showProgressBar: false,
     pauseOnHover: true
   };
 
