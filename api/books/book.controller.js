@@ -2,6 +2,7 @@ const { Book } = require('./book.model');
 const { User } = require('../auth/user.model');
 
 module.exports = {
+  // not in use - replaced by getBooksByOffset
   getAllBooks(req, res, next) {
     Book
       .find()
@@ -64,20 +65,29 @@ module.exports = {
       .catch(e => next(e));
   },
 
-  addBook(req, res) {
+  addBook(req, res, next) {
     const { user, bookToAdd } = req.body;
 
-    // add user id to the book we will save
-    bookToAdd.userId = user._id;
-    bookToAdd.username = user.username;
+    // check for duplicates
+    Book.find({ userId: user._id, title: bookToAdd.title, description: bookToAdd.description })
+      .then(book => {
+        if (book.length) {
+          return res.status(409).send('Book already exists in users collection');
+        }
 
-    Book.create(bookToAdd).then(bookData => {
-      User.findByIdAndUpdate(user._id, { $push: { bookIds: bookData._id } })
-        .then(() => {
-          res.status(200).send(bookData);
-        })
-        .catch(e => next(e));
-    });
+        // add user id to the book we will save
+        bookToAdd.userId = user._id;
+        bookToAdd.username = user.username;
+
+        Book.create(bookToAdd).then(bookData => {
+          User.findByIdAndUpdate(user._id, { $push: { bookIds: bookData._id } })
+            .then(() => {
+              res.status(200).send(bookData);
+            })
+            .catch(e => next(e));
+        });
+      })
+      .catch(e => next(e));
   },
 
   deleteBookById(req, res, next) {

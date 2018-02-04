@@ -25,7 +25,6 @@
 
 #### Browser Compatibility 
 - tested on Chrome, Opera, Edge, IE11
-- on IE11, when deleting a book from collection or removing a request, the profile page does not update (ok after F5). When adding a book, the Browse Books page does not update. Caching problem? 
 
 #### Useful Links
 https://arwl-book-exchange.herokuapp.com 
@@ -37,8 +36,6 @@ http://materializecss.com/
  
 Enhancements
 - add fuller test coverage for API
-- implement delete modal on profile page
-- prevent duplicate entries? - or warn
 - add footer
 - add a messaging component
 - add proper front end error handling

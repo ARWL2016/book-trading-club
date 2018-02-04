@@ -28,7 +28,7 @@
         <td class="btc-title-column">{{book.title}}</td>
         <td>{{book.authors[0]}}</td>
         <td class="btc-centered">{{book.requestsReceived.length}}</td>
-        <td class="btc-centered"><i (click)="deleteBook(book)" class="material-icons btc-icon">delete_forever</i></td>
+        <td class="btc-centered"><i (click)="confirmDelete(book)" class="material-icons btc-icon">delete_forever</i></td>
       </tr>
     </tbody>
   </table>
@@ -39,14 +39,14 @@
   </div>
 </section>
 
-<!-- DELETE MODAL -->
+<!-- DELETE BOOK MODAL -->
 <section id="modal1" class="modal" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalActions">
   <div class="modal-content">
-    <h4 *ngIf="selectedBook"></h4>
-    <p></p>
+    <h4>{{selectedBook?.title}} by {{selectedBook?.authors[0]}}</h4>
+    <p>Are you sure you want to permanently remove this book from your collection?</p>
   </div>
   <div class="modal-footer">
-    <a class="waves-effect waves-green btn-flat" >Remove<i class="material-icons right">delete_forever</i></a>
+    <a class="waves-effect waves-green btn-flat" (click)="deleteBook(selectedBook)">Remove<i class="material-icons right">delete_forever</i></a>
     <a class="waves-effect waves-green btn-flat" (click)="closeModal()">Cancel<i class="material-icons right">cancel</i></a>
   </div>
 </section>

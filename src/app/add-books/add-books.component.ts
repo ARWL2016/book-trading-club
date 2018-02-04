@@ -87,6 +87,9 @@ export class AddBooksComponent {
         this.modalProgressBar = false;
       }, err => {
         console.log(err);
+        if (err.status === 409) {
+          this.notify.error(this.selectedBook.title, 'This book already exists in your collection');
+        }
         this.modalProgressBar = false;
       });
 

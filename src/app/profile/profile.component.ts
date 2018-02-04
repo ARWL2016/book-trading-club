@@ -75,7 +75,13 @@ export class ProfileComponent implements OnInit {
     this.linkClass.requests = link === 'Requests' ? 'active' : '';
   }
 
+  public confirmDelete(book): void {
+    this.selectedBook = book;
+    this.openModal();
+  }
+
   public deleteBook(book): void {
+    this.closeModal();
     this.pBarService.showProgressBar();
     this.bookService
       .deleteBookById(book._id)
