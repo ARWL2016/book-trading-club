@@ -42,8 +42,8 @@ export class AddBooksComponent {
   ) { }
 
   public searchBooksAPI(form): void {
-
     this.bookData = [];
+    this.helpMessage = '';
     this.pBarService.showProgressBar();
 
     this.gBooksApiService

@@ -3,10 +3,10 @@ const { logger } = require('./logger');
 
 mongoose.Promise = global.Promise;
 
-mongoose.connect(process.env.MONGODB_URI);
+mongoose.connect(process.env.MONGO_LOCAL);
 
 mongoose.connection.on('connected', () => {
-  logger.info('mongoose connected to: ' + process.env.MONGODB_URI);
+  logger.info('mongoose connected to: ' + process.env.MONGO_LOCAL);
 });
 
 mongoose.connection.on('error', (err) => {

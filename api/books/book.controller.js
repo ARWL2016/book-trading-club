@@ -69,7 +69,8 @@ module.exports = {
     const { user, bookToAdd } = req.body;
 
     // check for duplicates
-    Book.find({ userId: user._id, title: bookToAdd.title, description: bookToAdd.description })
+    Book
+      .find({ userId: user._id, title: bookToAdd.title, description: bookToAdd.description })
       .then(book => {
         if (book.length) {
           return res.status(409).send('Book already exists in users collection');
@@ -79,13 +80,16 @@ module.exports = {
         bookToAdd.userId = user._id;
         bookToAdd.username = user.username;
 
-        Book.create(bookToAdd).then(bookData => {
-          User.findByIdAndUpdate(user._id, { $push: { bookIds: bookData._id } })
-            .then(() => {
-              res.status(200).send(bookData);
-            })
-            .catch(e => next(e));
-        });
+        Book
+          .create(bookToAdd)
+          .then(bookData => {
+            User
+              .findByIdAndUpdate(user._id, { $push: { bookIds: bookData._id } })
+              .then(() => {
+                res.status(200).send(bookData);
+              })
+              .catch(e => next(e));
+          });
       })
       .catch(e => next(e));
   },

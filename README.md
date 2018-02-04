@@ -34,7 +34,12 @@ https://stackoverflow.com/questions/43869961/node-js-express-redirect-all-to-ang
 http://materializecss.com/ 
 
  
+Bugs
+
+
 Enhancements
+- add https redirect
+- use cache control in html: https://stackoverflow.com/questions/4480304/how-to-set-http-headers-for-cache-control
 - add fuller test coverage for API
 - add footer
 - add a messaging component

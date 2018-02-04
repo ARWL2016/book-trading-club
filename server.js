@@ -6,6 +6,7 @@ const compression = require('compression');
 const path = require('path');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
+const expressEnforcesSsl = require('express-enforces-ssl');
 const ms = require('ms');
 
 // local
@@ -22,8 +23,26 @@ const staticOptions = process.env.NODE_ENV === 'production' ?
 const app = express();
 
 // configure app
-app.use(compression());
 app.use(helmet());
+app.use(helmet.contentSecurityPolicy({
+  directives: {
+    defaultSrc: ["'self'", ],
+    connectSrc: ["'self'", 'https://www.googleapis.com'],
+    scriptSrc: ["'self'", "'unsafe-eval'"],
+    styleSrc: ["'self'", 'https://fonts.googleapis.com', "'unsafe-inline'"],
+    imgSrc: ["'self'", 'http://books.google.com'],
+    fontSrc: ["'self'", 'https://fonts.googleapis.com', 'https://fonts.gstatic.com']
+  }
+}));
+if (process.env.NODE_ENV === 'production') {
+  app.enable('trust proxy');
+  app.use(expressEnforcesSsl());
+  app.use(helmet.hsts({
+    maxAge: ms('1 year'),
+    includeSubdomains: true
+  }));
+  app.use(compression());
+}
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'dist'), staticOptions));
 

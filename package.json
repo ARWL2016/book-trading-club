@@ -16,7 +16,7 @@
     "mocha": "SET \"NODE_ENV=test\" && mocha",
     "tslint": "ng lint --fix",
     "eslint": "./node_modules/.bin/eslint api server.js --fix",
-    "eslint:watch": "esw api server.js --watch --fix",
+    "eslint:watch": "esw api server.js --watch",
     "deploy": "git push heroku",
     "postdeploy": "heroku open",
     "kill": "taskkill /f /im node.exe"
