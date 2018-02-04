@@ -16,6 +16,8 @@ module.exports = {
     Book
       .count()
       .then(count => {
+        // prevent IE from caching results
+        res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
         res.status(200).send({ count });
       })
       .catch(e => next(e));
@@ -23,13 +25,13 @@ module.exports = {
 
   getBooksByOffset(req, res, next) {
     const { skip, limit } = req.query;
-
     Book
       .find()
       .skip(+skip)
       .limit(+limit)
       .sort({ _id: -1 })
       .then(bookData => {
+        res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
         res.status(200).send(bookData);
       })
       .catch(e => next(e));
@@ -41,6 +43,7 @@ module.exports = {
       .find({ userId: id })
       .sort({ _id: -1 })
       .then(data => {
+        res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
         res.status(200).send(data);
       })
       .catch(e => next(e));

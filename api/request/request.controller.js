@@ -56,6 +56,8 @@ module.exports = {
 
     Request.find({ requesterId: id })
       .then(requests => {
+        res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+        console.log({ res });
         res.status(200).send(requests);
       })
       .catch(e => next(e));
