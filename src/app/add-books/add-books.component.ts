@@ -51,9 +51,7 @@ export class AddBooksComponent {
     this.gBooksApiService
       .searchBooks(form.value)
       .then(data => {
-        console.log({data});
         this.bookData = this.helperService.convertToHttps(data);
-        console.log(this.bookData);
         this.pBarService.hideProgressBar();
       })
       .catch(e => {
