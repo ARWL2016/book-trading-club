@@ -35,7 +35,8 @@
 // PREVIEW SECTION
 
 .btc-book-preview {
-  min-height: 360px;
+  height: 360px;
+  overflow: hidden;
 }
 
 .btc-book-preview-image-container {

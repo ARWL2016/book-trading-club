@@ -87,6 +87,7 @@ export class BrowseBooksComponent implements OnInit {
     this.bookService.getBooksByOffset(skip, limit)
     .subscribe(data => {
       this.bookData = this.addAlreadyRequestedFlag(data);
+      console.log(this.bookData);
       this.pBarService.hideProgressBar();
     }, err => {
       this.notify.error('Error', 'Unable to fetch data.');

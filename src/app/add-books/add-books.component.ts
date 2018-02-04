@@ -8,6 +8,7 @@ import { GoogleBooksApiService } from 'app/services/google-books-api.service';
 import { Router } from '@angular/router';
 import { NotificationsService } from 'angular2-notifications';
 import { ProgressBarService } from 'app/services/progress-bar.service';
+import { HelperService } from 'app/services/helper.service';
 
 @Component({
   selector: 'btc-add-books',
@@ -35,6 +36,7 @@ export class AddBooksComponent {
   constructor(
     private authService: AuthService,
     private bookService: BookService,
+    private helperService: HelperService,
     private gBooksApiService: GoogleBooksApiService,
     private router: Router,
     private notify: NotificationsService,
@@ -49,7 +51,9 @@ export class AddBooksComponent {
     this.gBooksApiService
       .searchBooks(form.value)
       .then(data => {
-        this.bookData = data;
+        console.log({data});
+        this.bookData = this.helperService.convertToHttps(data);
+        console.log(this.bookData);
         this.pBarService.hideProgressBar();
       })
       .catch(e => {

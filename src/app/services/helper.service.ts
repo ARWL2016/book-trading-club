@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Response, Headers, RequestOptions } from '@angular/http';
+import { Book } from 'app/models/book';
 
 @Injectable()
 export class HelperService {
@@ -19,6 +20,14 @@ export class HelperService {
     const headers = new Headers({ 'X-Auth': token, 'Content-Type': 'application/json', });
     const options = new RequestOptions({ headers });
     return options;
+  }
+
+  public convertToHttps(books: Book[]): Book[] {
+    return books.map(book => {
+      const thumbnail =  book.imageLinks.thumbnail.replace('http', 'https');
+      book.imageLinks.thumbnail = thumbnail;
+      return book;
+    });
   }
 
 }
