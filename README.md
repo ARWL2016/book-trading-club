@@ -1,6 +1,6 @@
 ### Book Trading App
 
-This is a personal project, not a production grade application. It uses free dynos on Heroku and a sandbox database at MLab. It has not been subject to full cross browser testing. 
+  Book Exchange is a book trading application which allows authenticated users to search for books on the Google Books API, build a book collection, view other users' collections, and send and receive requests for books. 
 
 #### Technology 
 - Angular 4.0 / Angular CLI
@@ -10,7 +10,7 @@ This is a personal project, not a production grade application. It uses free dyn
 - Express 4.15
 - MongoDB 2.2 
 - Mongoose 4.11 
-- Google Books API
+- Data: Google Books API
 - Auth: JSON Web Tokens, BCrypt
 - Hosting: Heroku / MLab (cloud Mongo provider)
 - Testing: Karma, Mocha, Supertest, Expect
@@ -34,25 +34,18 @@ https://developers.google.com/books/docs/v1/using#WorkingVolumes
 https://stackoverflow.com/questions/43869961/node-js-express-redirect-all-to-angular-2-page  
 http://materializecss.com/ 
 
-Production
-- add server side error logging
-- authenticate routes consistently
-- add fuller test coverage for API
-
-Bugs: 
-
-
+ 
 Enhancements
+- add fuller test coverage for API
 - implement delete modal on profile page
 - prevent duplicate entries? - or warn
 - add footer
-- remove description from bookData
 - add a messaging component
 - add proper front end error handling
 - extract modal as separate component
 
 Todo 
-- delete book method
+- delete book method - currently requests for a deleted book are not auto removed
 - front end checklist
 
 

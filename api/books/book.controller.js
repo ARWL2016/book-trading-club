@@ -2,31 +2,26 @@ const { Book } = require('./book.model');
 const { User } = require('../auth/user.model');
 
 module.exports = {
-  getAllBooks(req, res) {
+  getAllBooks(req, res, next) {
     Book
       .find()
       .sort({ _id: -1 })
       .then(bookData => {
         res.status(200).send(bookData);
       })
-      .catch(e => {
-        res.status(404).send();
-      });
+      .catch(e => next(e));
   },
 
-  getBookCount(req, res) {
+  getBookCount(req, res, next) {
     Book
       .count()
       .then(count => {
         res.status(200).send({ count });
       })
-      .catch(e => {
-        console.log({ e });
-        res.status(500).send('Cannot return book count');
-      });
+      .catch(e => next(e));
   },
 
-  getBooksByOffset(req, res) {
+  getBooksByOffset(req, res, next) {
     const { skip, limit } = req.query;
 
     Book
@@ -37,12 +32,10 @@ module.exports = {
       .then(bookData => {
         res.status(200).send(bookData);
       })
-      .catch(e => {
-        res.status(500).send('Server error');
-      });
+      .catch(e => next(e));
   },
 
-  getBooksByUserId(req, res) {
+  getBooksByUserId(req, res, next) {
     const id = req.query.id;
     Book
       .find({ userId: id })
@@ -50,12 +43,10 @@ module.exports = {
       .then(data => {
         res.status(200).send(data);
       })
-      .catch(e => {
-        res.send(500).send('Could not fetch books for current user');
-      });
+      .catch(e => next(e));
   },
 
-  searchBooksByTitle(req, res) {
+  searchBooksByTitle(req, res, next) {
     const title = req.params.title;
     Book
       .find({ 'title': { $regex: new RegExp(title), $options: 'i' } })
@@ -65,8 +56,9 @@ module.exports = {
           res.status(200).send(data);
         } else {
           res.status(200).send('The query returned no results');
-       }
-    });
+        }
+      })
+      .catch(e => next(e));
   },
 
   addBook(req, res) {
@@ -81,13 +73,11 @@ module.exports = {
         .then(() => {
           res.status(200).send(bookData);
         })
-        .catch(e => {
-          res.status(400).send('Data could not be added');
-        });
+        .catch(e => next(e));
     });
   },
 
-  deleteBookById(req, res) {
+  deleteBookById(req, res, next) {
     // TODO clean up any requests for this book
     const id = req.params.id;
     Book.findByIdAndRemove(id)
@@ -97,7 +87,10 @@ module.exports = {
           .then(() => {
             res.status(200).send({ message: 'Book removed from collection' });
           });
-      });
+      })
+      .catch(e => next(e));
   }
 
 };
+
+

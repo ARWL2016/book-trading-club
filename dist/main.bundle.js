@@ -1006,6 +1006,8 @@ var BookService = (function () {
         this.http = http;
         this.authService = authService;
         this.helperService = helperService;
+        // authenticated requests
+        this.options = this.helperService.addAuthTokenToHeader();
     }
     BookService.prototype.getBookCount = function () {
         var url = '/api/book/getBookCount';
@@ -1022,26 +1024,25 @@ var BookService = (function () {
         return this.http.get(url)
             .map(function (res) { return res.json(); });
     };
-    BookService.prototype.getMyBooks = function (id) {
-        var url = "/api/book/getCurrentUsersBooks?id=" + id;
-        return this.http.get(url)
-            .map(function (res) { return res.json(); });
-    };
     BookService.prototype.searchBooks = function (title, author) {
         var url = "/api/book/searchBooks/" + title;
         return this.http.get(url)
+            .map(function (res) { return res.json(); });
+    };
+    BookService.prototype.getMyBooks = function (id) {
+        var url = "/api/book/getCurrentUsersBooks?id=" + id;
+        return this.http.get(url, this.options)
             .map(function (res) { return res.json(); });
     };
     BookService.prototype.addBookToCollection = function (bookToAdd) {
         var user = this.authService.currentUser;
         var url = '/api/book/addBook';
         var body = { user: user, bookToAdd: bookToAdd };
-        var options = this.helperService.addAuthTokenToHeader();
-        return this.http.post(url, body, options);
+        return this.http.post(url, body, this.options);
     };
     BookService.prototype.deleteBookById = function (id) {
         var url = "/api/book/delete/" + id;
-        return this.http.delete(url);
+        return this.http.delete(url, this.options);
     };
     return BookService;
 }());
@@ -1275,6 +1276,7 @@ var RequestService = (function () {
         this.helper = helper;
         this.auth = auth;
         this.http = http;
+        this.options = this.helper.addAuthTokenToHeader();
     }
     RequestService.prototype.requestBook = function (user, book) {
         var requesterId = this.auth.currentUser._id;
@@ -1291,17 +1293,16 @@ var RequestService = (function () {
         };
         var url = '/api/request/createRequest';
         var body = { request: request };
-        var options = this.helper.addAuthTokenToHeader();
-        return this.http.post(url, body, options);
+        return this.http.post(url, body, this.options);
     };
     RequestService.prototype.getMyRequests = function (id) {
         var url = "/api/request/getCurrentUsersRequests?id=" + id;
-        return this.http.get(url)
+        return this.http.get(url, this.options)
             .map(function (res) { return res.json(); });
     };
     RequestService.prototype.deleteRequestById = function (id) {
         var url = "api/request/delete/" + id;
-        return this.http.delete(url);
+        return this.http.delete(url, this.options);
     };
     return RequestService;
 }());

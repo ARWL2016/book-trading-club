@@ -18,6 +18,8 @@ export class RequestService {
     private auth: AuthService,
     private http: Http) { }
 
+  private options = this.helper.addAuthTokenToHeader();
+
   public requestBook(user: User, book: Book): Observable<Response> {
     const requesterId: string = this.auth.currentUser._id;
     const timestamp = new Date().toString();
@@ -34,19 +36,19 @@ export class RequestService {
 
     const url = '/api/request/createRequest';
     const body = { request };
-    const options = this.helper.addAuthTokenToHeader();
-    return this.http.post(url, body, options);
+
+    return this.http.post(url, body, this.options);
   }
 
   public getMyRequests(id: string): Observable<[{ Request }]> {
     const url = `/api/request/getCurrentUsersRequests?id=${id}`;
-    return this.http.get(url)
+    return this.http.get(url, this.options)
       .map((res: Response) => res.json());
   }
 
   public deleteRequestById(id): Observable<Response> {
     const url = `api/request/delete/${id}`;
-    return this.http.delete(url);
+    return this.http.delete(url, this.options);
   }
 
 }

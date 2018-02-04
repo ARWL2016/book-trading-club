@@ -34,15 +34,19 @@ export class BookService {
       .map((res: Response) => res.json());
   }
 
-  public getMyBooks(id): Observable<Book[]> {
-    const url = `/api/book/getCurrentUsersBooks?id=${id}`;
+  public searchBooks(title: string, author?: string): Observable<Book[]> {
+    const url = `/api/book/searchBooks/${title}`;
     return this.http.get(url)
       .map(res => res.json());
   }
 
-  public searchBooks(title: string, author?: string): Observable<Book[]> {
-    const url = `/api/book/searchBooks/${title}`;
-    return this.http.get(url)
+  // authenticated requests
+
+  private options = this.helperService.addAuthTokenToHeader();
+
+  public getMyBooks(id): Observable<Book[]> {
+    const url = `/api/book/getCurrentUsersBooks?id=${id}`;
+    return this.http.get(url, this.options)
       .map(res => res.json());
   }
 
@@ -50,13 +54,13 @@ export class BookService {
     const user = this.authService.currentUser;
     const url = '/api/book/addBook';
     const body = {user, bookToAdd};
-    const options = this.helperService.addAuthTokenToHeader();
-    return this.http.post(url, body, options);
+
+    return this.http.post(url, body, this.options);
   }
 
   public deleteBookById(id: string): Observable<Response> {
     const url = `/api/book/delete/${id}`;
-    return this.http.delete(url);
+    return this.http.delete(url, this.options);
   }
 
 }

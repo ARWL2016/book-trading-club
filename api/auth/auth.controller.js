@@ -1,7 +1,7 @@
 const { User } = require('./user.model');
 
 module.exports = {
-  register(req, res) {
+  register(req, res, next) {
     const body = req.body;
     const { username } = req.body;
 
@@ -19,10 +19,11 @@ module.exports = {
             res.header('X-Auth', token).send(user);
           });
         }
-      }).catch(err => res.status(400).send(err));
+      })
+      .catch(e => next(e));
   },
 
-  checkUsername(req, res) {
+  checkUsername(req, res, next) {
     const username = req.params.username;
     User.findOne({ username })
       .then(user => {
@@ -31,28 +32,31 @@ module.exports = {
         } else {
           res.status(200).send('username available');
         }
-      });
+      })
+      .catch(e => next(e));
   },
 
-  login(req, res) {
+  login(req, res, next) {
     const { username, password } = req.body;
-
-    User.findByCredentials(username, password).then((user) => {
-      return user.generateAuthToken()
-        .then((token) => {
-          user.password = undefined;
-          user.tokens = undefined;
-          res.header('X-Auth', token).send(user);
-      });
-    }).catch((err) => {
-      res.status(400).send();
-    });
+    let user;
+    User
+      .findByCredentials(username, password)
+      .then(existingUser => {
+        user = existingUser;
+        return existingUser.generateAuthToken();
+      })
+      .then(token => {
+        user.password = undefined;
+        user.tokens = undefined;
+        res.header('X-Auth', token).send(user);
+      })
+      .catch(e => next(e));
   },
 
-  logout(req, res) {
+  logout(req, res, next) {
     req.user.removeToken(req.token).then(() => {
       res.status(200).send();
     })
-    .catch(err => res.status(400).send());
+    .catch(e => next(e));
   }
 };
