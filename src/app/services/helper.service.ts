@@ -23,11 +23,12 @@ export class HelperService {
   }
 
   public convertToHttps(books: Book[]): Book[] {
-    return books.map(book => {
-      const thumbnail =  book.imageLinks.thumbnail.replace('http', 'https');
+    const result = books.map(book => {
+      const thumbnail =  book.imageLinks.thumbnail.replace('http:', 'https:');
       book.imageLinks.thumbnail = thumbnail;
       return book;
     });
+    return result;
   }
 
 }
