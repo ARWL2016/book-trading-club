@@ -49,7 +49,6 @@ export class GoogleBooksApiService {
           return filteredArray;
         })
         .catch(e => {
-          console.log(e);
           return Promise.reject(e);
         });
 

@@ -37,18 +37,21 @@ export class RequestService {
     const url = '/api/request/createRequest';
     const body = { request };
 
-    return this.http.post(url, body, this.options);
+    const options = this.helper.addAuthTokenToHeader();
+    return this.http.post(url, body, options);
   }
 
   public getMyRequests(id: string): Observable<[{ Request }]> {
     const url = `/api/request/getCurrentUsersRequests?id=${id}`;
-    return this.http.get(url, this.options)
+    const options = this.helper.addAuthTokenToHeader();
+    return this.http.get(url, options)
       .map((res: Response) => res.json());
   }
 
   public deleteRequestById(id): Observable<Response> {
+    const options = this.helper.addAuthTokenToHeader();
     const url = `api/request/delete/${id}`;
-    return this.http.delete(url, this.options);
+    return this.http.delete(url, options);
   }
 
 }

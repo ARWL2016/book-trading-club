@@ -10,7 +10,7 @@
     "start": "node server.js",
     "build": "ng build",
     "build:watch": "ng build --watch --sourcemaps",
-    "build:prod": "ng build --no-aot --prod",
+    "build:prod": "ng build --prod",
     "dev": "SET \"NODE_ENV=development\" && npm-run-all --parallel server build:watch eslint:watch",
     "test": "ng test",
     "mocha": "SET \"NODE_ENV=test\" && mocha",

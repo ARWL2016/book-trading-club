@@ -63,7 +63,6 @@ export class ProfileComponent implements OnInit {
       .getMyRequests(this.currentUser._id)
       .subscribe((data: [{ Request }]) => {
         this.myRequests = data;
-        console.log(this.myRequests);
       }, err => {
         this.message = 'user data currently unavailable';
       });
@@ -95,7 +94,6 @@ export class ProfileComponent implements OnInit {
   }
 
   public cancelRequest(request): void {
-    console.log({request});
     this.pBarService.showProgressBar();
     this.requestService
 

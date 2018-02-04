@@ -45,7 +45,6 @@ Todo
 - delete book method - currently requests for a deleted book are not auto removed
 - front end checklist
 
-
 Notes 
 - Users BookIDs array is not being used
 

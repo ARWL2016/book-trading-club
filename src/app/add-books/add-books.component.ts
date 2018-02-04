@@ -81,12 +81,10 @@ export class AddBooksComponent {
     this.bookService
       .addBookToCollection(this.selectedBook)
       .subscribe(res => {
-        console.log(res);
         this.closeModal();
         this.notify.success(this.selectedBook.title, 'This book was added to your collection');
         this.modalProgressBar = false;
       }, err => {
-        console.log(err);
         if (err.status === 409) {
           this.notify.error(this.selectedBook.title, 'This book already exists in your collection');
         }

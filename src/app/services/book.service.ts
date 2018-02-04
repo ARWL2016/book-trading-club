@@ -42,25 +42,26 @@ export class BookService {
 
   // authenticated requests
 
-  private options = this.helperService.addAuthTokenToHeader();
-
   public getMyBooks(id): Observable<Book[]> {
+    const options = this.helperService.addAuthTokenToHeader();
     const url = `/api/book/getCurrentUsersBooks?id=${id}`;
-    return this.http.get(url, this.options)
+    return this.http.get(url, options)
       .map(res => res.json());
   }
 
   public addBookToCollection(bookToAdd: Book): Observable<Response> {
+    const options = this.helperService.addAuthTokenToHeader();
     const user = this.authService.currentUser;
     const url = '/api/book/addBook';
     const body = {user, bookToAdd};
 
-    return this.http.post(url, body, this.options);
+    return this.http.post(url, body, options);
   }
 
   public deleteBookById(id: string): Observable<Response> {
+    const options = this.helperService.addAuthTokenToHeader();
     const url = `/api/book/delete/${id}`;
-    return this.http.delete(url, this.options);
+    return this.http.delete(url, options);
   }
 
 }
