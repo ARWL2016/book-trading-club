@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const { logger } = require('./logger');
 
-const localDB = process.env.MONGO_LOCAL;
+// const localDB = process.env.MONGO_LOCAL;
 const mLab = process.env.MONGODB_URI;
 
 mongoose.Promise = global.Promise;
