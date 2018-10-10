@@ -26,7 +26,7 @@ const app = express();
 app.use(helmet());
 app.use(helmet.contentSecurityPolicy({
   directives: {
-    defaultSrc: ["'self'", ],
+    defaultSrc: ["'self'"],
     connectSrc: ["'self'", 'https://www.googleapis.com'],
     scriptSrc: ["'self'", "'unsafe-eval'"],
     styleSrc: ["'self'", 'https://fonts.googleapis.com', "'unsafe-inline'"],

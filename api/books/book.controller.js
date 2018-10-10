@@ -70,7 +70,11 @@ module.exports = {
 
     // check for duplicates
     Book
-      .find({ userId: user._id, title: bookToAdd.title, description: bookToAdd.description })
+      .find({
+        userId: user._id,
+        title: bookToAdd.title,
+        description: bookToAdd.description
+      })
       .then(book => {
         if (book.length) {
           return res.status(409).send('Book already exists in users collection');

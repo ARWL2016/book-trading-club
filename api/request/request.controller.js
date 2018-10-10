@@ -29,7 +29,9 @@ module.exports = {
 
   deleteRequest(req, res, next) {
     const _id = req.params.id;
-    let bookId, requesterName, requesterId;
+    let bookId;
+    let requesterName;
+    let requesterId;
 
     Request
       .findByIdAndRemove(_id)
